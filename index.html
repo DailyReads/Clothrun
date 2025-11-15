@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sneakrun</title>
+  <link rel="icon" type="image/png" href="Keyloops_20251026_201720_0000.png">
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Segoe UI', sans-serif; 
+    }
+
+    body { 
+      background: #ffffff; 
+      color: #000; 
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #d4a373, #ccd5ae);
+      color: #fff;
+    }
+
+    @media (min-width: 1024px) {
+      header {
+        text-align: left;
+        padding: 40px 60px;
+      }
+      header h1 {
+        font-size: 48px;
+      }
+    }
+
+    /* HERO */
+     .hero {
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('WhatsApp Image 2025-11-09 at 10.54.53_33926b4f.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        height: 500px;
+      }
+
+      .hero-content {
+        gap: 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ========== COUNTDOWN BOX ========== */
+    .countdown-box {
+      display: inline-block;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .countdown-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .time-box {
+      background: rgba(255,255,255,0.25);
+      padding: 10px 15px;
+      border-radius: 10px;
+      min-width: 60px;
+      text-align: center;
+      color: white;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .time-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.35);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      margin-bottom: 5px;
+    }
+
+    .time-box small {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    @media (min-width: 1024px) {
+      .countdown-box {
+        padding: 30px 60px;
+        border-radius: 25px;
+      }
+
+      .countdown-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .countdown {
+        gap: 20px;
+      }
+
+      .time-box {
+        min-width: 100px;
+        padding: 20px 25px;
+        border-radius: 15px;
+        border: 3px solid rgba(255,255,255,0.4);
+      }
+
+      .time-box span {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+      }
+
+      .time-box small {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ========== GLASSMORPH BUTTON ========== */
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .hero .btn-primary {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.9rem 2.2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+    }
+
+    .hero .btn-primary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero .btn-primary:active {
+      transform: translateY(0);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (min-width: 1024px) {
+      .hero .btn-primary {
+        padding: 1rem 3rem;
+        font-size: 1.2rem;
+      }
+    }
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .hero .btn-primary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* FEATURES */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      flex: 1 1 250px;
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* SLANTED BANNERS */
+    .banner {
+      position: relative;
+      overflow: hidden;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .banner-left {
+      clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+      background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80');
+    }
+
+    .banner-right {
+      clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+      background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1600&q=80');
+    }
+
+    /* overlay */
+    .banner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .banner-content-left,
+    .banner-content-right {
+      position: relative;
+      z-index: 2;
+      max-width: 60%;
+      color: white;
+      padding: 0 50px;
+    }
+
+    .banner-content-left { text-align: left; }
+    .banner-content-right { text-align: right; margin-left: auto; }
+
+    .banner h2 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .banner p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .banner .btn {
+      background: black;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Sneakrun</h1>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Sneakrun</h1>
+    <p>Maximum looks and maximum speed — that’s Sneakrun.</p>
+
+    <div class="countdown-box">
+      <div class="countdown-title">🎉 Discount 10%</div>
+      <div class="countdown">
+        <div class="time-box"><span id="days">00</span><small>Days</small></div>
+        <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+        <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+        <div class="time-box"><span id="seconds">00</span><small>Sec</small></div>
+      </div>
+    </div>
+
+    <a href="index1.html" class="btn btn-primary">Shop Now</a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <div class="icon">⚡</div>
+    <h3>Speed Boost</h3>
+    <p>Responsive foam & lightweight chassis for explosive acceleration.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">✨</div>
+    <h3>Street Style</h3>
+    <p>Designed in Jakarta, inspired by global street culture.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🥿</div>
+    <h3>All-Day Comfort</h3>
+    <p>Breathable knit upper + ergonomic arch support.</p>
+  </div>
+</section>
+
+<section class="banners">
+  <div class="banner banner-left">
+    <div class="banner-content-left">
+      <h2>For the Track</h2>
+      <p>Engineered for PBs. Tested on 10K runs.</p>
+      <a href="index1.html?category=track" class="btn">Shop Now</a>
+    </div>
+  </div>
+
+  <div class="banner banner-right">
+    <div class="banner-content-right">
+      <h2>For the Street</h2>
+      <p>Turn sidewalks into your runway.</p>
+      <a href="index1.html?category=street" class="btn">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const targetDate = new Date("2025-12-26T19:40:00+07:00");
+
+  function updateCountdown() {
+    const now = new Date();
+    const distance = targetDate - now;
+
+    if (distance < 0) return;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = String(days).padStart(2, '0');
+    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+</body>
+</html>
