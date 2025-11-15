@@ -39,7 +39,7 @@
 
     /* HERO */
      .hero {
-      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('WhatsApp Image 2025-11-09 at 10.54.53_33926b4f.jpg');
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.shutterstock.com/image-photo/singapore-november-06-2023-interior-600nw-2408572559.jpg');
       background-size: cover;
       background-position: center;
       height: 420px;
@@ -270,47 +270,52 @@
     }
 
     /* SLANTED BANNERS */
-    .banner {
-      position: relative;
-      overflow: hidden;
-      height: 500px;
-      display: flex;
-      align-items: center;
-      background-size: cover;
-      background-position: center;
-    }
+   /* SLANTED POLYGON BANNERS (HD + clean) */
+.banner {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: auto;
+}
 
-    .banner-left {
-      clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-      background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80');
-    }
+/* Banner kiri polygon */
+.banner-left {
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=2400&q=90');
+}
 
-    .banner-right {
-      clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
-      background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1600&q=80');
-    }
+/* Banner kanan polygon */
+.banner-right {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+  background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=2400&q=90');
+}
 
-    /* overlay */
-    .banner::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      z-index: 1;
-    }
+/* overlay */
+.banner::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
 
-    .banner-content-left,
-    .banner-content-right {
-      position: relative;
-      z-index: 2;
-      max-width: 60%;
-      color: white;
-      padding: 0 50px;
-    }
+.banner-content-left,
+.banner-content-right {
+  position: relative;
+  z-index: 2;
+  max-width: 60%;
+  color: white;
+  padding: 0 50px;
+}
 
-    .banner-content-left { text-align: left; }
-    .banner-content-right { text-align: right; margin-left: auto; }
+.banner-content-left { text-align: left; }
+.banner-content-right { text-align: right; margin-left: auto; }
 
     .banner h2 {
       font-size: 2.8rem;
@@ -377,7 +382,7 @@
     <div class="banner-content-left">
       <h2>For the Track</h2>
       <p>Engineered for PBs. Tested on 10K runs.</p>
-      <a href="index1.html?category=track" class="btn">Shop</a>
+      <a href="index1.html#accessories" class="btn">Shop</a>
     </div>
   </div>
 
@@ -415,4 +420,3 @@
 </script>
 </body>
 </html>
-
