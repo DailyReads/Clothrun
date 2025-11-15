@@ -707,12 +707,13 @@ footer p {
 /* ========== PRODUCT SECTION DETAILS ========== */
 .product-section-details {
   display: flex;
-  gap: 32px;
   flex-direction: column;
+  gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
+
 @media (min-width: 1024px) {
   .product-section-details {
     flex-direction: row;
@@ -1333,39 +1334,40 @@ footer p {
 const products = [
   { 
     id: 1, 
-    name: "Classic Linen Shirt", 
-    price: 199000, 
+    name: "Men's Gentle style retro knit sweaters", 
+    price: 149000, 
     category: "cloth", 
-    image: "https://images.unsplash.com/photo-1521332605334-ed419f8c7198?w=300",
+    image: "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01fPgR9L1TT0DRP9Hzs_!!1137782382.jpg_q50.jpg_.webp",
     images: [
-      "https://images.unsplash.com/photo-1521332605334-ed419f8c7198?w=460", // Beige
-      "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=460", // Black
-      "https://images.unsplash.com/photo-1590726059920-a5e2b7c3f9e7?w=460"  // Gray
+      "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01fPgR9L1TT0DRP9Hzs_!!1137782382.jpg_q50.jpg_.webp",
+      "https://img.alicdn.com/imgextra/i2/1137782382/O1CN01dJsklv1TT0DPx6vMk_!!1137782382.jpg_q50.jpg_.webp",
+      "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01tGLL4M1TT0DQyAdAE_!!1137782382.jpg_q50.jpg_.webp"
     ],
     colors: [
-      { name: "Beige", code: "#D2B48C", imageIndex: 0 },
-      { name: "Black", code: "#000000", imageIndex: 1 },
-      { name: "Gray", code: "#808080", imageIndex: 2 }
+       { name: "Coffee", code: "#6F4E37", imageIndex: 1 },
+      { name: "Gray", code: "#808080", imageIndex: 2 },
     ],
-    sizes: ["S", "M", "L", "XL"],
-    description: "Premium breathable linen shirt for daily wear or office. Soft texture, wrinkle-resistant finish, and timeless cut." 
+    sizes: ["M", "L", "XL","2XL"],
+    description: "A timeless retro knit sweater designed to deliver a gentle, refined look for everyday wear. Crafted from soft, high-quality knit fabric, this sweater blends vintage charm with modern comfort." 
   },
   { 
     id: 2, 
-    name: "Vintage Denim Jacket", 
-    price: 349000, 
+    name: "Men's Autumn/Winter New Thick Solid Color Crew Neck Knit Sweater", 
+    price: 149000, 
     category: "cloth", 
-    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=300",
+    image: "https://img.alicdn.com/imgextra/i1/1137782382/O1CN018Sz1ku1TT0PzNxaj8_!!1137782382.jpg_q50.jpg_.webp",
     images: [
-      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=460",
-      "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=460"
+      "https://img.alicdn.com/imgextra/i1/1137782382/O1CN018Sz1ku1TT0PzNxaj8_!!1137782382.jpg_q50.jpg_.webp",
+      "https://img.alicdn.com/imgextra/i3/1137782382/O1CN019yhHhh1TT0PyDZ5ho_!!1137782382.jpg_q50.jpg_.webp",
+      "https://img.alicdn.com/imgextra/i2/1137782382/O1CN01kCcS8S1TT0PvIXUIt_!!1137782382.jpg_q50.jpg_.webp"
     ],
     colors: [
-      { name: "Blue", code: "#4169E1", imageIndex: 0 },
-      { name: "Black", code: "#000000", imageIndex: 1 }
+      { name: "Gray", code: "#808080", imageIndex: 0 },
+      { name: "Green", code: "#006400", imageIndex: 1 },
+      { name: "Blue", code: "#0000FF", imageIndex: 2 }
     ],
-    sizes: ["M", "L", "XL"],
-    description: "Rugged vintage-style denim jacket. Perfect layering piece for all seasons." 
+    sizes: ["M", "L", "XL","2XL"],
+    description: "A warm and stylish thick knit sweater designed for the autumn and winter seasons. Made from premium soft knit fabric that provides excellent warmth and all-day comfort. The classic crew neck design and solid color finish create a clean, modern look that’s easy to pair with any outfit." 
   },
   { 
     id: 3, 
