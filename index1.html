@@ -713,7 +713,6 @@ footer p {
   margin: 0 auto;
   padding: 0 20px;
 }
-
 @media (min-width: 1024px) {
   .product-section-details {
     flex-direction: row;
@@ -1133,11 +1132,9 @@ footer p {
   padding: 0 !important;
   margin: 0;
 }
-
 .product-card img {
   border-radius: 8px; /* optional: keep rounded image */
 }
-
 /* Scale down on desktop */
 @media (min-width: 1024px) {
   .product-card {
@@ -1148,7 +1145,6 @@ footer p {
     transform: scale(0.94) translateY(-2px);
   }
 }
-
 /* ✅ PATCH: Top-left back button & title */
 .top-bar {
   display: flex;
@@ -1158,7 +1154,23 @@ footer p {
   max-width: 1200px;
   margin: 0 auto;
 }
-
+.hamburger-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  padding: 0;
+}
+.hamburger-btn:hover {
+  background: #e9ecef;
+  transform: scale(1.05);
+}
 .back-btn {
   width: 40px;
   height: 40px;
@@ -1174,26 +1186,164 @@ footer p {
   color: #333;
   text-decoration: none;
 }
-
 .back-btn:hover {
   background: #e9ecef;
   transform: scale(1.05);
 }
-
 .page-title {
   font-size: 24px;
   font-weight: 700;
   color: #222;
   margin: 0;
 }
+/* ========== SIDEBAR ========== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100%;
+  background: white;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  z-index: 2000;
+  transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding-top: 60px;
+  overflow-y: auto;
+}
+.sidebar.active {
+  left: 0;
+}
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+  display: none;
+}
+.sidebar.active + .sidebar-overlay {
+  display: block;
+}
+.sidebar-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 24px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  z-index: 10;
+}
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: 500;
+  color: #222;
+  margin: 0;
+}
+.sidebar-logo span {
+  color: #d4a373;
+}
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-nav li {
+  padding: 0 24px;
+  margin: 6px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #333;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.sidebar-nav a:hover {
+  background: #fdf9f6;
+  color: #d4a373;
+}
+.sidebar-nav a i {
+  margin-right: 16px;
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  color: #999;
+}
+.sidebar-nav a:hover i {
+  color: #d4a373;
+}
+.sidebar-nav a.active {
+  background: #fdf3ed;
+  color: #d4a373;
+  font-weight: 600;
+}
+.sidebar-close {
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  background: #f9f9f9;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.sidebar-close:hover {
+  background: #f0f0f0;
+  color: #333;
+  transform: rotate(90deg);
+}
+/* ========== ACTIVE TITLE ========== */
+.section-title.active {
+  color: #d4a373;
+}
   </style>
 </head>
-<!-- Top Bar: Back Button + Title -->
-<div class="top-bar">
-  <a href="index.html" class="back-btn" title="Back to Home"><</a>
-  <h1 class="page-title">Products</h1>
-</div>
 <body>
+  <!-- ✅ Now ALL UI elements are inside <body> -->
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <h1 class="page-title">Products</h1>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">ClothRun</div>
+    </div>
+    <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+    <ul class="sidebar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#" onclick="showProducts(); return false;">Products</a></li>
+      <li><a href="#" onclick="showSummerEvent(); return false;">Summer Event</a></li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
   <!-- Cart Button -->
   <button class="cart-btn" onclick="toggleCart()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1202,32 +1352,39 @@ footer p {
     <span class="cart-count" id="cartCount">0</span>
   </button>
 
-  <!-- Search -->
-  <div class="search-container">
-    <div class="search-box">
-      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-      </svg>
-      <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()">
-      <button id="searchClear" class="search-clear" onclick="clearSearch()">×</button>
+  <!-- Main Content -->
+  <div class="section">
+    <!-- Search -->
+    <div class="search-container">
+      <div class="search-box">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()">
+        <button id="searchClear" class="search-clear" onclick="clearSearch()">×</button>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+      <button class="category-btn active" data-category="all">All</button>
+      <button class="category-btn" data-category="cloth">Cloth</button>
+      <button class="category-btn" data-category="pants">Pants</button>
+      <button class="category-btn" data-category="accessories">Accessories</button>
     </div>
   </div>
 
-  <!-- Categories -->
-  <div class="categories">
-    <button class="category-btn active" data-category="all">All</button>
-    <button class="category-btn" data-category="cloth">Cloth</button>
-    <button class="category-btn" data-category="pants">Pants</button>
-    <button class="category-btn" data-category="accessories">Accessories</button>
+  <!-- Special Promo Section (wrapped in .section) -->
+  <div class="section">
+    <h2 class="section-title special-promo-title">Special <span>Promo</span></h2>
+    <div class="product-grid" id="promoGrid"></div>
   </div>
 
-  <!-- Special Promo Section -->
-  <h2 class="section-title special-promo-title">Special <span>Promo</span></h2>
-  <div class="product-grid" id="promoGrid"></div>
-
-  <!-- Products Section -->
-  <h2 class="section-title">Products</h2>
-  <div class="product-grid" id="productGrid"></div>
+  <!-- Products Section (wrapped in .section) -->
+  <div class="section">
+    <h2 class="section-title">Products</h2>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
 
   <!-- No Results -->
   <div class="no-results" id="noResults">
@@ -1242,7 +1399,6 @@ footer p {
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
     </div>
-    <!-- ✅ ADDED HEADER FOR TITLE -->
     <div class="modal-header">
       <h1 class="page-title-details">Product Details</h1>
     </div>
@@ -1462,7 +1618,6 @@ const products = [
     description: "Eco-friendly canvas tote with reinforced handles." 
   }
 ];
-
 // ================================
 // CONFIG
 // ================================
@@ -1473,7 +1628,6 @@ const promoList = {
   "DISKON20": { type: "percent", value: 20 },
   "GAG123": { type: "percent", value: 5 }
 };
-
 // ================================
 // GLOBAL STATE
 // ================================
@@ -1484,7 +1638,6 @@ let selectedSize = null;
 let selectedColor = null;
 let currentProductForColor = null;
 let currentProductForSize = null;
-
 // ================================
 // RENDERING — Enhanced & Filtered
 // ================================
@@ -1492,7 +1645,6 @@ const productGrid = document.getElementById('productGrid');
 const promoGrid = document.getElementById('promoGrid');
 const categoryButtons = document.querySelectorAll('.category-btn');
 let currentCategory = 'all';
-
 function renderProducts(category = 'all') {
   if (!productGrid) return;
   const filtered = category === 'all' 
@@ -1502,7 +1654,6 @@ function renderProducts(category = 'all') {
     ? filtered.map(renderProductCard).join('')
     : `<div class="no-results"><h3>No Products</h3><p>Nothing here in <strong>${category}</strong> category.</p></div>`;
 }
-
 function renderPromoProducts() {
   if (!promoGrid) return;
   const promoItems = isDiscountActive 
@@ -1512,7 +1663,6 @@ function renderPromoProducts() {
     ? promoItems.map(renderProductCard).join('')
     : `<div class="no-results"><p>No active promotions right now.</p></div>`;
 }
-
 function renderProductCard(product) {
   const isDiscount = isDiscountActive && discountProducts.includes(product.id);
   const finalPrice = isDiscount 
@@ -1535,7 +1685,6 @@ function renderProductCard(product) {
     </div>
   `;
 }
-
 // ================================
 // CATEGORY FILTERING
 // ================================
@@ -1547,33 +1696,28 @@ categoryButtons.forEach(btn => {
     renderProducts(currentCategory);
   });
 });
-
 // ================================
 // COLOR SELECTION
 // ================================
 function selectColor(colorName, imageIndex) {
   const product = currentProductForColor;
   if (!product || !product.colors) return;
-
   // Update UI
   document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
   const selectedEl = Array.from(document.querySelectorAll('.color-option'))
     .find(el => el.dataset.color === colorName);
   if (selectedEl) selectedEl.classList.add('selected');
-
   // Update state & image
   selectedColor = colorName;
   currentSlideIndex = imageIndex;
   updateSliderDisplay();
 }
-
 // ================================
 // SIZE MODAL
 // ================================
 function showSizeModal(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
-
   currentProductForSize = product;
   selectedSize = null;
   const modal = document.getElementById('sizeModal');
@@ -1583,7 +1727,6 @@ function showSizeModal(productId) {
   const opts = document.getElementById('sizeOptions');
   const btn = document.getElementById('sizeConfirmBtn');
   const err = document.getElementById('sizeErrorMessage');
-
   if (img) {
     const colorObj = product.colors?.find(c => c.name === selectedColor);
     img.src = product.images?.[colorObj?.imageIndex || 0] || product.image;
@@ -1592,7 +1735,6 @@ function showSizeModal(productId) {
     const colorText = selectedColor ? ` (${selectedColor})` : '';
     name.textContent = product.name + colorText;
   }
-
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
   if (price) {
@@ -1600,7 +1742,6 @@ function showSizeModal(productId) {
       ? `<s style="color:#999;font-size:14px;">Rp ${product.price.toLocaleString('id-ID')}</s><br>Rp ${finalPrice.toLocaleString('id-ID')}`
       : `Rp ${product.price.toLocaleString('id-ID')}`;
   }
-
   if (opts) {
     opts.innerHTML = '';
     product.sizes.forEach(size => {
@@ -1611,30 +1752,25 @@ function showSizeModal(productId) {
       opts.appendChild(el);
     });
   }
-
   if (btn) {
     btn.disabled = true;
     btn.onclick = confirmSizeSelection;
   }
   if (err) err.style.display = 'none';
-
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function selectSize(size) {
   selectedSize = size;
   document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
   const selectedEl = Array.from(document.querySelectorAll('.size-option'))
     .find(el => el.textContent.trim() === size.toString());
   if (selectedEl) selectedEl.classList.add('selected');
-
   const btn = document.getElementById('sizeConfirmBtn');
   const err = document.getElementById('sizeErrorMessage');
   if (btn) btn.disabled = false;
   if (err) err.style.display = 'none';
 }
-
 function confirmSizeSelection() {
   if (!selectedSize || !currentProductForSize) {
     const err = document.getElementById('sizeErrorMessage');
@@ -1647,7 +1783,6 @@ function confirmSizeSelection() {
   addToCartWithColorAndSize(currentProductForSize.id, selectedColor, selectedSize);
   closeSizeModal();
 }
-
 function closeSizeModal() {
   const modal = document.getElementById('sizeModal');
   if (modal) {
@@ -1657,14 +1792,12 @@ function closeSizeModal() {
   selectedSize = null;
   currentProductForSize = null;
 }
-
 // ================================
 // ADD TO CART (with color + size)
 // ================================
 function confirmAddToCart(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
-
   if (product.sizes && product.sizes.length > 0) {
     if (product.colors && product.colors.length > 0 && !selectedColor) {
       showNotification("Please select a color first");
@@ -1673,29 +1806,23 @@ function confirmAddToCart(productId) {
     showSizeModal(productId);
     return;
   }
-
   if (product.colors && !selectedColor) {
     showNotification("Please select a color");
     return;
   }
-
   addToCartWithColorAndSize(productId, selectedColor, selectedSize);
   closeProductDetails();
 }
-
 function addToCartWithColorAndSize(productId, color = null, size = null) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
-
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
-
   const existingItem = cart.find(item =>
     item.id === productId &&
     (item.color === color || (!item.color && !color)) &&
     (item.size === size || (!item.size && !size))
   );
-
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
@@ -1707,27 +1834,22 @@ function addToCartWithColorAndSize(productId, color = null, size = null) {
       size
     });
   }
-
   saveCartToLocalStorage();
   updateCartDisplay();
-
   const msg = `${product.name}` +
     (color ? ` (${color})` : '') +
     (size ? ` Size ${size}` : '') +
     ` added to cart!`;
   showNotification(msg);
 }
-
 // ================================
 // PRODUCT DETAILS MODAL
 // ================================
 let currentSlideIndex = 0;
 let totalSlides = 0;
-
 function showProductDetails(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
-
   const modal = document.getElementById('productDetailsModal');
   const title = document.getElementById('detailsTitle');
   const price = document.getElementById('detailsPrice');
@@ -1735,12 +1857,10 @@ function showProductDetails(productId) {
   const slider = document.getElementById('detailsImageSlider');
   const btn = document.getElementById('detailsAddToCartBtn');
   const colorOpts = document.getElementById('colorOptions');
-
   // Reset state
   selectedColor = null;
   selectedSize = null;
   currentProductForColor = product;
-
   if (title) title.textContent = product.name;
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
@@ -1750,7 +1870,6 @@ function showProductDetails(productId) {
       : `Rp ${product.price.toLocaleString('id-ID')}`;
   }
   if (desc) desc.textContent = product.description || 'No description available.';
-
   // Images
   const images = product.images || [product.image];
   totalSlides = images.length;
@@ -1760,7 +1879,6 @@ function showProductDetails(productId) {
       `<img src="${src}" alt="${product.name}" class="${i === 0 ? 'active' : ''}">`
     ).join('');
   }
-
   // ✅ COLOR OPTIONS
   if (colorOpts && product.colors && product.colors.length > 0) {
     colorOpts.innerHTML = product.colors.map(color => `
@@ -1774,21 +1892,18 @@ function showProductDetails(productId) {
   } else {
     colorOpts.closest('.color-selection').style.display = 'none';
   }
-
   // Reset Add button
   if (btn) {
     btn.textContent = "Add to Cart";
     btn.onclick = () => confirmAddToCart(productId);
     btn.disabled = false;
   }
-
   updateSliderDisplay();
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 }
-
 function closeProductDetails() {
   const modal = document.getElementById('productDetailsModal');
   if (modal) {
@@ -1796,18 +1911,15 @@ function closeProductDetails() {
     document.body.style.overflow = 'auto';
   }
 }
-
 function changeSlide(dir) {
   currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides;
   updateSliderDisplay();
 }
-
 function updateSliderDisplay() {
   const imgs = document.querySelectorAll('#detailsImageSlider img');
   const counter = document.getElementById('imageCounter');
   const prev = document.getElementById('sliderPrevBtn');
   const next = document.getElementById('sliderNextBtn');
-
   imgs.forEach((img, i) => img.classList.toggle('active', i === currentSlideIndex));
   if (counter) counter.textContent = `${currentSlideIndex + 1} / ${totalSlides}`;
   if (prev && next) {
@@ -1820,7 +1932,6 @@ function updateSliderDisplay() {
     }
   }
 }
-
 // ================================
 // CART DISPLAY & UPDATE
 // ================================
@@ -1829,16 +1940,13 @@ function updateCartDisplay() {
   const cartItems = document.getElementById('cartItems');
   const totalAmount = document.getElementById('totalAmount');
   const checkoutBtn = document.getElementById('checkoutBtn');
-
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const total = subtotal - (subtotal * currentDiscount / 100);
-
   if (cartCount) {
     cartCount.textContent = totalItems;
     cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
   }
-
   if (cartItems) {
     if (cart.length === 0) {
       cartItems.innerHTML = `
@@ -1873,12 +1981,10 @@ function updateCartDisplay() {
       if (checkoutBtn) checkoutBtn.disabled = false;
     }
   }
-
   if (totalAmount) {
     totalAmount.textContent = `Rp ${total.toLocaleString('id-ID')}`;
   }
 }
-
 function updateQuantity(cartIndex, change) {
   if (cartIndex < 0 || cartIndex >= cart.length) return;
   const item = cart[cartIndex];
@@ -1889,7 +1995,6 @@ function updateQuantity(cartIndex, change) {
   saveCartToLocalStorage();
   updateCartDisplay();
 }
-
 // ================================
 // LOCALSTORAGE
 // ================================
@@ -1898,7 +2003,6 @@ function saveCartToLocalStorage() {
   localStorage.setItem('clothrunPromo', JSON.stringify(appliedPromo));
   localStorage.setItem('clothrunDiscount', currentDiscount.toString());
 }
-
 function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('clothrunCart');
   const savedPromo = localStorage.getItem('clothrunPromo');
@@ -1907,13 +2011,11 @@ function loadCartFromLocalStorage() {
   if (savedPromo) appliedPromo = JSON.parse(savedPromo);
   if (savedDiscount) currentDiscount = parseFloat(savedDiscount);
 }
-
 function clearCartFromLocalStorage() {
   localStorage.removeItem('clothrunCart');
   localStorage.removeItem('clothrunPromo');
   localStorage.removeItem('clothrunDiscount');
 }
-
 // ================================
 // PROMO
 // ================================
@@ -1941,7 +2043,6 @@ function applyPromo() {
     msg.textContent = "❌ Invalid promo code.";
   }
 }
-
 // ================================
 // WHATSAPP & CHECKOUT
 // ================================
@@ -1956,14 +2057,16 @@ function sendToWhatsApp() {
     alert('Please enter a valid email address');
     return;
   }
-
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const total = subtotal - (subtotal * currentDiscount / 100);
-
-  let message = `*ClothRun Store Order*\n`;
-  message += `Customer: ${name}\n`;
-  message += `Email: ${email}\n`;
-  message += `*ORDER DETAILS:*\n`;
+  let message = `*ClothRun Store Order*
+`;
+  message += `Customer: ${name}
+`;
+  message += `Email: ${email}
+`;
+  message += `*ORDER DETAILS:*
+`;
   cart.forEach(item => {
     const price = item.finalPrice || item.price;
     const colorText = item.color ? ` | Color: ${item.color}` : '';
@@ -1984,9 +2087,7 @@ function sendToWhatsApp() {
   message += `*TOTAL: Rp ${total.toLocaleString('id-ID')}*
 `;
   message += `Thank you for your order!`;
-
   window.open(`https://wa.me/082382052250?text=${encodeURIComponent(message)}`, '_blank');
-
   setTimeout(() => {
     cart = [];
     appliedPromo = null;
@@ -1999,7 +2100,6 @@ function sendToWhatsApp() {
     document.getElementById('promoMessage').textContent = '';
   }, 1000);
 }
-
 // ================================
 // SEARCH & UI
 // ================================
@@ -2009,24 +2109,20 @@ function filterProducts() {
   const clear = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
   let found = false;
-
   cards.forEach(card => {
     const name = card.getAttribute('data-name');
     const visible = name?.includes(query);
     card.classList.toggle('hidden', !visible);
     if (visible) found = true;
   });
-
   if (clear) clear.style.display = query ? 'block' : 'none';
   if (noRes) noRes.style.display = query && !found ? 'block' : 'none';
 }
-
 function clearSearch() {
   const inp = document.getElementById('searchInput');
   if (inp) inp.value = '';
   filterProducts();
 }
-
 function toggleCart() {
   const cartSection = document.getElementById('cartSection');
   if (!cartSection) return;
@@ -2034,7 +2130,6 @@ function toggleCart() {
   cartSection.style.display = isOpen ? 'none' : 'block';
   document.body.style.overflow = isOpen ? 'auto' : 'hidden';
 }
-
 function showNotification(msg) {
   const notif = document.createElement('div');
   notif.textContent = msg;
@@ -2049,7 +2144,6 @@ function showNotification(msg) {
     setTimeout(() => notif.remove(), 300);
   }, 2000);
 }
-
 // ================================
 // INIT
 // ================================
@@ -2059,7 +2153,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPromoProducts();       
   updateCartDisplay();
 });
-
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
@@ -2069,6 +2162,99 @@ document.addEventListener('keydown', (e) => {
     else if (sm?.classList.contains('active')) closeSizeModal();
   }
 });
+// ========== SIDEBAR TOGGLE ==========
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('active');
+  // ✅ Toggle overlay too
+  const overlay = document.querySelector('.sidebar-overlay');
+  if (overlay) overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+}
+// ========== NAVIGASI HALAMAN ==========
+function showProducts() {
+  // ✅ Sembunyikan Summer section jika ada
+  const summerSection = document.getElementById('summerEventSection');
+  if (summerSection) summerSection.style.display = 'none';
+
+  // ✅ Tampilkan semua section utama (yang sudah di-wrap dalam .section)
+  document.querySelectorAll('.section').forEach(sec => {
+    const title = sec.querySelector('.section-title');
+    if (title && !title.classList.contains('special-promo-title')) {
+      // Products section: title === "Products"
+      if (title.textContent.trim() === 'Products') {
+        sec.style.display = 'block';
+        title.classList.add('active');
+      } else if (title.classList.contains('special-promo-title')) {
+        sec.style.display = 'block';
+        title.classList.remove('active');
+      }
+    } else if (title && title.classList.contains('special-promo-title')) {
+      sec.style.display = 'block';
+    }
+  });
+
+  // Tampilkan controls
+  const searchContainer = document.querySelector('.search-container');
+  const categories = document.querySelector('.categories');
+  if (searchContainer) searchContainer.closest('.section').style.display = 'block';
+  if (categories) categories.closest('.section').style.display = 'block';
+
+  // Update title
+  const pageTitle = document.querySelector('.page-title');
+  if (pageTitle) pageTitle.textContent = 'Products';
+
+  toggleSidebar();
+}
+function showSummerEvent() {
+  // Hide ONLY main product sections
+  const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section');
+  const productsSection = Array.from(document.querySelectorAll('.section'))
+    .find(sec => sec.querySelector('.section-title:not(.special-promo-title)')?.textContent.trim() === 'Products');
+
+  if (promoSection) promoSection.style.display = 'none';
+  if (productsSection) productsSection.style.display = 'none';
+
+  // ✅ Keep search & categories visible (do NOT hide them)
+  const searchSection = document.querySelector('.search-container')?.closest('.section');
+  const categoriesEl = document.querySelector('.categories');
+  if (searchSection) searchSection.style.display = 'block';
+  if (categoriesEl) categoriesEl.style.display = 'flex';
+
+  // Create or update Summer Event section
+  let summerSection = document.getElementById('summerEventSection');
+  if (!summerSection) {
+    summerSection = document.createElement('div');
+    summerSection.id = 'summerEventSection';
+    summerSection.className = 'section';
+    // Insert after categories (or at end of main content)
+    const mainContent = document.querySelector('.categories')?.parentElement;
+    if (mainContent) {
+      mainContent.after(summerSection);
+    } else {
+      document.body.appendChild(summerSection);
+    }
+  }
+
+  // Define your Summer Event products (e.g., IDs 1, 2, 5)
+  const summerProductIds = [1, 2, 5];
+  const summerItems = products.filter(p => summerProductIds.includes(p.id));
+
+  summerSection.innerHTML = `
+    <h2 class="section-title active">Summer Event</h2>
+    <div class="product-grid" id="summerEventGrid">
+      ${summerItems.length 
+        ? summerItems.map(renderProductCard).join('') 
+        : `<div class="no-results"><p>No items in this Summer Event.</p></div>`}
+    </div>
+  `;
+  summerSection.style.display = 'block';
+
+  // Update top title
+  const pageTitle = document.querySelector('.page-title');
+  if (pageTitle) pageTitle.textContent = 'Summer Event';
+
+  toggleSidebar();
+}
   </script>
 </body>
 </html>
