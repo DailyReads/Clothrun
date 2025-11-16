@@ -1336,8 +1336,8 @@ footer p {
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
     <ul class="sidebar-nav">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#" onclick="showProducts(); return false;">Products</a></li>
-      <li><a href="#" onclick="showSummerEvent(); return false;">Summer Event</a></li>
+      <li><a href="index#products.html" onclick="showProducts(); return false;">Products</a></li>
+      <li><a href="index#summer-event.html" onclick="showSummerEvent(); return false;">Summer Event</a></li>
     </ul>
   </div>
 
@@ -1382,7 +1382,7 @@ footer p {
 
   <!-- Products Section (wrapped in .section) -->
   <div class="section">
-    <h2 class="section-title">Products</h2>
+    <h2 class="section-title">All Products</h2>
     <div class="product-grid" id="productGrid"></div>
   </div>
 
@@ -2172,32 +2172,20 @@ function toggleSidebar() {
 }
 // ========== NAVIGASI HALAMAN ==========
 function showProducts() {
-  // ✅ Sembunyikan Summer section jika ada
-  const summerSection = document.getElementById('summerEventSection');
-  if (summerSection) summerSection.style.display = 'none';
-
-  // ✅ Tampilkan semua section utama (yang sudah di-wrap dalam .section)
+  // ✅ Munculkan semua section kecuali summer event
   document.querySelectorAll('.section').forEach(sec => {
-    const title = sec.querySelector('.section-title');
-    if (title && !title.classList.contains('special-promo-title')) {
-      // Products section: title === "Products"
-      if (title.textContent.trim() === 'Products') {
-        sec.style.display = 'block';
-        title.classList.add('active');
-      } else if (title.classList.contains('special-promo-title')) {
-        sec.style.display = 'block';
-        title.classList.remove('active');
-      }
-    } else if (title && title.classList.contains('special-promo-title')) {
+    if (sec.id === 'summerEventSection') {
+      sec.style.display = 'none';
+    } else {
       sec.style.display = 'block';
     }
   });
 
-  // Tampilkan controls
-  const searchContainer = document.querySelector('.search-container');
+  // ✅ Tampilkan search & categories
+  const searchSection = document.querySelector('.search-container')?.closest('.section');
   const categories = document.querySelector('.categories');
-  if (searchContainer) searchContainer.closest('.section').style.display = 'block';
-  if (categories) categories.closest('.section').style.display = 'block';
+  if (searchSection) searchSection.style.display = 'block';
+  if (categories) categories.style.display = 'flex';
 
   // Update title
   const pageTitle = document.querySelector('.page-title');
@@ -2205,38 +2193,34 @@ function showProducts() {
 
   toggleSidebar();
 }
+
 function showSummerEvent() {
-  // Hide ONLY main product sections
+  // ✅ Ambil section berdasarkan ID atau class lebih pasti
   const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section');
-  const productsSection = Array.from(document.querySelectorAll('.section'))
-    .find(sec => sec.querySelector('.section-title:not(.special-promo-title)')?.textContent.trim() === 'Products');
+  const productsSection = document.getElementById('productGrid')?.closest('.section');
 
   if (promoSection) promoSection.style.display = 'none';
   if (productsSection) productsSection.style.display = 'none';
 
-  // ✅ Keep search & categories visible (do NOT hide them)
+  // ✅ Sembunyikan search & categories
   const searchSection = document.querySelector('.search-container')?.closest('.section');
-  const categoriesEl = document.querySelector('.categories');
-  if (searchSection) searchSection.style.display = 'block';
-  if (categoriesEl) categoriesEl.style.display = 'flex';
+  const categories = document.querySelector('.categories');
+  if (searchSection) searchSection.style.display = 'none';
+  if (categories) categories.style.display = 'none';
 
-  // Create or update Summer Event section
+  // Render Summer Event
   let summerSection = document.getElementById('summerEventSection');
   if (!summerSection) {
     summerSection = document.createElement('div');
     summerSection.id = 'summerEventSection';
     summerSection.className = 'section';
-    // Insert after categories (or at end of main content)
-    const mainContent = document.querySelector('.categories')?.parentElement;
-    if (mainContent) {
-      mainContent.after(summerSection);
-    } else {
-      document.body.appendChild(summerSection);
-    }
+    // Sisipkan setelah header/top-bar
+    const mainContent = document.querySelector('.top-bar');
+    if (mainContent) mainContent.after(summerSection);
+    else document.body.prepend(summerSection);
   }
 
-  // Define your Summer Event products (e.g., IDs 1, 2, 5)
-  const summerProductIds = [1, 2, 5];
+  const summerProductIds = [1, 2, 5]; // ✅ Hanya produk ini yang muncul
   const summerItems = products.filter(p => summerProductIds.includes(p.id));
 
   summerSection.innerHTML = `
@@ -2249,10 +2233,19 @@ function showSummerEvent() {
   `;
   summerSection.style.display = 'block';
 
-  // Update top title
+  // Sembunyikan section lain (fallback jika ada duplikat)
+  document.querySelectorAll('.section').forEach(sec => {
+    if (sec.id !== 'summerEventSection' && sec !== summerSection) {
+      const title = sec.querySelector('.section-title');
+      if (title && title.textContent.trim() !== 'Summer Event') {
+        sec.style.display = 'none';
+      }
+    }
+  });
+
   const pageTitle = document.querySelector('.page-title');
   if (pageTitle) pageTitle.textContent = 'Summer Event';
-
+  
   toggleSidebar();
 }
   </script>
