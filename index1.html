@@ -1337,7 +1337,7 @@ footer p {
     <ul class="sidebar-nav">
       <li><a href="index.html">Home</a></li>
       <li><a href="index#products.html" onclick="showProducts(); return false;">Products</a></li>
-      <li><a href="index#summer-event.html" onclick="showSummerEvent(); return false;">Summer Event</a></li>
+      <li><a href="index1.html#summer-event" onclick="showSummerEvent(); return false;">Summer Event</a></li>
     </ul>
   </div>
 
@@ -2248,6 +2248,12 @@ function showSummerEvent() {
   
   toggleSidebar();
 }
+// ✅ Auto-load Summer Event if hash is #summer-event
+window.addEventListener('load', () => {
+  if (window.location.hash === '#summer-event') {
+    setTimeout(showSummerEvent, 50);
+  }
+});
   </script>
 </body>
 </html>
