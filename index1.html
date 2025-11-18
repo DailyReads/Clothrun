@@ -181,7 +181,6 @@ header {
 .product-card {
   position: relative;
   background: #fff; 
-  border-radius: 15px; 
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
   padding: 15px;
@@ -199,11 +198,11 @@ header {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;
-  border-radius: 10px; 
+  border-radius: 0; /* ✅ no corner */
   background-color: #f8f9fa;
 }
 .product-name { 
-  font-size: 15px; 
+  font-size: 16px; 
   font-weight: 600; 
   margin: 10px 0; 
 }
@@ -1335,7 +1334,7 @@ footer p {
     </div>
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
     <ul class="sidebar-nav">
-      <li><a href="index#products.html" onclick="showProducts(); return false;">All Products</a></li>
+      <li><a href="index#products.html" onclick="showProducts(); return false;">Products</a></li>
       <li><a href="index1.html#summer-event" onclick="showSummerEvent(); return false;">Summer Event</a></li>
     </ul>
   </div>
@@ -1653,14 +1652,17 @@ function renderProducts(category = 'all') {
     ? filtered.map(renderProductCard).join('')
     : `<div class="no-results"><h3>No Products</h3><p>Nothing here in <strong>${category}</strong> category.</p></div>`;
 }
-function renderPromoProducts() {
+function renderPromoProducts(category = 'all') {
   if (!promoGrid) return;
-  const promoItems = isDiscountActive 
+  let promoItems = isDiscountActive 
     ? products.filter(p => discountProducts.includes(p.id))
     : [];
+  if (category !== 'all') {
+    promoItems = promoItems.filter(p => p.category === category);
+  }
   promoGrid.innerHTML = promoItems.length > 0
     ? promoItems.map(renderProductCard).join('')
-    : `<div class="no-results"><p>No active promotions right now.</p></div>`;
+    : `<div class="no-results"><p>No active promotions in this category.</p></div>`;
 }
 function renderProductCard(product) {
   const isDiscount = isDiscountActive && discountProducts.includes(product.id);
@@ -2148,9 +2150,25 @@ function showNotification(msg) {
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
   loadCartFromLocalStorage();
-  renderProducts('all');       
-  renderPromoProducts();       
+  renderProducts('all');
+  renderPromoProducts('all'); // ✅ pass argument
   updateCartDisplay();
+
+  // ✅ Event delegation untuk kategori
+  const categoriesContainer = document.querySelector('.categories');
+  if (categoriesContainer) {
+    categoriesContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.category-btn');
+      if (!btn) return;
+
+      categoriesContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      currentCategory = btn.dataset.category || 'all';
+      renderProducts(currentCategory);
+      renderPromoProducts(currentCategory);
+    });
+  }
 });
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
@@ -2256,7 +2274,3 @@ window.addEventListener('load', () => {
   </script>
 </body>
 </html>
-
-
-
-
