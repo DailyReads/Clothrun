@@ -1310,6 +1310,65 @@ footer p {
 .section-title.active {
   color: #d4a373;
 }
+/* ========== COUNTDOWN TIMER ========== */
+.countdown-timer-section {
+  text-align: center;
+  margin: 24px 0;
+  padding: 12px 20px;
+}
+.countdown-timer-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.countdown-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d4a373;
+}
+.countdown-boxes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.countdown-box {
+  background: linear-gradient(135deg, #d4a373, #c49668);
+  color: white;
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(212, 163, 115, 0.2);
+}
+.countdown-box span {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.countdown-box small {
+  font-size: 11px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .countdown-box {
+    min-width: 50px;
+    padding: 8px 0;
+  }
+  .countdown-box span {
+    font-size: 18px;
+  }
+  .countdown-box small {
+    font-size: 10px;
+  }
+}
   </style>
 </head>
 <body>
@@ -1334,6 +1393,7 @@ footer p {
     </div>
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
     <ul class="sidebar-nav">
+      <li><a href="index.html">Home</a></li>
       <li><a href="index#products.html" onclick="showProducts(); return false;">Products</a></li>
       <li><a href="index1.html#summer-event" onclick="showSummerEvent(); return false;">Summer Event</a></li>
     </ul>
@@ -1375,6 +1435,30 @@ footer p {
   <!-- Special Promo Section (wrapped in .section) -->
   <div class="section">
     <h2 class="section-title special-promo-title">Special <span>Promo</span></h2>
+     <!-- Countdown Timer — between promo and all products -->
+<div id="countdownTimer" class="countdown-timer-section">
+  <div class="countdown-timer-wrapper">
+    <span class="countdown-label">Special Promo Countdown</span>
+    <div class="countdown-boxes">
+      <div class="countdown-box">
+        <span id="days">00</span>
+        <small>Days</small>
+      </div>
+      <div class="countdown-box">
+        <span id="hours">00</span>
+        <small>Hours</small>
+      </div>
+      <div class="countdown-box">
+        <span id="minutes">00</span>
+        <small>Min</small>
+      </div>
+      <div class="countdown-box">
+        <span id="seconds">00</span>
+        <small>Sec</small>
+      </div>
+    </div>
+  </div>
+</div>
     <div class="product-grid" id="promoGrid"></div>
   </div>
 
@@ -2036,12 +2120,12 @@ function applyPromo() {
     appliedPromo = { code, ...promo };
     currentDiscount = promo.value;
     msg.style.color = "green";
-    msg.textContent = `✅ Promo ${code} applied! ${promo.value}% off`;
+    msg.textContent = `Promo ${code} applied! ${promo.value}% off`;
     saveCartToLocalStorage();
     updateCartDisplay();
   } else if (code) {
     msg.style.color = "red";
-    msg.textContent = "❌ Invalid promo code.";
+    msg.textContent = "Invalid promo code.";
   }
 }
 // ================================
@@ -2270,6 +2354,48 @@ window.addEventListener('load', () => {
   if (window.location.hash === '#summer-event') {
     setTimeout(showSummerEvent, 50);
   }
+});
+// ✅ Countdown: pastikan DOM siap & aman
+document.addEventListener('DOMContentLoaded', () => {
+  const targetTime = new Date('2025-12-31T23:59:59+07:00').getTime();
+  
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = targetTime - now;
+
+    if (diff <= 0) {
+      const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section');
+      const countdownEl = document.getElementById('countdownTimer');
+      if (promoSection) promoSection.remove();
+      if (countdownEl) countdownEl.remove();
+      clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // ✅ Update hanya jika element ada
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minsEl = document.getElementById('minutes');
+    const secsEl = document.getElementById('seconds');
+
+    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+    if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
+    if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
+  }
+
+  // ✅ First update after slight delay (to ensure DOM paint)
+  setTimeout(() => {
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    // Store interval if needed
+    window._countdownInterval = interval;
+  }, 100);
 });
   </script>
 </body>
