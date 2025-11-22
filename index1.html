@@ -2189,19 +2189,49 @@ function sendToWhatsApp() {
 // SEARCH & UI
 // ================================
 function filterProducts() {
-  const query = document.getElementById('searchInput')?.value.toLowerCase() || '';
+  const query = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
   const cards = document.querySelectorAll('.product-card');
-  const clear = document.getElementById('searchClear');
+  const clearBtn = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
-  let found = false;
-  cards.forEach(card => {
-    const name = card.getAttribute('data-name');
-    const visible = name?.includes(query);
-    card.classList.toggle('hidden', !visible);
-    if (visible) found = true;
-  });
-  if (clear) clear.style.display = query ? 'block' : 'none';
-  if (noRes) noRes.style.display = query && !found ? 'block' : 'none';
+
+  // ✅ Get UI elements to hide/show
+  const categories = document.querySelector('.categories');
+  const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section'); // includes countdown & promo grid
+  const allProductsTitle = document.querySelector('.section-title:not(.special-promo-title)'); // first non-promo title = "All Products"
+  const countdownTimer = document.getElementById('countdownTimer');
+
+  if (query) {
+    // 🔽 HIDE during search
+    if (categories) categories.style.display = 'none';
+    if (promoSection) promoSection.style.display = 'none';
+    if (allProductsTitle) allProductsTitle.style.display = 'none';
+    if (countdownTimer) countdownTimer.style.display = 'none';
+
+    // 🔍 Show only matching cards (from *any* section)
+    let found = false;
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name');
+      const matches = name?.includes(query);
+      card.classList.toggle('hidden', !matches);
+      if (matches) found = true;
+    });
+
+    // Show/hide "No Results"
+    if (noRes) noRes.style.display = found ? 'none' : 'block';
+
+  } else {
+    // 🔼 RESTORE when cleared
+    if (categories) categories.style.display = 'flex';
+    if (promoSection) promoSection.style.display = 'block';
+    if (allProductsTitle) allProductsTitle.style.display = 'block';
+    if (countdownTimer) countdownTimer.style.display = 'block';
+
+    cards.forEach(card => card.classList.remove('hidden'));
+    if (noRes) noRes.style.display = 'none';
+  }
+
+  // Toggle clear button
+  if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
 }
 function clearSearch() {
   const inp = document.getElementById('searchInput');
