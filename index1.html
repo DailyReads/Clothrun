@@ -1650,13 +1650,13 @@ function updateQuantity(cartIndex, change) {
 
 function saveCartToLocalStorage() {
   localStorage.setItem('clothrunCart', JSON.stringify(cart));
-  localStorage.setItem('clothrun Promo, JSON.stringify(applied Promo));
+  localStorage.setItem('clothrunPromo, JSON.stringify(applied Promo));
   localStorage.setItem('clothrunDiscount', currentDiscount.toString());
 }
 
 function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('clothrunCart');
-  const savedPromo localStorage.getItem('clothrun Promo);
+  const savedPromo localStorage.getItem('clothrunPromo');
   const savedDiscount = localStorage.getItem('clothrunDiscount');
   if (savedCart) cart = JSON.parse(savedCart);
   if (savedPromo) appliedPromo = JSON.parse(savedPromo);
@@ -1861,5 +1861,6 @@ function showToast(message) {
   </script>
 </body>
 </html>
+
 
 
