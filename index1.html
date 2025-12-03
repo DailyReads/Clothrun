@@ -6,7 +6,7 @@
   <title>ClothRun — Premium Cloth Store</title>
   <link rel="icon" type="image/png" href="Keyloops_20251026_201720_0000.png">
   <style>
-/* ✅ All CSS — updated for clarity & visibility in modal */
+/* ✅ All CSS — updated sesuai permintaan */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 html, body { width: 100%; overflow-x: hidden; }
 body { background: #ffffff; color: #000; }
@@ -21,71 +21,6 @@ header {
 @media (min-width: 1024px) {
   header { text-align: left; padding: 40px 60px; }
   header h1 { font-size: 48px; margin-bottom: 10px; }
-}
-/* ========== CATEGORY BUTTONS ========== */
-.categories {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 24px 0;
-  padding: 0 20px;
-}
-.category-btn {
-  background: #f8f9fa;
-  color: #555;
-  border: 2px solid #e0e0e0;
-  border-radius: 30px;
-  padding: 8px 20px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-.category-btn:hover {
-  background: #e9ecef;
-  border-color: #d4a373;
-  color: #d4a373;
-}
-.category-btn.active {
-  background: #d4a373;
-  color: white;
-  border-color: #c49668;
-  box-shadow: 0 4px 8px rgba(212, 163, 115, 0.2);
-}
-/* ========== SECTION TITLE ========== */
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #222;
-  text-align: center;
-  margin: 40px 0 24px;
-  position: relative;
-}
-.section-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #d4a373, #ccd5ae);
-  margin: 8px auto 0;
-  border-radius: 3px;
-}
-/* ========== SPECIAL PROMO TITLE ========== */
-.special-promo-title {
-  font-size: 22px;
-  font-weight: 600;
-  color: #d4a373;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.special-promo-title span {
-  background: linear-gradient(135deg, #d4a373, #ccd5ae);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 700;
 }
 /* ========== SEARCH CONTAINER ========== */
 .search-container {
@@ -184,33 +119,32 @@ header {
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
   padding: 15px;
-  text-align: center; 
+  text-align: left; /* ✅ LEFT align */
   transition: 0.3s;
 }
 .product-card:hover { 
   transform: translateY(-2px); 
-}
-.product-card.hidden { 
-  display: none; 
 }
 .product-card img { 
   width: 100%; 
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;
-  border-radius: 0; /* ✅ no corner */
+  border-radius: 0; /* ✅ NO cornering — sharp edges */
   background-color: #f8f9fa;
 }
 .product-name { 
   font-size: 16px; 
   font-weight: 600; 
   margin: 10px 0; 
+  text-align: left;
 }
 .product-price { 
   font-size: 16px; 
   font-weight: 500;
   color: #000;
   margin-bottom: 10px;
+  text-align: left;
 }
 .product-price s {
   color: #000;
@@ -220,7 +154,7 @@ header {
   margin-bottom: 2px;
 }
 .product-price strong {
-  color: #000;
+  color: #d4a373; /* ✅ Promo price = brand color */
   font-weight: 700;
   font-size: 17px;
 }
@@ -249,6 +183,33 @@ header {
   border-radius: 14px;
   z-index: -1;
   opacity: 0.3;
+}
+/* ✅ LOVE BUTTON — product grid */
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.favorite-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: transparent;
+  stroke: #3d3d3d;
+  stroke-width: 2;
+  transition: all 0.2s ease;
+}
+.favorite-btn.active svg {
+  fill: #000;
+  stroke: #000;
 }
 .add-btn { 
   background: #000; 
@@ -619,31 +580,6 @@ footer p {
     flex: 1 1 100%;
   }
 }
-/* ========== PRODUCT ACTIONS ========== */
-.product-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
-  width: 100%;
-}
-.details-btn-product {
-  background: transparent;
-  color: #d4a373;
-  border: 2px solid #d4a373;
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-.details-btn-product:hover {
-  background: #d4a373;
-  color: white;
-}
 /* ========== PRODUCT DETAILS MODAL ========== */
 .product-details-modal {
   display: none;
@@ -680,7 +616,6 @@ footer p {
 .close-details-btn:hover {
   transform: scale(1.1);
 }
-/* ✅ FIX TITLE POSITION */
 .modal-header {
   text-align: center;
   margin-top: 20px;
@@ -700,7 +635,6 @@ footer p {
     font-size: 24px;
   }
 }
-/* ========== PRODUCT SECTION DETAILS ========== */
 .product-section-details {
   display: flex;
   flex-direction: column;
@@ -716,7 +650,6 @@ footer p {
     padding: 0 40px;
   }
 }
-/* ========== IMAGE SLIDER CONTAINER ========== */
 .image-slider-container {
   position: relative;
   width: 100%;
@@ -732,7 +665,7 @@ footer p {
   display: flex;
   overflow: hidden;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 0; /* ✅ No rounding on images */
   background: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 10px;
@@ -744,15 +677,14 @@ footer p {
   aspect-ratio: 4 / 3;
   object-fit: contain;
   object-position: center;
-  border-radius: 8px;
   flex-shrink: 0;
   display: none;
   background-color: #f8f9fa;
+  border-radius: 0; /* ✅ Sharp edges */
 }
 .image-slider-details img.active {
   display: block;
 }
-/* ========== SLIDER NAVIGATION BUTTONS ========== */
 .slider-nav-btn {
   position: absolute;
   top: 50%;
@@ -796,7 +728,6 @@ footer p {
   color: #333;
   transform: translateY(-50%) scale(1);
 }
-/* ========== IMAGE COUNTER ========== */
 .image-counter {
   position: absolute;
   bottom: 20px;
@@ -810,7 +741,6 @@ footer p {
   font-weight: 600;
   z-index: 10;
 }
-/* ========== DOTS NAVIGATION ========== */
 .slider-dots {
   display: flex;
   justify-content: center;
@@ -833,7 +763,6 @@ footer p {
 .slider-dot:hover {
   background: #c49668;
 }
-/* ========== PRODUCT INFO DETAILS ========== */
 .product-info-details {
   flex: 1;
   min-width: 300px;
@@ -883,6 +812,42 @@ footer p {
   line-height: 1.7;
   margin-bottom: 24px;
 }
+/* ✅ FAVORITE BUTTON — detail modal (hanya love berubah) */
+.favorite-details-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: #000;
+  border: 2px solid #000;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.2s;
+}
+.favorite-details-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #3d3d3d;
+  stroke-width: 2;
+  transition: all 0.2s ease;
+}
+/* ✅ Hanya ubah SVG saat active — teks & border tetap */
+.favorite-details-btn.active svg {
+  fill: #000;
+  stroke: #000;
+}
+/* Opsional: hover tetap halus */
+.favorite-details-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
 .add-to-cart-details-btn {
   background-color: #000000;
   color: white;
@@ -896,180 +861,6 @@ footer p {
   width: 100%;
   max-width: 300px;
   transition: background-color 0.3s, transform 0.2s;
-}
-/* ========== SIZE SELECTION MODAL ========== */
-.size-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 3000;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-}
-.size-modal.active {
-  display: flex;
-}
-.size-modal-content {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 450px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  animation: modalSlideIn 0.3s ease-out;
-}
-@keyframes modalSlideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.size-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
-}
-.size-modal-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #333;
-}
-.size-modal-close {
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #999;
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.3s;
-}
-.size-modal-close:hover {
-  background: #f0f0f0;
-  color: #333;
-}
-.size-product-info {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 25px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 12px;
-}
-.size-product-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-.size-product-details {
-  flex: 1;
-}
-.size-product-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-.size-product-price {
-  font-size: 18px;
-  font-weight: 700;
-  color: #d4a373;
-}
-.size-selection-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 15px;
-  display: block;
-}
-.size-options {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 25px;
-}
-@media (max-width: 480px) {
-  .size-options {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.size-option {
-  background: white;
-  border: 2px solid #e0e0e0;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  transition: all 0.3s;
-}
-.size-option:hover {
-  border-color: #d4a373;
-  background: #fef9f5;
-  transform: translateY(-2px);
-}
-.size-option.selected {
-  background: #d4a373;
-  border-color: #d4a373;
-  color: white;
-}
-.size-option.out-of-stock {
-  background: #f5f5f5;
-  border-color: #e0e0e0;
-  color: #999;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
-.size-option.out-of-stock:hover {
-  transform: none;
-  background: #f5f5f5;
-  border-color: #e0e0e0;
-}
-.size-confirm-btn {
-  width: 100%;
-  background: #000000;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.size-confirm-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  transform: none;
-}
-.size-error-message {
-  color: #e74c3c;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 10px;
-  display: none;
 }
 /* ========== COLOR SELECTION ========== */
 .color-selection {
@@ -1111,28 +902,7 @@ footer p {
   font-weight: 600;
   color: #222;
 }
-/* ✅ PATCH: Remove product card borders/shadow & shrink on desktop */
-.product-card {
-  box-shadow: none !important;
-  border: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0;
-}
-.product-card img {
-  border-radius: 8px; /* optional: keep rounded image */
-}
-/* Scale down on desktop */
-@media (min-width: 1024px) {
-  .product-card {
-    transform: scale(0.92);
-    transition: transform 0.2s;
-  }
-  .product-card:hover {
-    transform: scale(0.94) translateY(-2px);
-  }
-}
-/* ✅ PATCH: Top-left back button & title */
+/* ========== TOP BAR & SIDEBAR ========== */
 .top-bar {
   display: flex;
   align-items: center;
@@ -1183,7 +953,6 @@ footer p {
   color: #222;
   margin: 0;
 }
-/* ========== SIDEBAR ========== */
 .sidebar {
   position: fixed;
   top: 0;
@@ -1294,74 +1063,9 @@ footer p {
   color: #333;
   transform: rotate(90deg);
 }
-/* ========== ACTIVE TITLE ========== */
-.section-title.active {
-  color: #d4a373;
-}
-/* ========== COUNTDOWN TIMER ========== */
-.countdown-timer-section {
-  text-align: center;
-  margin: 24px 0;
-  padding: 12px 20px;
-}
-.countdown-timer-wrapper {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.countdown-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #d4a373;
-}
-.countdown-boxes {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.countdown-box {
-  background: linear-gradient(135deg, #d4a373, #c49668);
-  color: white;
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(212, 163, 115, 0.2);
-}
-.countdown-box span {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-.countdown-box small {
-  font-size: 11px;
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-}
-
-@media (max-width: 480px) {
-  .countdown-box {
-    min-width: 50px;
-    padding: 8px 0;
-  }
-  .countdown-box span {
-    font-size: 18px;
-  }
-  .countdown-box small {
-    font-size: 10px;
-  }
-}
   </style>
 </head>
 <body>
-  <!-- ✅ Now ALL UI elements are inside <body> -->
-
   <!-- Top Bar -->
   <div class="top-bar">
     <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Open menu">
@@ -1373,7 +1077,6 @@ footer p {
     </button>
     <h1 class="page-title">Products</h1>
   </div>
-
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -1382,14 +1085,12 @@ footer p {
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
     <ul class="sidebar-nav">
       <li><a href="index.html">Home</a></li>
-      <li><a href="index#products.html" onclick="showProducts(); return false;">Products</a></li>
-      <li><a href="index1.html#summer-event" onclick="showSummerEvent(); return false;">Summer Event</a></li>
+      <li><a href="javascript:void(0)" onclick="showProducts(); toggleSidebar()">Products</a></li>
+      <li><a href="javascript:void(0)" onclick="showFavorites(); toggleSidebar()">Favorites</a></li>
     </ul>
   </div>
-
   <!-- Sidebar Overlay -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
-
   <!-- Cart Button -->
   <button class="cart-btn" onclick="toggleCart()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1397,9 +1098,8 @@ footer p {
     </svg>
     <span class="cart-count" id="cartCount">0</span>
   </button>
-
   <!-- Main Content -->
-  <div class="section">
+  <div class="section" id="searchSection">
     <!-- Search -->
     <div class="search-container">
       <div class="search-box">
@@ -1410,58 +1110,22 @@ footer p {
         <button id="searchClear" class="search-clear" onclick="clearSearch()">×</button>
       </div>
     </div>
-
-    <!-- Categories -->
-    <div class="categories">
-      <button class="category-btn active" data-category="all">All</button>
-      <button class="category-btn" data-category="cloth">Cloth</button>
-      <button class="category-btn" data-category="pants">Pants</button>
-      <button class="category-btn" data-category="accessories">Accessories</button>
-    </div>
   </div>
-
-  <!-- Special Promo Section (wrapped in .section) -->
-  <div class="section">
-    <h2 class="section-title special-promo-title">Special <span>Promo</span></h2>
-     <!-- Countdown Timer — between promo and all products -->
-<div id="countdownTimer" class="countdown-timer-section">
-  <div class="countdown-timer-wrapper">
-    <span class="countdown-label">Special Promo Countdown</span>
-    <div class="countdown-boxes">
-      <div class="countdown-box">
-        <span id="days">00</span>
-        <small>Days</small>
-      </div>
-      <div class="countdown-box">
-        <span id="hours">00</span>
-        <small>Hours</small>
-      </div>
-      <div class="countdown-box">
-        <span id="minutes">00</span>
-        <small>Min</small>
-      </div>
-      <div class="countdown-box">
-        <span id="seconds">00</span>
-        <small>Sec</small>
-      </div>
-    </div>
+  <!-- Favorites Section -->
+  <div class="section" id="favoritesSection" style="display:none;">
+    <h2 class="section-title">Favorites</h2>
+    <div class="product-grid" id="favoritesGrid"></div>
   </div>
-</div>
-    <div class="product-grid" id="promoGrid"></div>
-  </div>
-
-  <!-- Products Section (wrapped in .section) -->
-  <div class="section">
+  <!-- Products Section -->
+  <div class="section" id="productsSection">
     <h2 class="section-title">All Products</h2>
     <div class="product-grid" id="productGrid"></div>
   </div>
-
   <!-- No Results -->
   <div class="no-results" id="noResults">
     <h3>No Results</h3>
     <p>Try a different keyword or category</p>
   </div>
-
   <!-- Product Details Modal -->
   <div class="product-details-modal" id="productDetailsModal">
     <div class="close-details-btn" onclick="closeProductDetails()">
@@ -1489,31 +1153,15 @@ footer p {
           <div class="color-options" id="colorOptions"></div>
         </div>
         <button class="add-to-cart-details-btn" id="detailsAddToCartBtn">Add to Cart</button>
+        <button class="favorite-details-btn" id="detailsFavoriteBtn" onclick="toggleFavoriteInDetails()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          Favorite
+        </button>
       </div>
     </div>
   </div>
-
-  <!-- Size Selection Modal -->
-  <div class="size-modal" id="sizeModal">
-    <div class="size-modal-content">
-      <div class="size-modal-header">
-        <h2 class="size-modal-title">Select Size</h2>
-        <button class="size-modal-close" onclick="closeSizeModal()">×</button>
-      </div>
-      <div class="size-product-info">
-        <img src="" alt="" class="size-product-image" id="sizeProductImage">
-        <div class="size-product-details">
-          <div class="size-product-name" id="sizeProductName"></div>
-          <div class="size-product-price" id="sizeProductPrice"></div>
-        </div>
-      </div>
-      <label class="size-selection-label">Choose your size:</label>
-      <div class="size-options" id="sizeOptions"></div>
-      <button class="size-confirm-btn" id="sizeConfirmBtn" disabled>Add to Cart</button>
-      <div class="size-error-message" id="sizeErrorMessage">Please select a size</div>
-    </div>
-  </div>
-
   <!-- Cart Section -->
   <div class="cart-section" id="cartSection">
     <div class="cart-header">
@@ -1535,24 +1183,22 @@ footer p {
         </div>
       </div>
       <h2>My Shopping Products</h2>
-        <div class="receipt-items" id="cartItems">
-          <div class="empty-cart">
-            <div class="empty-cart-icon">🛒</div>
-            <h3>Your cart is empty</h3>
-            <p>Add some products to get started!</p>
-            <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
-          </div>
+      <div class="receipt-items" id="cartItems">
+        <div class="empty-cart">
+          <div class="empty-cart-icon">🛒</div>
+          <h3>Your cart is empty</h3>
+          <p>Add some products to get started!</p>
+          <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
         </div>
-        <div class="receipt-summary">
-          <div class="summary-row total"><span>Total Amount</span><span id="totalAmount">Rp 0</span></div>
-          <button class="checkout-btn" onclick="sendToWhatsApp()" id="checkoutBtn" disabled>Checkout</button>
-        </div>
+      </div>
+      <div class="receipt-summary">
+        <div class="summary-row total"><span>Total Amount</span><span id="totalAmount">Rp 0</span></div>
+        <button class="checkout-btn" onclick="sendToWhatsApp()" id="checkoutBtn" disabled>Checkout</button>
       </div>
     </div>
   </div>
-
   <script>
-// ✅ Products — with color support
+// ✅ Products — tanpa sizes
 const products = [
   { 
     id: 1, 
@@ -1566,10 +1212,9 @@ const products = [
       "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01tGLL4M1TT0DQyAdAE_!!1137782382.jpg_q50.jpg_.webp"
     ],
     colors: [
-       { name: "Coffee", code: "#6F4E37", imageIndex: 1 },
+      { name: "Coffee", code: "#6F4E37", imageIndex: 1 },
       { name: "Gray", code: "#808080", imageIndex: 2 },
     ],
-    sizes: ["M", "L", "XL","2XL"],
     description: "A timeless retro knit sweater designed to deliver a gentle, refined look for everyday wear. Crafted from soft, high-quality knit fabric, this sweater blends vintage charm with modern comfort." 
   },
   { 
@@ -1588,7 +1233,6 @@ const products = [
       { name: "Green", code: "#006400", imageIndex: 1 },
       { name: "Blue", code: "#0000FF", imageIndex: 2 }
     ],
-    sizes: ["M", "L", "XL","2XL"],
     description: "A warm and stylish thick knit sweater designed for the autumn and winter seasons. Made from premium soft knit fabric that provides excellent warmth and all-day comfort. The classic crew neck design and solid color finish create a clean, modern look that’s easy to pair with any outfit." 
   },
   { 
@@ -1603,11 +1247,10 @@ const products = [
       "https://img.alicdn.com/imgextra/i1/2503593231/O1CN01MgQhjf1Zjqjlg3WsH_!!2503593231.jpg_q50.jpg_.webp"
     ],
     colors: [
-       { name: "Black", code: "#000000", imageIndex: 0 },
+      { name: "Black", code: "#000000", imageIndex: 0 },
       { name: "Green", code: "#90EE90", imageIndex: 1 },
       { name: "Apricot", code: "#FBCEB1", imageIndex: 2 }
     ],
-    sizes: ["M", "L", "XL", "2XL","3XL"],
     description: "Stay cool and comfortable all summer long with these lightweight ice silk pants. Made from ultra-smooth, breathable fabric, they offer a refreshing cooling effect that’s perfect for hot weather." 
   },
   { 
@@ -1618,7 +1261,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1612336308010-6f13304cfd67?w=300",
     images: ["https://images.unsplash.com/photo-1612336308010-6f13304cfd67?w=460"],
     colors: [{ name: "Blue", code: "#1E90FF", imageIndex: 0 }],
-    sizes: ["27", "28", "29", "30", "31"],
     description: "Slim-fit high-waisted jeans with premium stretch denim." 
   },
   { 
@@ -1635,7 +1277,6 @@ const products = [
       { name: "Brown", code: "#8B4513", imageIndex: 0 },
       { name: "Black", code: "#000000", imageIndex: 1 }
     ],
-    sizes: [], // no size
     description: "Genuine leather crossbody bag. Adjustable strap, secure zipper." 
   },
   { 
@@ -1646,7 +1287,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300",
     images: ["https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=460"],
     colors: [{ name: "Beige", code: "#F5F5DC", imageIndex: 0 }],
-    sizes: [], // no size
     description: "Soft wool-blend scarf in earthy tones. Lightweight yet warm." 
   },
   { 
@@ -1663,7 +1303,6 @@ const products = [
       { name: "Gray", code: "#A9A9A9", imageIndex: 0 },
       { name: "Black", code: "#000000", imageIndex: 1 }
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
     description: "Cozy oversized hoodie with kangaroo pocket and ribbed cuffs." 
   },
   { 
@@ -1680,12 +1319,12 @@ const products = [
       { name: "Natural", code: "#F8F4E6", imageIndex: 0 },
       { name: "Black", code: "#000000", imageIndex: 1 }
     ],
-    sizes: [], // no size
     description: "Eco-friendly canvas tote with reinforced handles." 
   }
 ];
+
 // ================================
-// CONFIG
+// CONFIG & STATE
 // ================================
 const discountRate = 10;
 const discountProducts = [1, 3, 5];
@@ -1694,54 +1333,46 @@ const promoList = {
   "DISKON20": { type: "percent", value: 20 },
   "GAG123": { type: "percent", value: 5 }
 };
-// ================================
-// GLOBAL STATE
-// ================================
 let cart = [];
+let favorites = JSON.parse(localStorage.getItem('clothrunFavorites') || '[]');
 let currentDiscount = 0;
 let appliedPromo = null;
-let selectedSize = null;
 let selectedColor = null;
 let currentProductForColor = null;
-let currentProductForSize = null;
+let currentProductForDetails = null;
+
 // ================================
-// RENDERING — Enhanced & Filtered
+// RENDER PRODUCTS & FAVORITES
 // ================================
-const productGrid = document.getElementById('productGrid');
-const promoGrid = document.getElementById('promoGrid');
-const categoryButtons = document.querySelectorAll('.category-btn');
-let currentCategory = 'all';
-function renderProducts(category = 'all') {
-  if (!productGrid) return;
-  const filtered = category === 'all' 
-    ? products 
-    : products.filter(p => p.category === category);
-  productGrid.innerHTML = filtered.length > 0 
-    ? filtered.map(renderProductCard).join('')
-    : `<div class="no-results"><h3>No Products</h3><p>Nothing here in <strong>${category}</strong> category.</p></div>`;
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map(p => renderProductCard(p, favorites.includes(p.id))).join('');
 }
-function renderPromoProducts(category = 'all') {
-  if (!promoGrid) return;
-  let promoItems = isDiscountActive 
-    ? products.filter(p => discountProducts.includes(p.id))
-    : [];
-  if (category !== 'all') {
-    promoItems = promoItems.filter(p => p.category === category);
-  }
-  promoGrid.innerHTML = promoItems.length > 0
-    ? promoItems.map(renderProductCard).join('')
-    : `<div class="no-results"><p>No active promotions in this category.</p></div>`;
+
+function renderFavorites() {
+  const favGrid = document.getElementById('favoritesGrid');
+  const favItems = products.filter(p => favorites.includes(p.id));
+  favGrid.innerHTML = favItems.length > 0
+    ? favItems.map(p => renderProductCard(p, true)).join('')
+    : `<div class="no-results"><p>You haven’t added any favorites yet.</p></div>`;
 }
-function renderProductCard(product) {
+
+function renderProductCard(product, isFavorite = false) {
   const isDiscount = isDiscountActive && discountProducts.includes(product.id);
   const finalPrice = isDiscount 
     ? Math.round(product.price * (1 - discountRate / 100)) 
     : product.price;
   return `
-    <div class="product-card" data-name="${product.name.toLowerCase()}" 
-         data-category="${product.category}"
+    <div class="product-card" data-name="${product.name.toLowerCase()}" data-id="${product.id}" 
          onclick="showProductDetails(${product.id})">
       <img src="${product.image}" alt="${product.name}" loading="lazy">
+      <button class="favorite-btn ${isFavorite ? 'active' : ''}" 
+              data-id="${product.id}" 
+              onclick="toggleFavorite(event, ${product.id})">
+        <svg viewBox="0 0 24 24" fill="${isFavorite ? '#000' : 'none'}" stroke="${isFavorite ? '#000' : '#999'}">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
       <div class="product-name">${product.name}</div>
       <div class="product-price">
         ${isDiscount 
@@ -1750,147 +1381,82 @@ function renderProductCard(product) {
           : `Rp ${product.price.toLocaleString('id-ID')}`
         }
       </div>
-      ${isDiscount ? `<span class="product-badge">Promo</span>` : ''}
     </div>
   `;
 }
+
 // ================================
-// CATEGORY FILTERING
+// FAVORITE TOGGLE
 // ================================
-categoryButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    categoryButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentCategory = btn.dataset.category;
-    renderProducts(currentCategory);
-  });
-});
+function toggleFavorite(e, productId) {
+  e.stopPropagation();
+  const index = favorites.indexOf(productId);
+  if (index === -1) {
+    favorites.push(productId);
+  } else {
+    favorites.splice(index, 1);
+  }
+  localStorage.setItem('clothrunFavorites', JSON.stringify(favorites));
+  renderProducts();
+  if (document.getElementById('favoritesSection').style.display === 'block') {
+    renderFavorites();
+  }
+  // Update UI in detail modal if open
+  if (currentProductForDetails && currentProductForDetails.id === productId) {
+    updateFavoriteButtonInDetails();
+  }
+}
+
+function toggleFavoriteInDetails() {
+  if (!currentProductForDetails) return;
+  toggleFavorite({ stopPropagation: () => {} }, currentProductForDetails.id);
+}
+
+function updateFavoriteButtonInDetails() {
+  const btn = document.getElementById('detailsFavoriteBtn');
+  const isFav = favorites.includes(currentProductForDetails.id);
+  if (btn) {
+    btn.classList.toggle('active', isFav);
+  }
+}
+
 // ================================
 // COLOR SELECTION
 // ================================
 function selectColor(colorName, imageIndex) {
   const product = currentProductForColor;
   if (!product || !product.colors) return;
-  // Update UI
   document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
   const selectedEl = Array.from(document.querySelectorAll('.color-option'))
     .find(el => el.dataset.color === colorName);
   if (selectedEl) selectedEl.classList.add('selected');
-  // Update state & image
   selectedColor = colorName;
   currentSlideIndex = imageIndex;
   updateSliderDisplay();
 }
+
 // ================================
-// SIZE MODAL
-// ================================
-function showSizeModal(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) return;
-  currentProductForSize = product;
-  selectedSize = null;
-  const modal = document.getElementById('sizeModal');
-  const img = document.getElementById('sizeProductImage');
-  const name = document.getElementById('sizeProductName');
-  const price = document.getElementById('sizeProductPrice');
-  const opts = document.getElementById('sizeOptions');
-  const btn = document.getElementById('sizeConfirmBtn');
-  const err = document.getElementById('sizeErrorMessage');
-  if (img) {
-    const colorObj = product.colors?.find(c => c.name === selectedColor);
-    img.src = product.images?.[colorObj?.imageIndex || 0] || product.image;
-  }
-  if (name) {
-    const colorText = selectedColor ? ` (${selectedColor})` : '';
-    name.textContent = product.name + colorText;
-  }
-  const isDiscount = isDiscountActive && discountProducts.includes(productId);
-  const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
-  if (price) {
-    price.innerHTML = isDiscount
-      ? `<s style="color:#999;font-size:14px;">Rp ${product.price.toLocaleString('id-ID')}</s><br>Rp ${finalPrice.toLocaleString('id-ID')}`
-      : `Rp ${product.price.toLocaleString('id-ID')}`;
-  }
-  if (opts) {
-    opts.innerHTML = '';
-    product.sizes.forEach(size => {
-      const el = document.createElement('div');
-      el.className = 'size-option';
-      el.textContent = size;
-      el.addEventListener('click', () => selectSize(size));
-      opts.appendChild(el);
-    });
-  }
-  if (btn) {
-    btn.disabled = true;
-    btn.onclick = confirmSizeSelection;
-  }
-  if (err) err.style.display = 'none';
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function selectSize(size) {
-  selectedSize = size;
-  document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
-  const selectedEl = Array.from(document.querySelectorAll('.size-option'))
-    .find(el => el.textContent.trim() === size.toString());
-  if (selectedEl) selectedEl.classList.add('selected');
-  const btn = document.getElementById('sizeConfirmBtn');
-  const err = document.getElementById('sizeErrorMessage');
-  if (btn) btn.disabled = false;
-  if (err) err.style.display = 'none';
-}
-function confirmSizeSelection() {
-  if (!selectedSize || !currentProductForSize) {
-    const err = document.getElementById('sizeErrorMessage');
-    if (err) {
-      err.textContent = 'Please select a size';
-      err.style.display = 'block';
-    }
-    return;
-  }
-  addToCartWithColorAndSize(currentProductForSize.id, selectedColor, selectedSize);
-  closeSizeModal();
-}
-function closeSizeModal() {
-  const modal = document.getElementById('sizeModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-  selectedSize = null;
-  currentProductForSize = null;
-}
-// ================================
-// ADD TO CART (with color + size)
+// ADD TO CART — no size
 // ================================
 function confirmAddToCart(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
-  if (product.sizes && product.sizes.length > 0) {
-    if (product.colors && product.colors.length > 0 && !selectedColor) {
-      showNotification("Please select a color first");
-      return;
-    }
-    showSizeModal(productId);
-    return;
-  }
   if (product.colors && !selectedColor) {
-    showNotification("Please select a color");
+    alert("Please select a color");
     return;
   }
-  addToCartWithColorAndSize(productId, selectedColor, selectedSize);
+  addToCartWithColor(productId, selectedColor);
   closeProductDetails();
 }
-function addToCartWithColorAndSize(productId, color = null, size = null) {
+
+function addToCartWithColor(productId, color = null) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
   const existingItem = cart.find(item =>
     item.id === productId &&
-    (item.color === color || (!item.color && !color)) &&
-    (item.size === size || (!item.size && !size))
+    (item.color === color || (!item.color && !color))
   );
   if (existingItem) {
     existingItem.quantity += 1;
@@ -1899,56 +1465,50 @@ function addToCartWithColorAndSize(productId, color = null, size = null) {
       ...product,
       quantity: 1,
       finalPrice,
-      color,
-      size
+      color
     });
   }
   saveCartToLocalStorage();
   updateCartDisplay();
-  const msg = `${product.name}` +
-    (color ? ` (${color})` : '') +
-    (size ? ` Size ${size}` : '') +
-    ` added to cart!`;
-  showNotification(msg);
+  alert(`${product.name}${color ? ` (${color})` : ''} added to cart!`);
 }
+
 // ================================
 // PRODUCT DETAILS MODAL
 // ================================
 let currentSlideIndex = 0;
 let totalSlides = 0;
+
 function showProductDetails(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
+  currentProductForDetails = product;
+  currentProductForColor = product;
+  selectedColor = null;
   const modal = document.getElementById('productDetailsModal');
   const title = document.getElementById('detailsTitle');
   const price = document.getElementById('detailsPrice');
   const desc = document.getElementById('detailsDescription');
   const slider = document.getElementById('detailsImageSlider');
   const btn = document.getElementById('detailsAddToCartBtn');
+  const favBtn = document.getElementById('detailsFavoriteBtn');
   const colorOpts = document.getElementById('colorOptions');
-  // Reset state
-  selectedColor = null;
-  selectedSize = null;
-  currentProductForColor = product;
-  if (title) title.textContent = product.name;
+
+  title.textContent = product.name;
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
-  if (price) {
-    price.innerHTML = isDiscount
-      ? `<s style="color:#999;font-size:20px;">Rp ${product.price.toLocaleString('id-ID')}</s><br>Rp ${finalPrice.toLocaleString('id-ID')}`
-      : `Rp ${product.price.toLocaleString('id-ID')}`;
-  }
-  if (desc) desc.textContent = product.description || 'No description available.';
-  // Images
+  price.innerHTML = isDiscount
+    ? `<s style="color:#999;font-size:20px;">Rp ${product.price.toLocaleString('id-ID')}</s><br>Rp ${finalPrice.toLocaleString('id-ID')}`
+    : `Rp ${product.price.toLocaleString('id-ID')}`;
+  desc.textContent = product.description || 'No description available.';
+
   const images = product.images || [product.image];
   totalSlides = images.length;
   currentSlideIndex = 0;
-  if (slider) {
-    slider.innerHTML = images.map((src, i) => 
-      `<img src="${src}" alt="${product.name}" class="${i === 0 ? 'active' : ''}">`
-    ).join('');
-  }
-  // ✅ COLOR OPTIONS
+  slider.innerHTML = images.map((src, i) => 
+    `<img src="${src}" alt="${product.name}" class="${i === 0 ? 'active' : ''}">`
+  ).join('');
+
   if (colorOpts && product.colors && product.colors.length > 0) {
     colorOpts.innerHTML = product.colors.map(color => `
       <div class="color-option" data-color="${color.name}" 
@@ -1961,117 +1521,113 @@ function showProductDetails(productId) {
   } else {
     colorOpts.closest('.color-selection').style.display = 'none';
   }
-  // Reset Add button
-  if (btn) {
-    btn.textContent = "Add to Cart";
-    btn.onclick = () => confirmAddToCart(productId);
-    btn.disabled = false;
-  }
+
+  btn.onclick = () => confirmAddToCart(productId);
+  btn.disabled = false;
+
+  updateFavoriteButtonInDetails();
   updateSliderDisplay();
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
+
 function closeProductDetails() {
   const modal = document.getElementById('productDetailsModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+  currentProductForDetails = null;
 }
+
 function changeSlide(dir) {
   currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides;
   updateSliderDisplay();
 }
+
 function updateSliderDisplay() {
   const imgs = document.querySelectorAll('#detailsImageSlider img');
   const counter = document.getElementById('imageCounter');
   const prev = document.getElementById('sliderPrevBtn');
   const next = document.getElementById('sliderNextBtn');
+
   imgs.forEach((img, i) => img.classList.toggle('active', i === currentSlideIndex));
   if (counter) counter.textContent = `${currentSlideIndex + 1} / ${totalSlides}`;
-  if (prev && next) {
-    if (totalSlides <= 1) {
-      prev.style.display = 'none';
-      next.style.display = 'none';
-    } else {
-      prev.style.display = 'flex';
-      next.style.display = 'flex';
-    }
+  if (prev && next && totalSlides > 1) {
+    prev.style.display = 'flex';
+    next.style.display = 'flex';
+  } else if (prev && next) {
+    prev.style.display = 'none';
+    next.style.display = 'none';
   }
 }
+
 // ================================
-// CART DISPLAY & UPDATE
+// CART & UI
 // ================================
 function updateCartDisplay() {
   const cartCount = document.getElementById('cartCount');
   const cartItems = document.getElementById('cartItems');
   const totalAmount = document.getElementById('totalAmount');
   const checkoutBtn = document.getElementById('checkoutBtn');
+
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const total = subtotal - (subtotal * currentDiscount / 100);
-  if (cartCount) {
-    cartCount.textContent = totalItems;
-    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-  }
-  if (cartItems) {
-    if (cart.length === 0) {
-      cartItems.innerHTML = `
-        <div class="empty-cart">
-          <div class="empty-cart-icon">🛒</div>
-          <h3>Your cart is empty</h3>
-          <p>Add some products to get started!</p>
-          <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
+
+  cartCount.textContent = totalItems;
+  cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = `
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some products to get started!</p>
+        <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
+      </div>
+    `;
+    checkoutBtn.disabled = true;
+  } else {
+    cartItems.innerHTML = cart.map((item, index) => {
+      const itemPrice = item.finalPrice || item.price;
+      const colorText = item.color ? `<div style="font-size:13px;color:#666;">Color: ${item.color}</div>` : '';
+      return `
+        <div class="receipt-item">
+          <img src="${item.image}" alt="${item.name}" class="item-image">
+          <div class="item-info">
+            <div class="item-name">${item.name}${colorText}</div>
+            <div class="item-controls">
+              <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+              <span class="quantity">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+          </div>
+          <div class="item-price">Rp ${(itemPrice * item.quantity).toLocaleString('id-ID')}</div>
         </div>
       `;
-      if (checkoutBtn) checkoutBtn.disabled = true;
-    } else {
-      cartItems.innerHTML = cart.map((item, index) => {
-        const itemPrice = item.finalPrice || item.price;
-        const colorText = item.color ? `<div style="font-size:13px;color:#666;">Color: ${item.color}</div>` : '';
-        const sizeText = item.size ? `<div style="font-size:13px;color:#666;margin-top:2px;">Size: ${item.size}</div>` : '';
-        return `
-          <div class="receipt-item">
-            <img src="${item.image}" alt="${item.name}" class="item-image">
-            <div class="item-info">
-              <div class="item-name">${item.name}${colorText}${sizeText}</div>
-              <div class="item-controls">
-                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                <span class="quantity">${item.quantity}</span>
-                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-              </div>
-            </div>
-            <div class="item-price">Rp ${(itemPrice * item.quantity).toLocaleString('id-ID')}</div>
-          </div>
-        `;
-      }).join('');
-      if (checkoutBtn) checkoutBtn.disabled = false;
-    }
+    }).join('');
+    checkoutBtn.disabled = false;
   }
-  if (totalAmount) {
-    totalAmount.textContent = `Rp ${total.toLocaleString('id-ID')}`;
-  }
+
+  totalAmount.textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
+
 function updateQuantity(cartIndex, change) {
   if (cartIndex < 0 || cartIndex >= cart.length) return;
-  const item = cart[cartIndex];
-  item.quantity += change;
-  if (item.quantity <= 0) {
+  cart[cartIndex].quantity += change;
+  if (cart[cartIndex].quantity <= 0) {
     cart.splice(cartIndex, 1);
   }
   saveCartToLocalStorage();
   updateCartDisplay();
 }
-// ================================
-// LOCALSTORAGE
-// ================================
+
 function saveCartToLocalStorage() {
   localStorage.setItem('clothrunCart', JSON.stringify(cart));
   localStorage.setItem('clothrunPromo', JSON.stringify(appliedPromo));
   localStorage.setItem('clothrunDiscount', currentDiscount.toString());
 }
+
 function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('clothrunCart');
   const savedPromo = localStorage.getItem('clothrunPromo');
@@ -2080,11 +1636,7 @@ function loadCartFromLocalStorage() {
   if (savedPromo) appliedPromo = JSON.parse(savedPromo);
   if (savedDiscount) currentDiscount = parseFloat(savedDiscount);
 }
-function clearCartFromLocalStorage() {
-  localStorage.removeItem('clothrunCart');
-  localStorage.removeItem('clothrunPromo');
-  localStorage.removeItem('clothrunDiscount');
-}
+
 // ================================
 // PROMO
 // ================================
@@ -2112,8 +1664,9 @@ function applyPromo() {
     msg.textContent = "Invalid promo code.";
   }
 }
+
 // ================================
-// WHATSAPP & CHECKOUT
+// WHATSAPP
 // ================================
 function sendToWhatsApp() {
   const name = document.getElementById('customerName')?.value.trim();
@@ -2128,40 +1681,31 @@ function sendToWhatsApp() {
   }
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const total = subtotal - (subtotal * currentDiscount / 100);
-  let message = `*ClothRun Store Order*
-`;
-  message += `Customer: ${name}
-`;
-  message += `Email: ${email}
-`;
-  message += `*ORDER DETAILS:*
-`;
+  let message = `*ClothRun Store Order*\n`;
+  message += `Customer: ${name}\n`;
+  message += `Email: ${email}\n`;
+  message += `*ORDER DETAILS:*\n`;
   cart.forEach(item => {
     const price = item.finalPrice || item.price;
     const colorText = item.color ? ` | Color: ${item.color}` : '';
-    const sizeText = item.size ? ` | Size: ${item.size}` : '';
-    message += `• ${item.name}${colorText}${sizeText}
-`;
-    message += `  Qty: ${item.quantity} × Rp ${price.toLocaleString('id-ID')}
-`;
-    message += `  Subtotal: Rp ${(price * item.quantity).toLocaleString('id-ID')}
-`;
+    message += `• ${item.name}${colorText}\n`;
+    message += `  Qty: ${item.quantity} × Rp ${price.toLocaleString('id-ID')}\n`;
+    message += `  Subtotal: Rp ${(price * item.quantity).toLocaleString('id-ID')}\n`;
   });
   if (currentDiscount > 0) {
-    message += `Subtotal: Rp ${subtotal.toLocaleString('id-ID')}
-`;
-    message += `Discount (${currentDiscount}%): -Rp ${(subtotal * currentDiscount / 100).toLocaleString('id-ID')}
-`;
+    message += `Subtotal: Rp ${subtotal.toLocaleString('id-ID')}\n`;
+    message += `Discount (${currentDiscount}%): -Rp ${(subtotal * currentDiscount / 100).toLocaleString('id-ID')}\n`;
   }
-  message += `*TOTAL: Rp ${total.toLocaleString('id-ID')}*
-`;
+  message += `*TOTAL: Rp ${total.toLocaleString('id-ID')}*\n`;
   message += `Thank you for your order!`;
   window.open(`https://wa.me/082382052250?text=${encodeURIComponent(message)}`, '_blank');
   setTimeout(() => {
     cart = [];
     appliedPromo = null;
     currentDiscount = 0;
-    clearCartFromLocalStorage();
+    localStorage.removeItem('clothrunCart');
+    localStorage.removeItem('clothrunPromo');
+    localStorage.removeItem('clothrunDiscount');
     updateCartDisplay();
     toggleCart();
     document.getElementById('customerName').value = '';
@@ -2169,256 +1713,84 @@ function sendToWhatsApp() {
     document.getElementById('promoMessage').textContent = '';
   }, 1000);
 }
+
 // ================================
-// SEARCH & UI
+// SEARCH
 // ================================
 function filterProducts() {
   const query = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
   const cards = document.querySelectorAll('.product-card');
   const clearBtn = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
-
-  // ✅ Get UI elements to hide/show
-  const categories = document.querySelector('.categories');
-  const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section'); // includes countdown & promo grid
-  const allProductsTitle = document.querySelector('.section-title:not(.special-promo-title)'); // first non-promo title = "All Products"
-  const countdownTimer = document.getElementById('countdownTimer');
-
-  if (query) {
-    // 🔽 HIDE during search
-    if (categories) categories.style.display = 'none';
-    if (promoSection) promoSection.style.display = 'none';
-    if (allProductsTitle) allProductsTitle.style.display = 'none';
-    if (countdownTimer) countdownTimer.style.display = 'none';
-
-    // 🔍 Show only matching cards (from *any* section)
-    let found = false;
-    cards.forEach(card => {
-      const name = card.getAttribute('data-name');
-      const matches = name?.includes(query);
-      card.classList.toggle('hidden', !matches);
-      if (matches) found = true;
-    });
-
-    // Show/hide "No Results"
-    if (noRes) noRes.style.display = found ? 'none' : 'block';
-
-  } else {
-    // 🔼 RESTORE when cleared
-    if (categories) categories.style.display = 'flex';
-    if (promoSection) promoSection.style.display = 'block';
-    if (allProductsTitle) allProductsTitle.style.display = 'block';
-    if (countdownTimer) countdownTimer.style.display = 'block';
-
-    cards.forEach(card => card.classList.remove('hidden'));
-    if (noRes) noRes.style.display = 'none';
-  }
-
-  // Toggle clear button
+  let found = false;
+  cards.forEach(card => {
+    const name = card.getAttribute('data-name');
+    const matches = name?.includes(query);
+    if (matches) {
+      card.style.display = 'block';
+      found = true;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  if (noRes) noRes.style.display = (query && !found) ? 'block' : 'none';
   if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
 }
+
 function clearSearch() {
   const inp = document.getElementById('searchInput');
   if (inp) inp.value = '';
   filterProducts();
 }
+
 function toggleCart() {
   const cartSection = document.getElementById('cartSection');
-  if (!cartSection) return;
   const isOpen = cartSection.style.display === 'block';
   cartSection.style.display = isOpen ? 'none' : 'block';
   document.body.style.overflow = isOpen ? 'auto' : 'hidden';
 }
-function showNotification(msg) {
-  const notif = document.createElement('div');
-  notif.textContent = msg;
-  notif.style.cssText = `
-    position: fixed; top: 80px; right: 20px; background: #4CAF50; color: white;
-    padding: 15px 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 10000; animation: slideIn 0.3s ease-out;
-  `;
-  document.body.appendChild(notif);
-  setTimeout(() => {
-    notif.style.animation = 'slideOut 0.3s ease-in';
-    setTimeout(() => notif.remove(), 300);
-  }, 2000);
+
+// ================================
+// NAVIGATION — updated behavior
+// ================================
+function showProducts() {
+  document.getElementById('favoritesSection').style.display = 'none';
+  document.getElementById('productsSection').style.display = 'block';
+  document.getElementById('searchSection').style.display = 'block';
+  document.querySelector('.page-title').textContent = 'Products';
 }
+
+function showFavorites() {
+  document.getElementById('favoritesSection').style.display = 'block';
+  document.getElementById('productsSection').style.display = 'none';
+  document.getElementById('searchSection').style.display = 'none';
+  renderFavorites();
+  document.querySelector('.page-title').textContent = 'Favorites';
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('active');
+  const overlay = document.querySelector('.sidebar-overlay');
+  overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+}
+
 // ================================
 // INIT
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
   loadCartFromLocalStorage();
-  renderProducts('all');
-  renderPromoProducts('all'); // ✅ pass argument
+  renderProducts();
+  renderFavorites();
   updateCartDisplay();
-
-  // ✅ Event delegation untuk kategori
-  const categoriesContainer = document.querySelector('.categories');
-  if (categoriesContainer) {
-    categoriesContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('.category-btn');
-      if (!btn) return;
-
-      categoriesContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      currentCategory = btn.dataset.category || 'all';
-      renderProducts(currentCategory);
-      renderPromoProducts(currentCategory);
-    });
-  }
 });
-// Keyboard shortcuts
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const pdm = document.getElementById('productDetailsModal');
-    const sm = document.getElementById('sizeModal');
     if (pdm?.classList.contains('active')) closeProductDetails();
-    else if (sm?.classList.contains('active')) closeSizeModal();
   }
-});
-// ========== SIDEBAR TOGGLE ==========
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('active');
-  // ✅ Toggle overlay too
-  const overlay = document.querySelector('.sidebar-overlay');
-  if (overlay) overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
-}
-// ========== NAVIGASI HALAMAN ==========
-function showProducts() {
-  // ✅ Munculkan semua section kecuali summer event
-  document.querySelectorAll('.section').forEach(sec => {
-    if (sec.id === 'summerEventSection') {
-      sec.style.display = 'none';
-    } else {
-      sec.style.display = 'block';
-    }
-  });
-
-  // ✅ Tampilkan search & categories
-  const searchSection = document.querySelector('.search-container')?.closest('.section');
-  const categories = document.querySelector('.categories');
-  if (searchSection) searchSection.style.display = 'block';
-  if (categories) categories.style.display = 'flex';
-
-  // Update title
-  const pageTitle = document.querySelector('.page-title');
-  if (pageTitle) pageTitle.textContent = 'Products';
-
-  toggleSidebar();
-}
-
-function showSummerEvent() {
-  // ✅ Ambil section berdasarkan ID atau class lebih pasti
-  const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section');
-  const productsSection = document.getElementById('productGrid')?.closest('.section');
-
-  if (promoSection) promoSection.style.display = 'none';
-  if (productsSection) productsSection.style.display = 'none';
-
-  // ✅ Sembunyikan search & categories
-  const searchSection = document.querySelector('.search-container')?.closest('.section');
-  const categories = document.querySelector('.categories');
-  if (searchSection) searchSection.style.display = 'none';
-  if (categories) categories.style.display = 'none';
-
-  // Render Summer Event
-  let summerSection = document.getElementById('summerEventSection');
-  if (!summerSection) {
-    summerSection = document.createElement('div');
-    summerSection.id = 'summerEventSection';
-    summerSection.className = 'section';
-    // Sisipkan setelah header/top-bar
-    const mainContent = document.querySelector('.top-bar');
-    if (mainContent) mainContent.after(summerSection);
-    else document.body.prepend(summerSection);
-  }
-
-  const summerProductIds = [1, 2, 5]; // ✅ Hanya produk ini yang muncul
-  const summerItems = products.filter(p => summerProductIds.includes(p.id));
-
-  summerSection.innerHTML = `
-    <h2 class="section-title active">Summer Event</h2>
-    <div class="product-grid" id="summerEventGrid">
-      ${summerItems.length 
-        ? summerItems.map(renderProductCard).join('') 
-        : `<div class="no-results"><p>No items in this Summer Event.</p></div>`}
-    </div>
-  `;
-  summerSection.style.display = 'block';
-
-  // Sembunyikan section lain (fallback jika ada duplikat)
-  document.querySelectorAll('.section').forEach(sec => {
-    if (sec.id !== 'summerEventSection' && sec !== summerSection) {
-      const title = sec.querySelector('.section-title');
-      if (title && title.textContent.trim() !== 'Summer Event') {
-        sec.style.display = 'none';
-      }
-    }
-  });
-
-  const pageTitle = document.querySelector('.page-title');
-  if (pageTitle) pageTitle.textContent = 'Summer Event';
-  
-  toggleSidebar();
-}
-// ✅ Auto-load Summer Event if hash is #summer-event
-window.addEventListener('load', () => {
-  if (window.location.hash === '#summer-event') {
-    setTimeout(showSummerEvent, 50);
-  }
-});
-// ✅ Countdown: pastikan DOM siap & aman
-document.addEventListener('DOMContentLoaded', () => {
-  const targetTime = new Date('2025-12-31T23:59:59+07:00').getTime();
-  
-  function updateCountdown() {
-    const now = Date.now();
-    const diff = targetTime - now;
-
-    if (diff <= 0) {
-      const promoSection = document.querySelector('.section-title.special-promo-title')?.closest('.section');
-      const countdownEl = document.getElementById('countdownTimer');
-      if (promoSection) promoSection.remove();
-      if (countdownEl) countdownEl.remove();
-      clearInterval(interval);
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    // ✅ Update hanya jika element ada
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minsEl = document.getElementById('minutes');
-    const secsEl = document.getElementById('seconds');
-
-    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-    if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
-    if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
-  }
-
-  // ✅ First update after slight delay (to ensure DOM paint)
-  setTimeout(() => {
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    // Store interval if needed
-    window._countdownInterval = interval;
-  }, 100);
 });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
