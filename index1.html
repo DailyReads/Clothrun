@@ -106,15 +106,14 @@ header {
 .product-grid { 
   display: grid; 
   grid-template-columns: repeat(2, 1fr); 
-  gap: 8px;           /* jarak tipis */
+  gap: 12px;           /* ✅ diperbesar agar tidak berhimpitan di HP */
   margin: 0;
   padding: 0;
 }
-
 @media (min-width: 768px) {
   .product-grid { 
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 12px;         /* tetap 12px (konsisten) */
   }
 }
 
@@ -673,8 +672,8 @@ footer p {
 }
 .image-slider-details img {
   width: 100%;
-  max-width: 460px;
-  aspect-ratio: 4 / 3;
+  max-width: 500px;
+  aspect-ratio: 3 / 3;
   object-fit: contain;
   object-position: center;
   flex-shrink: 0;
@@ -1097,7 +1096,7 @@ footer p {
 }
 @media (min-width: 768px) {
   .section > h2 {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 }
   </style>
@@ -1176,8 +1175,8 @@ footer p {
     <div class="product-section-details">
       <div class="image-slider-container">
         <div class="image-slider-details" id="detailsImageSlider"></div>
-        <button class="slider-nav-btn prev" id="sliderPrevBtn" onclick="changeSlide(-1)">‹</button>
-        <button class="slider-nav-btn next" id="sliderNextBtn" onclick="changeSlide(1)">›</button>
+        <button class="slider-nav-btn prev" id="sliderPrevBtn" onclick="changeSlide(-1)"><</button>
+        <button class="slider-nav-btn next" id="sliderNextBtn" onclick="changeSlide(1)">></button>
         <div class="image-counter" id="imageCounter">1 / 1</div>
       </div>
       <div class="product-info-details">
@@ -1872,6 +1871,3 @@ function showToast(message) {
   </script>
 </body>
 </html>
-
-
-
