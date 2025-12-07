@@ -1680,20 +1680,24 @@ function applyPromo() {
   const input = document.getElementById("promoCode");
   const msg = document.getElementById("promoMessage");
   if (!input || !msg) return;
+
   const code = input.value.trim().toUpperCase();
   input.value = '';
+
+  // ❌ Tidak pakai localStorage → selalu mulai dari nol tiap sesi
   if (appliedPromo) {
     msg.style.color = "red";
     msg.textContent = "Promo already applied.";
     return;
   }
+
   if (promoList[code]) {
     const promo = promoList[code];
     appliedPromo = { code, ...promo };
     currentDiscount = promo.value;
     msg.style.color = "green";
     msg.textContent = `Promo ${code} applied! ${promo.value}% off`;
-    saveCartToLocalStorage();
+    // ✅ Tidak disimpan ke localStorage
     updateCartDisplay();
   } else if (code) {
     msg.style.color = "red";
