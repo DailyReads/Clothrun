@@ -1,422 +1,539 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sneakrun</title>
-  <link rel="icon" type="image/png" href="Keyloops_20251026_201720_0000.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keyloops</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%23d4a373'/><text x='12' y='16' text-anchor='middle' font-size='14' fill='white'>K</text></svg>">
   <style>
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      font-family: 'Segoe UI', sans-serif; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
     }
 
-    body { 
-      background: #ffffff; 
-      color: #000; 
+    body {
+      background: #fefefe;
+      color: #2d3748;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* HEADER */
+    /* ————— TRANSPARENT HEADER ————— */
     header {
-      text-align: center;
-      padding: 50px 20px;
-      background: linear-gradient(135deg, #d4a373, #ccd5ae);
-      color: #fff;
-    }
-
-    @media (min-width: 1024px) {
-      header {
-        text-align: left;
-        padding: 40px 60px;
-      }
-      header h1 {
-        font-size: 48px;
-      }
-    }
-
-    /* HERO */
-     .hero {
-      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.shutterstock.com/image-photo/kuala-lumpur-malaysia-december-02-600nw-2485725515.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
-
-    .hero-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    @media (min-width: 1024px) {
-      .hero {
-        height: 500px;
-      }
-
-      .hero-content {
-        gap: 20px;
-      }
-
-      .hero-content h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero-content p {
-        font-size: 1.5rem;
-      }
-    }
-
-    /* ========== COUNTDOWN BOX ========== */
-    .countdown-box {
-      display: inline-block;
-      text-align: center;
-      background: rgba(255,255,255,0.1);
-      padding: 20px 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .countdown-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-
-    .countdown {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 5%;
+      z-index: 100;
       display: flex;
       justify-content: center;
-      gap: 12px;
-    }
-
-    .time-box {
-      background: rgba(255,255,255,0.25);
-      padding: 10px 15px;
-      border-radius: 10px;
-      min-width: 60px;
-      text-align: center;
-      color: white;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      border: 2px solid rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-    }
-
-    .time-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      background: rgba(255,255,255,0.35);
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      margin-bottom: 5px;
-    }
-
-    .time-box small {
-      font-size: 0.75rem;
-      opacity: 0.9;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    @media (min-width: 1024px) {
-      .countdown-box {
-        padding: 30px 60px;
-        border-radius: 25px;
-      }
-
-      .countdown-title {
-        font-size: 2rem;
-        margin-bottom: 20px;
-      }
-
-      .countdown {
-        gap: 20px;
-      }
-
-      .time-box {
-        min-width: 100px;
-        padding: 20px 25px;
-        border-radius: 15px;
-        border: 3px solid rgba(255,255,255,0.4);
-      }
-
-      .time-box span {
-        font-size: 2.5rem;
-        margin-bottom: 8px;
-      }
-
-      .time-box small {
-        font-size: 0.9rem;
-      }
-    }
-
-    /* ========== GLASSMORPH BUTTON ========== */
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .hero .btn-primary {
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.9rem 2.2rem;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
 
-    .hero .btn-primary:hover {
-      background: rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero .btn-primary:active {
-      transform: translateY(0);
-      background: rgba(255, 255, 255, 0.2);
+    header h1 {
+      font-size: 1.8rem;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     @media (min-width: 1024px) {
-      .hero .btn-primary {
-        padding: 1rem 3rem;
-        font-size: 1.2rem;
+      header h1 {
+        font-size: 2.2rem;
       }
     }
-    /* BUTTON */
+
+    /* ————— HERO SLIDER ————— */
+    .hero {
+      height: 90vh;
+      max-height: 600px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+    }
+
+    .hero-slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      max-width: 800px;
+      padding: 0 30px;
+    }
+
+    .slide-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      font-weight: 800;
+    }
+
+    .slide-content p {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    /* NAV BUTTONS */
+    .hero-nav {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .nav-dot.active {
+      background: white;
+    }
+
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s;
+    }
+
+    .hero-arrow:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .hero-arrow.left {
+      left: 20px;
+    }
+
+    .hero-arrow.right {
+      right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .slide-content h2 { font-size: 2rem; }
+      .slide-content p { font-size: 1.1rem; }
+      .hero-arrow { width: 40px; height: 40px; font-size: 1rem; }
+    }
+
+    /* BUTTONS */
     .btn {
       display: inline-block;
-      padding: 0.8rem 2rem;
-      border-radius: 30px;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
       text-align: center;
-      transition: 0.3s;
-    }
-
-    .hero .btn-primary {
-      background: rgba(255,255,255,0.2);
+      transition: all 0.4s;
+      background: rgba(255, 255, 255, 0.2);
       color: white;
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* FEATURES */
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ————— FEATURES ————— */
     .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      padding: 50px 20px;
+      padding: 80px 20px;
       max-width: 1000px;
       margin: 0 auto;
     }
 
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
     .feature {
-      flex: 1 1 250px;
-      background: #f8f9fa;
-      border-radius: 16px;
-      padding: 24px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 32px 24px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s;
     }
 
-    .icon {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+    .feature:hover {
+      transform: translateY(-8px);
     }
 
-    /* SLANTED BANNERS */
-   /* SLANTED POLYGON BANNERS (HD + clean) */
-.banner {
-  position: relative;
-  overflow: hidden;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  image-rendering: auto;
-}
-
-/* Banner kiri polygon */
-.banner-left {
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-  background-image: url('https://images.squarespace-cdn.com/content/v1/53abab82e4b0e63cc7c4bd07/1498108265487-DJ92ZOXDS098J9SVATDT/_MG_0280.jpg');
-}
-
-/* Banner kanan polygon */
-.banner-right {
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
-  background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=2400&q=90');
-}
-
-/* overlay */
-.banner::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.35);
-  z-index: 1;
-}
-
-.banner-content-left,
-.banner-content-right {
-  position: relative;
-  z-index: 2;
-  max-width: 60%;
-  color: white;
-  padding: 0 50px;
-}
-
-.banner-content-left { text-align: left; }
-.banner-content-right { text-align: right; margin-left: auto; }
-
-    .banner h2 {
-      font-size: 2.8rem;
-      margin-bottom: 12px;
-    }
-
-    .banner p {
-      font-size: 1.2rem;
+    .feature-icon {
+      font-size: 3rem;
       margin-bottom: 20px;
+      color: #d4a373;
     }
 
-    .banner .btn {
-      background: rgb(255, 255, 255);
-      color: rgb(0, 0, 0);
+    .feature h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: #2d3748;
     }
 
+    .feature p {
+      color: #718096;
+      font-size: 1rem;
+    }
+
+    /* ————— BRAND STORY ————— */
+    .brand-story {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #000000, #ff0000);
+      color: white;
+      overflow: hidden;
+      padding: 80px 20px;
+    }
+
+    @media (min-width: 1024px) {
+      .brand-story {
+        flex-direction: row;
+        align-items: center;
+        min-height: 500px;
+        padding: 60px;
+      }
+    }
+
+    .story-content {
+      flex: 1;
+      max-width: 650px;
+      z-index: 2;
+      text-align: center;
+    }
+
+    @media (min-width: 1024px) {
+      .story-content {
+        text-align: left;
+        padding-right: 60px;
+      }
+    }
+
+    .story-content h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: #f8f9fa;
+    }
+
+    .story-content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      color: #e2e8f0;
+      font-weight: 300;
+    }
+
+    .story-content em {
+      font-style: italic;
+      color: #d4a373;
+      font-weight: 500;
+    }
+
+    .story-cta {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 16px 40px;
+      background: #d4a373;
+      color: #1a202c;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .story-cta:hover {
+      background: #c68f5a;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .story-bg {
+      flex: 1;
+      position: relative;
+      margin-top: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      height: 300px;
+    }
+
+    @media (min-width: 1024px) {
+      .story-bg {
+        margin-top: 0;
+        height: 100%;
+        max-height: 500px;
+      }
+    }
+
+    .story-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ————— FOOTER ————— */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #718096;
+      font-size: 0.95rem;
+      border-top: 1px solid #edf2f7;
+    }
+
+    @media (max-width: 768px) {
+      .hero { height: 80vh; }
+      .features { padding: 50px 20px; }
+    }
   </style>
 </head>
 <body>
+  <!-- TRANSPARENT HEADER -->
+  <header>
+    <h1>Keyloops</h1>
+  </header>
 
-<header>
-  <h1>Sneakrun</h1>
-</header>
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>Welcome to Sneakrun</h1>
-    <p>Maximum looks and maximum speed — that’s Sneakrun.</p>
-
-    <div class="countdown-box">
-      <div class="countdown-title">🎉 Discount 10%</div>
-      <div class="countdown">
-        <div class="time-box"><span id="days">00</span><small>Days</small></div>
-        <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
-        <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
-        <div class="time-box"><span id="seconds">00</span><small>Sec</small></div>
+  <!-- HERO SLIDER -->
+  <section class="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80')">
+        <div class="slide-content">
+          <h2>Small Tokens,<br>Big Memories.</h2>
+          <p>Gantungan kunci yang bercerita — tentang tempat, orang, atau janji.</p>
+          <a href="index1.html" class="btn">Temukan Milikmu</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80')">
+        <div class="slide-content">
+          <h2>Handcrafted with Care</h2>
+          <p>Dari logam, kayu, hingga resin — setiap loop dibuat satu per satu di Jakarta.</p>
+          <a href="index1.html" class="btn">Lihat Prosesnya</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469854523033-2c2584e472a8?auto=format&fit=crop&w=1200&q=80')">
+        <div class="slide-content">
+          <h2>Custom? Absolutely.</h2>
+          <p>Inisial, koordinat, atau tanggal bersejarah — jadikan milikmu sepenuhnya.</p>
+          <a href="index1.html?category=custom" class="btn">Buat Pesanan</a>
+        </div>
       </div>
     </div>
 
-    <a href="index1.html" class="btn btn-primary">Shop Now</a>
-  </div>
-</section>
+    <button class="hero-arrow left" id="prevBtn">‹</button>
+    <button class="hero-arrow right" id="nextBtn">›</button>
+    <div class="hero-nav" id="navDots"></div>
+  </section>
 
-<section class="features">
-  <div class="feature">
-    <div class="icon">⚡</div>
-    <h3>Speed Boost</h3>
-    <p>Responsive foam & lightweight chassis for explosive acceleration.</p>
-  </div>
-  <div class="feature">
-    <div class="icon">✨</div>
-    <h3>Street Style</h3>
-    <p>Designed in Jakarta, inspired by global street culture.</p>
-  </div>
-  <div class="feature">
-    <div class="icon">🥿</div>
-    <h3>All-Day Comfort</h3>
-    <p>Breathable knit upper + ergonomic arch support.</p>
-  </div>
-</section>
+  <!-- FEATURES -->
+  <section class="features">
+    <h2 style="text-align: center; font-size: 2.4rem; margin-bottom: 16px;">Kenapa Keyloops?</h2>
+    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: #718096;">
+      Bukan sekadar aksesori — tapi pengingat yang selalu dekat.
+    </p>
 
-<section class="banners">
-  <div class="banner banner-left">
-    <div class="banner-content-left">
-      <h2>For the Track</h2>
-      <p>Engineered for PBs. Tested on 10K runs.</p>
-      <a href="index1.html#summer-event" class="btn">Shop</a>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>Tahan Lama</h3>
+        <p>Material premium: stainless steel 316L, kayu jati, resin food-grade.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <h3>Personal</h3>
+        <p>Gravir gratis: nama, tanggal, koordinat lokasi spesialmu.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📦</div>
+        <h3>Dikirim dengan Cinta</h3>
+        <p>Packing eksklusif + kartu cerita tentang makna loop-mu.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="banner banner-right">
-    <div class="banner-content-right">
-      <h2>For the Street</h2>
-      <p>Turn sidewalks into your runway.</p>
-      <a href="index1.html?category=street" class="btn">Shop</a>
+  <!-- BRAND STORY -->
+  <section class="brand-story">
+    <div class="story-content">
+      <h2>Setiap Loop Punya Cerita.</h2>
+      <p>
+        Keyloops lahir dari pertanyaan sederhana:<br>
+        <em>“Bagaimana cara membawa kenangan — tanpa membebani?”</em>
+      </p>
+      <p>
+        Kami percaya: hal terkecil bisa jadi pengingat terkuat.<br>
+        Sejak 2022, setiap gantungan dibuat tangan di Jakarta —<br>
+        untuk mereka yang percaya pada makna di balik detail.
+      </p>
+      <a href="index1.html" class="btn story-cta">Temukan Loop-mu</a>
     </div>
-  </div>
-</section>
+    <div class="story-bg">
+      <img 
+        src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" 
+        alt="Pembuat keychain sedang mengukir di bengkel kecil Jakarta"
+      >
+    </div>
+  </section>
 
-<script>
-  const targetDate = new Date("2025-12-26T19:40:00+07:00");
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Keyloops. Small tokens, big memories.</p>
+  </footer>
 
-  function updateCountdown() {
-    const now = new Date();
-    const distance = targetDate - now;
+  <script>
+    // ————— HERO SLIDER LOGIC —————
+    const slides = document.querySelectorAll('.slide');
+    const heroSlides = document.getElementById('heroSlides');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const navDots = document.getElementById('navDots');
 
-    if (distance < 0) return;
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Generate navigation dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.classList.add('nav-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      navDots.appendChild(dot);
+    });
 
-    document.getElementById("days").textContent = String(days).padStart(2, '0');
-    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-    document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-    document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
-  }
+    const dots = document.querySelectorAll('.nav-dot');
 
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-</script>
+    function updateSlide() {
+      heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlide();
+      resetAutoSlide();
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlide();
+      resetAutoSlide();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlide();
+      resetAutoSlide();
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Swipe support (mobile)
+    let startX = 0;
+    let endX = 0;
+
+    heroSlides.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    heroSlides.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide(); // swipe kiri → next
+        else prevSlide(); // swipe kanan → prev
+      }
+    });
+
+    // Auto slide
+    resetAutoSlide();
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+  </script>
 </body>
 </html>
