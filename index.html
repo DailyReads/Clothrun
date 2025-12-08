@@ -123,31 +123,28 @@
     }
 
     /* NAV BUTTONS — HANYA PANAH KIRI & KANAN */
-    .hero-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 10;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s;
-    }
+  .hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  background: none;          /* hapus background */
+  border: none;              /* hapus border */
+  padding: 0;
+  outline: none;
+  user-select: none;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, text-shadow 0.2s;
+}
 
-    .hero-arrow:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: translateY(-50%) scale(1.1);
-    }
-
+.hero-arrow:hover {
+  transform: translateY(-50%) scale(1.2);
+  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+}
     .hero-arrow.left {
       left: 20px;
     }
@@ -186,49 +183,6 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* ————— FEATURES ————— */
-    .features {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-      margin-top: 40px;
-    }
-
-    .feature {
-      text-align: center;
-      padding: 32px 24px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-      transition: transform 0.3s;
-    }
-
-    .feature:hover {
-      transform: translateY(-8px);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: #d4a373;
-    }
-
-    .feature h3 {
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-      color: #2d3748;
-    }
-
-    .feature p {
-      color: #718096;
-      font-size: 1rem;
-    }
 
     /* ————— NIKE-STYLE GRID (2 COLUMNS) ————— */
     .nike-style-section {
@@ -341,38 +295,30 @@
       </div>
     </div>
 
-    <button class="hero-arrow left" id="prevBtn">‹</button>
-    <button class="hero-arrow right" id="nextBtn">›</button>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features">
-    <h2 style="text-align: center; font-size: 2.4rem; margin-bottom: 16px;">Why Keyloops?</h2>
-    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: #718096;">
-      Not just an accessory — but a reminder that stays close.
-    </p>
-
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">🔒</div>
-        <h3>Built to Last</h3>
-        <p>Premium materials: 316L stainless steel, teak wood, food-grade resin.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🎨</div>
-        <h3>Personalized</h3>
-        <p>Free engraving: names, dates, or GPS coordinates of your special place.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">📦</div>
-        <h3>Shipped with Love</h3>
-        <p>Exclusive packaging + a story card explaining the meaning behind your loop.</p>
-      </div>
-    </div>
+    <button class="hero-arrow left" id="prevBtn"><</button>
+    <button class="hero-arrow right" id="nextBtn">></button>
   </section>
 
   <!-- NIKE-STYLE SECTION (2 COLUMNS) -->
   <section class="nike-style-section">
+    <div class="nike-card">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
+      <div class="nike-overlay">
+        <h3>Trail Running</h3>
+        <p>Up the Mountains, Through the Woods</p>
+        <a href="index1.html" class="btn">Explore</a>
+      </div>
+    </div>
+    <div class="nike-card">
+      <img src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" alt="Mountain Muse" />
+      <div class="nike-overlay">
+        <h3>Nike x Jacquemus</h3>
+        <p>Mountain Muse</p>
+        <a href="index1.html" class="btn">Shop</a>
+      </div>
+    </div>
+  </section>
+   <section class="nike-style-section">
     <div class="nike-card">
       <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
       <div class="nike-overlay">
