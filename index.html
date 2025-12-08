@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,29 +20,38 @@
       line-height: 1.6;
     }
 
-    /* ————— TRANSPARENT HEADER ————— */
+    /* ————— HEADER ————— */
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       padding: 20px 5%;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       justify-content: center;
+      transition: all 0.4s ease;
+
+      color: white;
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.15);
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
 
     header h1 {
       font-size: 1.8rem;
-      color: #fff;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       font-weight: 700;
       letter-spacing: -0.5px;
+    }
+
+    header.scrolled h1 {
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
     @media (min-width: 1024px) {
@@ -53,14 +62,13 @@
 
     /* ————— HERO SLIDER ————— */
     .hero {
-      height: 90vh;
-      max-height: 600px;
+      height: 100vh;
+      width: 100%;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8f9fa;
     }
 
     .hero-slides {
@@ -89,7 +97,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .slide-content {
@@ -102,42 +110,19 @@
     }
 
     .slide-content h2 {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       margin-bottom: 1rem;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
       font-weight: 800;
     }
 
     .slide-content p {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       margin-bottom: 1.5rem;
       line-height: 1.5;
     }
 
-    /* NAV BUTTONS */
-    .hero-nav {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 12px;
-      z-index: 10;
-    }
-
-    .nav-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .nav-dot.active {
-      background: white;
-    }
-
+    /* NAV BUTTONS — HANYA PANAH KIRI & KANAN */
     .hero-arrow {
       position: absolute;
       top: 50%;
@@ -150,7 +135,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 2rem;
       cursor: pointer;
       z-index: 10;
       backdrop-filter: blur(6px);
@@ -172,7 +157,7 @@
     }
 
     @media (max-width: 768px) {
-      .slide-content h2 { font-size: 2rem; }
+      .slide-content h2 { font-size: 2.2rem; }
       .slide-content p { font-size: 1.1rem; }
       .hero-arrow { width: 40px; height: 40px; font-size: 1rem; }
     }
@@ -245,104 +230,79 @@
       font-size: 1rem;
     }
 
-    /* ————— BRAND STORY ————— */
-    .brand-story {
-      position: relative;
+    /* ————— NIKE-STYLE GRID (2 COLUMNS) ————— */
+    .nike-style-section {
       display: flex;
-      flex-direction: column;
-      background: linear-gradient(135deg, #000000, #ff0000);
-      color: white;
-      overflow: hidden;
-      padding: 80px 20px;
+      gap: 20px;
+      margin: 60px auto;
+      max-width: 1200px;
+      flex-wrap: wrap;
     }
 
-    @media (min-width: 1024px) {
-      .brand-story {
-        flex-direction: row;
-        align-items: center;
-        min-height: 500px;
-        padding: 60px;
-      }
-    }
-
-    .story-content {
-      flex: 1;
-      max-width: 650px;
-      z-index: 2;
-      text-align: center;
-    }
-
-    @media (min-width: 1024px) {
-      .story-content {
-        text-align: left;
-        padding-right: 60px;
-      }
-    }
-
-    .story-content h2 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      color: #f8f9fa;
-    }
-
-    .story-content p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      color: #e2e8f0;
-      font-weight: 300;
-    }
-
-    .story-content em {
-      font-style: italic;
-      color: #d4a373;
-      font-weight: 500;
-    }
-
-    .story-cta {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 16px 40px;
-      background: #d4a373;
-      color: #1a202c;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .story-cta:hover {
-      background: #c68f5a;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .story-bg {
-      flex: 1;
+    .nike-card {
       position: relative;
-      margin-top: 40px;
-      border-radius: 20px;
+      width: 100%;
+      height: 400px;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-      height: 300px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    @media (min-width: 1024px) {
-      .story-bg {
-        margin-top: 0;
-        height: 100%;
-        max-height: 500px;
-      }
+    .nike-card:hover {
+      transform: scale(1.02);
     }
 
-    .story-bg img {
+    .nike-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .nike-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: white;
+      text-align: left;
+    }
+
+    .nike-overlay h3 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .nike-overlay p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .nike-overlay .btn {
+      background: white;
+      color: #2d3748;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+    }
+
+    .nike-overlay .btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    @media (min-width: 768px) {
+      .nike-style-section {
+        flex-wrap: nowrap;
+      }
+      .nike-card {
+        width: calc(50% - 10px);
+        height: 500px;
+      }
     }
 
     /* ————— FOOTER ————— */
@@ -353,16 +313,12 @@
       font-size: 0.95rem;
       border-top: 1px solid #edf2f7;
     }
-
-    @media (max-width: 768px) {
-      .hero { height: 80vh; }
-      .features { padding: 50px 20px; }
-    }
   </style>
 </head>
 <body>
-  <!-- TRANSPARENT HEADER -->
-  <header>
+
+  <!-- HEADER: starts opaque, becomes transparent on scroll -->
+  <header id="header">
     <h1>Keyloops</h1>
   </header>
 
@@ -372,77 +328,66 @@
       <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80')">
         <div class="slide-content">
           <h2>Small Tokens,<br>Big Memories.</h2>
-          <p>Gantungan kunci yang bercerita — tentang tempat, orang, atau janji.</p>
-          <a href="index1.html" class="btn">Temukan Milikmu</a>
+          <p>Keychains that tell a story — of places, people, or promises.</p>
+          <a href="index1.html" class="btn">Shop Now</a>
         </div>
       </div>
       <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80')">
         <div class="slide-content">
           <h2>Handcrafted with Care</h2>
-          <p>Dari logam, kayu, hingga resin — setiap loop dibuat satu per satu di Jakarta.</p>
-          <a href="index1.html" class="btn">Lihat Prosesnya</a>
-        </div>
-      </div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469854523033-2c2584e472a8?auto=format&fit=crop&w=1200&q=80')">
-        <div class="slide-content">
-          <h2>Custom? Absolutely.</h2>
-          <p>Inisial, koordinat, atau tanggal bersejarah — jadikan milikmu sepenuhnya.</p>
-          <a href="index1.html?category=custom" class="btn">Buat Pesanan</a>
+          <p>From metal, wood, to resin — every loop is made one by one in Jakarta.</p>
+          <a href="index1.html" class="btn">Shop Now</a>
         </div>
       </div>
     </div>
 
     <button class="hero-arrow left" id="prevBtn">‹</button>
     <button class="hero-arrow right" id="nextBtn">›</button>
-    <div class="hero-nav" id="navDots"></div>
   </section>
 
   <!-- FEATURES -->
   <section class="features">
-    <h2 style="text-align: center; font-size: 2.4rem; margin-bottom: 16px;">Kenapa Keyloops?</h2>
+    <h2 style="text-align: center; font-size: 2.4rem; margin-bottom: 16px;">Why Keyloops?</h2>
     <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: #718096;">
-      Bukan sekadar aksesori — tapi pengingat yang selalu dekat.
+      Not just an accessory — but a reminder that stays close.
     </p>
 
     <div class="features-grid">
       <div class="feature">
         <div class="feature-icon">🔒</div>
-        <h3>Tahan Lama</h3>
-        <p>Material premium: stainless steel 316L, kayu jati, resin food-grade.</p>
+        <h3>Built to Last</h3>
+        <p>Premium materials: 316L stainless steel, teak wood, food-grade resin.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🎨</div>
-        <h3>Personal</h3>
-        <p>Gravir gratis: nama, tanggal, koordinat lokasi spesialmu.</p>
+        <h3>Personalized</h3>
+        <p>Free engraving: names, dates, or GPS coordinates of your special place.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">📦</div>
-        <h3>Dikirim dengan Cinta</h3>
-        <p>Packing eksklusif + kartu cerita tentang makna loop-mu.</p>
+        <h3>Shipped with Love</h3>
+        <p>Exclusive packaging + a story card explaining the meaning behind your loop.</p>
       </div>
     </div>
   </section>
 
-  <!-- BRAND STORY -->
-  <section class="brand-story">
-    <div class="story-content">
-      <h2>Setiap Loop Punya Cerita.</h2>
-      <p>
-        Keyloops lahir dari pertanyaan sederhana:<br>
-        <em>“Bagaimana cara membawa kenangan — tanpa membebani?”</em>
-      </p>
-      <p>
-        Kami percaya: hal terkecil bisa jadi pengingat terkuat.<br>
-        Sejak 2022, setiap gantungan dibuat tangan di Jakarta —<br>
-        untuk mereka yang percaya pada makna di balik detail.
-      </p>
-      <a href="index1.html" class="btn story-cta">Temukan Loop-mu</a>
+  <!-- NIKE-STYLE SECTION (2 COLUMNS) -->
+  <section class="nike-style-section">
+    <div class="nike-card">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
+      <div class="nike-overlay">
+        <h3>Trail Running</h3>
+        <p>Up the Mountains, Through the Woods</p>
+        <a href="index1.html" class="btn">Explore</a>
+      </div>
     </div>
-    <div class="story-bg">
-      <img 
-        src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" 
-        alt="Pembuat keychain sedang mengukir di bengkel kecil Jakarta"
-      >
+    <div class="nike-card">
+      <img src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" alt="Mountain Muse" />
+      <div class="nike-overlay">
+        <h3>Nike x Jacquemus</h3>
+        <p>Mountain Muse</p>
+        <a href="index1.html" class="btn">Shop</a>
+      </div>
     </div>
   </section>
 
@@ -452,33 +397,28 @@
   </footer>
 
   <script>
-    // ————— HERO SLIDER LOGIC —————
+    // ————— Header scroll effect —————
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // ————— HERO SLIDER —————
     const slides = document.querySelectorAll('.slide');
     const heroSlides = document.getElementById('heroSlides');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const navDots = document.getElementById('navDots');
 
     let currentIndex = 0;
     const totalSlides = slides.length;
     let autoSlideInterval;
 
-    // Generate navigation dots
-    slides.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.classList.add('nav-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(i));
-      navDots.appendChild(dot);
-    });
-
-    const dots = document.querySelectorAll('.nav-dot');
-
     function updateSlide() {
       heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
     }
 
     function goToSlide(index) {
@@ -504,33 +444,23 @@
       autoSlideInterval = setInterval(nextSlide, 5000);
     }
 
-    // Event listeners
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
-    // Swipe support (mobile)
+    // Swipe support
     let startX = 0;
-    let endX = 0;
-
     heroSlides.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
     });
-
     heroSlides.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) nextSlide(); // swipe kiri → next
-        else prevSlide(); // swipe kanan → prev
-      }
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
     });
 
-    // Auto slide
     resetAutoSlide();
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
+    // Keyboard
+    document.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key === 'ArrowRight') nextSlide();
     });
