@@ -31,7 +31,6 @@
       display: flex;
       justify-content: center;
       transition: all 0.4s ease;
-
       color: white;
     }
 
@@ -122,29 +121,30 @@
       line-height: 1.5;
     }
 
-    /* NAV BUTTONS — HANYA PANAH KIRI & KANAN */
-  .hero-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  font-size: 2.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
-  background: none;          /* hapus background */
-  border: none;              /* hapus border */
-  padding: 0;
-  outline: none;
-  user-select: none;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s, text-shadow 0.2s;
-}
+    /* NAV BUTTONS */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      background: none;
+      border: none;
+      padding: 0;
+      outline: none;
+      user-select: none;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s, text-shadow 0.2s;
+    }
 
-.hero-arrow:hover {
-  transform: translateY(-50%) scale(1.2);
-  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
-}
+    .hero-arrow:hover {
+      transform: translateY(-50%) scale(1.2);
+      text-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+    }
+
     .hero-arrow.left {
       left: 20px;
     }
@@ -156,7 +156,7 @@
     @media (max-width: 768px) {
       .slide-content h2 { font-size: 2.2rem; }
       .slide-content p { font-size: 1.1rem; }
-      .hero-arrow { width: 40px; height: 40px; font-size: 1rem; }
+      .hero-arrow { font-size: 1.5rem; }
     }
 
     /* BUTTONS */
@@ -183,13 +183,12 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
-
     /* ————— NIKE-STYLE GRID (2 COLUMNS) ————— */
     .nike-style-section {
       display: flex;
-      gap: 20px;
-      margin: 60px auto;
-      max-width: 1200px;
+      gap: 0;
+      margin: 0;
+      max-width: 100%;
       flex-wrap: wrap;
     }
 
@@ -198,13 +197,9 @@
       width: 100%;
       height: 400px;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: 0;
       cursor: pointer;
       transition: transform 0.3s ease;
-    }
-
-    .nike-card:hover {
-      transform: scale(1.02);
     }
 
     .nike-card img {
@@ -236,25 +231,26 @@
       line-height: 1.4;
     }
 
-    .nike-overlay .btn {
+ .nike-overlay .btn {
       background: white;
-      color: #2d3748;
+      color: #000000;
       border: none;
       padding: 0.7rem 1.5rem;
       font-weight: 700;
     }
 
     .nike-overlay .btn:hover {
-      background: #f0f0f0;
+      background: #f0f0f08f;
       transform: translateY(-2px);
     }
+
 
     @media (min-width: 768px) {
       .nike-style-section {
         flex-wrap: nowrap;
       }
       .nike-card {
-        width: calc(50% - 10px);
+        width: 50%;
         height: 500px;
       }
     }
@@ -271,7 +267,7 @@
 </head>
 <body>
 
-  <!-- HEADER: starts opaque, becomes transparent on scroll -->
+  <!-- HEADER -->
   <header id="header">
     <h1>Keyloops</h1>
   </header>
@@ -299,6 +295,9 @@
     <button class="hero-arrow right" id="nextBtn">></button>
   </section>
 
+  <!-- FEATURED HEADING -->
+  <h2 style="text-align: left; font-size: 2.2rem; font-weight: 500; margin: 60px 0 40px 0; padding-left: 40px; color: #000;">Featured</h2>
+
   <!-- NIKE-STYLE SECTION (2 COLUMNS) -->
   <section class="nike-style-section">
     <div class="nike-card">
@@ -318,7 +317,8 @@
       </div>
     </div>
   </section>
-   <section class="nike-style-section">
+
+  <section class="nike-style-section">
     <div class="nike-card">
       <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
       <div class="nike-overlay">
