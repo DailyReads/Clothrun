@@ -280,6 +280,27 @@
       font-size: 0.95rem;
       border-top: 1px solid #edf2f7;
     }
+    /* ————— TEXT ENTRANCE ANIMATION ————— */
+.slide-content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.slide.active .slide-content > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide.active .slide-content h2 {
+  transition-delay: 0.1s;
+}
+.slide.active .slide-content p {
+  transition-delay: 0.25s;
+}
+.slide.active .slide-content .btn {
+  transition-delay: 0.4s;
+}
   </style>
 </head>
 <body>
@@ -427,8 +448,18 @@
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key === 'ArrowRight') nextSlide();
     });
+    function updateSlide() {
+  heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+  // Remove active class from all slides
+  slides.forEach(slide => slide.classList.remove('active'));
+
+  // Add active class to current slide (triggers CSS transition)
+  slides[currentIndex].classList.add('active');
+    }
   </script>
 </body>
 </html>
+
 
 
