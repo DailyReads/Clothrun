@@ -1390,7 +1390,7 @@ function renderFavorites() {
   const favItems = products.filter(p => favorites.includes(p.id));
   favGrid.innerHTML = favItems.length > 0
     ? favItems.map(p => renderProductCard(p, true)).join('')
-    : `<div class="no-results"><p>You haven’t added any favorites yet.</p></div>`;
+    : ''; // ✅ benar-benar kosong — tanpa <div class="no-results">
 }
 
 function renderProductCard(product, isFavorite = false) {
@@ -1794,17 +1794,41 @@ function toggleCart() {
 // NAVIGATION — updated behavior
 // ================================
 function showProducts() {
+  // Tampilkan section yang relevan
   document.getElementById('favoritesSection').style.display = 'none';
   document.getElementById('productsSection').style.display = 'block';
   document.getElementById('searchSection').style.display = 'block';
+
+  // ✅ Reset search input & hasil
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.value = ''; // kosongkan input
+  }
+
+  // Jalankan filterProducts agar semua produk muncul kembali
+  filterProducts(); // ini akan:
+                    // - tampilkan semua card
+                    // - sembunyikan #noResults
+                    // - sembunyikan tombol × clear
+
+  // Update judul
   document.querySelector('.page-title').textContent = 'Products';
 }
 
 function showFavorites() {
+  // Sembunyikan sections yang tidak relevan
   document.getElementById('favoritesSection').style.display = 'block';
   document.getElementById('productsSection').style.display = 'none';
   document.getElementById('searchSection').style.display = 'none';
+
+  // ✅ Pastikan "No Results" juga disembunyikan (karena dia sibling dari productsSection)
+  const noResults = document.getElementById('noResults');
+  if (noResults) noResults.style.display = 'none';
+
+  // Render ulang favorites
   renderFavorites();
+
+  // Update judul
   document.querySelector('.page-title').textContent = 'Favorites';
 }
 
