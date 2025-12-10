@@ -537,7 +537,7 @@ header {
   margin-bottom: 20px;
 }
 .continue-shopping {
-  background: #d4a373;
+  background: #000000;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -1228,9 +1228,11 @@ footer p {
         </div>
       </div>
       <div class="receipt-summary">
-        <div class="summary-row total"><span>Total Amount</span><span id="totalAmount">Rp 0</span></div>
-        <button class="checkout-btn" onclick="sendToWhatsApp()" id="checkoutBtn" disabled>Checkout</button>
-      </div>
+  <div class="summary-row"><span>Subtotal</span><span id="subtotalAmount">Rp 0</span></div>
+  <div class="summary-row"><span>Discount</span><span id="discountAmount">Rp 0</span></div>
+  <div class="summary-row total"><span>Total Amount</span><span id="totalAmount">Rp 0</span></div>
+  <button class="checkout-btn" onclick="sendToWhatsApp()" id="checkoutBtn" disabled>Checkout</button>
+</div>
     </div>
   </div>
   <script>
@@ -1603,20 +1605,22 @@ function updateSliderDisplay() {
 function updateCartDisplay() {
   const cartCount = document.getElementById('cartCount');
   const cartItems = document.getElementById('cartItems');
-  const totalAmount = document.getElementById('totalAmount');
   const checkoutBtn = document.getElementById('checkoutBtn');
 
+  // Hitung subtotal (tanpa diskon)
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
-  const total = subtotal - (subtotal * currentDiscount / 100);
+  const discountValue = subtotal * (currentDiscount / 100);
+  const total = subtotal - discountValue;
 
+  // Update cart count badge
   cartCount.textContent = totalItems;
   cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
 
+  // Render items
   if (cart.length === 0) {
     cartItems.innerHTML = `
       <div class="empty-cart">
-        <div class="empty-cart-icon">🛒</div>
         <h3>Your cart is empty</h3>
         <p>Add some products to get started!</p>
         <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
@@ -1624,29 +1628,44 @@ function updateCartDisplay() {
     `;
     checkoutBtn.disabled = true;
   } else {
-    cartItems.innerHTML = cart.map((item, index) => {
-      const itemPrice = item.finalPrice || item.price;
-      const colorText = item.color ? `<div style="font-size:13px;color:#666;">Color: ${item.color}</div>` : '';
-      return `
-        <div class="receipt-item">
-          <img src="${item.image}" alt="${item.name}" class="item-image">
-          <div class="item-info">
-            <div class="item-name">${item.name}${colorText}</div>
-            <div class="item-controls">
-              <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-              <span class="quantity">${item.quantity}</span>
-              <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-            </div>
-          </div>
-          <div class="item-price">Rp ${(itemPrice * item.quantity).toLocaleString('id-ID')}</div>
+   cartItems.innerHTML = cart.map((item, index) => {
+  const itemPrice = item.finalPrice || item.price;
+  const colorText = item.color ? `<div style="font-size:13px;color:#666;">Color: ${item.color}</div>` : '';
+
+  // ✅ Ambil gambar sesuai warna jika ada
+  let displayImage = item.image; // fallback ke cover
+  if (item.color && item.colors) {
+    const colorObj = item.colors.find(c => c.name === item.color);
+    if (colorObj && item.images && item.images[colorObj.imageIndex]) {
+      displayImage = item.images[colorObj.imageIndex];
+    }
+  }
+
+  return `
+    <div class="receipt-item">
+      <img src="${displayImage}" alt="${item.name}" class="item-image">
+      <div class="item-info">
+        <div class="item-name">${item.name}${colorText}</div>
+        <div class="item-controls">
+          <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+          <span class="quantity">${item.quantity}</span>
+          <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
         </div>
-      `;
-    }).join('');
+      </div>
+      <div class="item-price">Rp ${(itemPrice * item.quantity).toLocaleString('id-ID')}</div>
+    </div>
+  `;
+}).join('');
     checkoutBtn.disabled = false;
   }
 
-  totalAmount.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+  // ✅ Update 3 baris summary
+  document.getElementById('subtotalAmount').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+  document.getElementById('discountAmount').textContent = `Rp ${discountValue.toLocaleString('id-ID')}`;
+  document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
+
+ 
 
 function updateQuantity(cartIndex, change) {
   if (cartIndex < 0 || cartIndex >= cart.length) return;
