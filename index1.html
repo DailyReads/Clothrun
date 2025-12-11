@@ -1174,8 +1174,6 @@ footer p {
   <button class="category-tab active" data-category="all">All Products</button>
   <button class="category-tab" data-category="new">New Arrivals</button>
   <button class="category-tab" data-category="sale">S.A.L.E</button>
-  <button class="category-tab" data-category="bracelet">Bracelet</button>
-  <button class="category-tab" data-category="necklace">Necklace</button>
 </div>
   <!-- Main Content -->
   <div class="section" id="searchSection">
@@ -1437,8 +1435,6 @@ const categoryMap = {
   all: products.map(p => p.id),
   new: [1, 2, 3],          // IDs for new arrivals
   sale: [4, 5, 6],         // IDs for items on sale
-  bracelet: [7, 10],       // ← add your bracelet product IDs
-  necklace: [8, 12]       // ← add your necklace product IDs
 };
 // ================================
 // RENDER PRODUCTS & FAVORITES
@@ -2034,5 +2030,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
+
 
 
