@@ -1171,8 +1171,10 @@ footer p {
   <!-- Category Tabs -->
 <div class="category-tabs" id="categoryTabs">
   <button class="category-tab active" data-category="all">All Products</button>
-  <button class="category-tab" data-category="perfume">New Arrivals</button>
-  <button class="category-tab" data-category="charm">S.A.L.E</button>
+  <button class="category-tab" data-category="new">New Arrivals</button>
+  <button class="category-tab" data-category="sale">S.A.L.E</button>
+  <button class="category-tab" data-category="bracelet">Bracelet</button>
+  <button class="category-tab" data-category="necklace">Necklace</button>
 </div>
   <!-- Main Content -->
   <div class="section" id="searchSection">
@@ -1432,8 +1434,10 @@ let currentCategory = 'all'; // default
 // ✅ Explicit ID-based category mapping (adjust IDs as needed)
 const categoryMap = {
   all: products.map(p => p.id),
-  charm: [5, 8],           // Leather Crossbody Bag, Canvas Tote Bag
-  perfume: [1,6]              // ← add IDs here when you have perfumes
+  new: [1, 2, 3],          // IDs for new arrivals
+  sale: [4, 5, 6],         // IDs for items on sale
+  bracelet: [7, 10],       // ← add your bracelet product IDs
+  necklace: [8, 12]       // ← add your necklace product IDs
 };
 // ================================
 // RENDER PRODUCTS & FAVORITES
@@ -1994,8 +1998,39 @@ document.querySelectorAll('.category-tab').forEach(tab => {
     filterProducts(); // reuse filtering logic
   });
 });
+// Auto-activate tab from URL hash (e.g. #new-arrivals)
+function autoActivateTabFromHash() {
+  const hash = window.location.hash.slice(1); // e.g. "new-arrivals"
+  if (hash) {
+    // Map hash to data-category value
+    const hashToCategory = {
+      'new-arrivals': 'new',
+      'sale': 'sale',
+      'bracelet': 'bracelet',
+      'necklace': 'necklace'
+    };
+    
+    const targetCategory = hashToCategory[hash];
+    if (targetCategory) {
+      // Find and click the matching tab
+      const tab = document.querySelector(`.category-tab[data-category="${targetCategory}"]`);
+      if (tab) {
+        // Simulate click to trigger full logic (class toggle + filter)
+        tab.click();
+        
+        
+      }
+    }
+  }
+}
+
+// Call it on load
+document.addEventListener('DOMContentLoaded', () => {
+  // ... your existing init code ...
+
+  autoActivateTabFromHash();
+});
   </script>
 </body>
 </html>
-
 
