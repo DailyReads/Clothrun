@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -1099,6 +1100,46 @@ footer p {
     margin-bottom: 24px;
   }
 }
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 20px 0 30px;
+  padding: 0 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.category-tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  padding: 6px 4px;
+  cursor: pointer;
+  position: relative;
+}
+.category-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+.category-tab:hover::after,
+.category-tab.active::after {
+  width: 100%;
+  left: 0;
+}
+.category-tab.active {
+  color: #000;
+  font-weight: 600;
+}
+
   </style>
 </head>
 <body>
@@ -1127,6 +1168,12 @@ footer p {
   </div>
   <!-- Sidebar Overlay -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <!-- Category Tabs -->
+<div class="category-tabs" id="categoryTabs">
+  <button class="category-tab active" data-category="all">All Products</button>
+  <button class="category-tab" data-category="charm">Charm</button>
+  <button class="category-tab" data-category="perfume">Perfume</button>
+</div>
   <!-- Main Content -->
   <div class="section" id="searchSection">
     <!-- Search -->
@@ -1379,6 +1426,15 @@ let selectedColor = null;
 let currentProductForColor = null;
 let currentProductForDetails = null;
 
+let currentCategory = 'all'; // default
+
+
+// ✅ Explicit ID-based category mapping (adjust IDs as needed)
+const categoryMap = {
+  all: products.map(p => p.id),
+  charm: [5, 8],           // Leather Crossbody Bag, Canvas Tote Bag
+  perfume: [1,6]              // ← add IDs here when you have perfumes
+};
 // ================================
 // RENDER PRODUCTS & FAVORITES
 // ================================
@@ -1665,8 +1721,6 @@ function updateCartDisplay() {
   document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
- 
-
 function updateQuantity(cartIndex, change) {
   if (cartIndex < 0 || cartIndex >= cart.length) return;
   cart[cartIndex].quantity += change;
@@ -1781,18 +1835,25 @@ function filterProducts() {
   const cards = document.querySelectorAll('.product-card');
   const clearBtn = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
+
+  // Get allowed IDs for current category
+  const allowedIds = new Set(categoryMap[currentCategory] || []);
+
   let found = false;
+
   cards.forEach(card => {
-    const name = card.getAttribute('data-name');
-    const matches = name?.includes(query);
-    if (matches) {
-      card.style.display = 'block';
-      found = true;
-    } else {
-      card.style.display = 'none';
-    }
+    const name = card.getAttribute('data-name') || '';
+    const id = parseInt(card.getAttribute('data-id'));
+    const matchesSearch = name.includes(query);
+    const matchesCategory = allowedIds.has(id);
+
+    const shouldShow = matchesSearch && matchesCategory;
+    card.style.display = shouldShow ? 'block' : 'none';
+    if (shouldShow) found = true;
   });
-  if (noRes) noRes.style.display = (query && !found) ? 'block' : 'none';
+
+  // UI feedback
+  if (noRes) noRes.style.display = (query || currentCategory !== 'all') && !found ? 'block' : 'none';
   if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
 }
 
@@ -1813,41 +1874,50 @@ function toggleCart() {
 // NAVIGATION — updated behavior
 // ================================
 function showProducts() {
-  // Tampilkan section yang relevan
+  // Show relevant sections
   document.getElementById('favoritesSection').style.display = 'none';
   document.getElementById('productsSection').style.display = 'block';
   document.getElementById('searchSection').style.display = 'block';
-
-  // ✅ Reset search input & hasil
+  
+  // ✅ Show category tabs — restore full appearance
+const tabs = document.getElementById('categoryTabs');
+if (tabs) {
+  tabs.style.visibility = 'visible';
+  tabs.style.height = 'auto';
+  tabs.style.overflow = 'visible';
+  tabs.style.margin = ''; // reset to original (via CSS)
+}
+  // Reset search & filtering
   const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.value = ''; // kosongkan input
-  }
+  if (searchInput) searchInput.value = '';
+  filterProducts();
 
-  // Jalankan filterProducts agar semua produk muncul kembali
-  filterProducts(); // ini akan:
-                    // - tampilkan semua card
-                    // - sembunyikan #noResults
-                    // - sembunyikan tombol × clear
-
-  // Update judul
+  // Update title
   document.querySelector('.page-title').textContent = 'Products';
 }
 
 function showFavorites() {
-  // Sembunyikan sections yang tidak relevan
+  // Show Favorites, hide Products & Search
   document.getElementById('favoritesSection').style.display = 'block';
   document.getElementById('productsSection').style.display = 'none';
   document.getElementById('searchSection').style.display = 'none';
-
-  // ✅ Pastikan "No Results" juga disembunyikan (karena dia sibling dari productsSection)
+  
+  // ✅ Hide category tabs visually but keep layout space
+const tabs = document.getElementById('categoryTabs');
+if (tabs) {
+  tabs.style.visibility = 'hidden';
+  tabs.style.height = '0';
+  tabs.style.overflow = 'hidden';
+  tabs.style.margin = '0'; // optional: suppress top/bottom margin collapse
+}
+  // Ensure "No Results" is hidden
   const noResults = document.getElementById('noResults');
   if (noResults) noResults.style.display = 'none';
 
-  // Render ulang favorites
+  // Re-render favorites
   renderFavorites();
 
-  // Update judul
+  // Update title
   document.querySelector('.page-title').textContent = 'Favorites';
 }
 
@@ -1915,7 +1985,15 @@ function showToast(message) {
   setTimeout(() => toast.classList.add('hide'), 2000);
   setTimeout(() => toast.remove(), 2500);
 }
+// Category tab handling
+document.querySelectorAll('.category-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentCategory = tab.dataset.category;
+    filterProducts(); // reuse filtering logic
+  });
+});
   </script>
 </body>
 </html>
-
