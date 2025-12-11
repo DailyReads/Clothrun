@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -26,8 +25,8 @@ header {
 /* ========== SEARCH CONTAINER ========== */
 .search-container {
   max-width: 600px;
-  margin: 30px auto;
-  padding: 0 20px;
+  margin: -55px auto;
+  padding: 0 30px;
 }
 .search-box {
   position: relative;
@@ -1104,7 +1103,7 @@ footer p {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin: 20px 0 30px;
+  margin: 120px 0 10px;
   padding: 0 20px;
   max-width: 600px;
   margin-left: auto;
@@ -1170,17 +1169,7 @@ footer p {
   </div>
   <!-- Sidebar Overlay -->
   <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
-  <!-- Category Tabs -->
-<div class="category-tabs" id="categoryTabs">
-  <button class="category-tab active" data-category="all">All Products</button>
-  <button class="category-tab" data-category="new">New Arrivals</button>
-  <button class="category-tab" data-category="sale">S.A.L.E</button>
-  <button class="category-tab" data-category="bracelet">Bracelet</button>
-  <button class="category-tab" data-category="necklace">Necklace</button>
-</div>
-  <!-- Main Content -->
-  <div class="section" id="searchSection">
-    <!-- Search -->
+   <!-- Search -->
     <div class="search-container">
       <div class="search-box">
         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -1191,6 +1180,17 @@ footer p {
       </div>
     </div>
   </div>
+  <!-- Category Tabs -->
+<div class="category-tabs" id="categoryTabs">
+  <button class="category-tab active" data-category="all">All Products</button>
+  <button class="category-tab" data-category="new">New Arrivals</button>
+  <button class="category-tab" data-category="sale">S.A.L.E</button>
+  <button class="category-tab" data-category="bracelet">Bracelet</button>
+  <button class="category-tab" data-category="necklace">Necklace</button>
+</div>
+  <!-- Main Content -->
+  <div class="section" id="searchSection">
+   
   <!-- Cart Button -->
   <button class="cart-btn" onclick="toggleCart()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -2035,5 +2035,3 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
-
-
