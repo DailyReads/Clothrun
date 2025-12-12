@@ -1837,16 +1837,22 @@ function filterProducts() {
   const clearBtn = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
 
-  // Get allowed IDs for current category
   const allowedIds = new Set(categoryMap[currentCategory] || []);
-
   let found = false;
 
   cards.forEach(card => {
     const name = card.getAttribute('data-name') || '';
     const id = parseInt(card.getAttribute('data-id'));
-    const matchesSearch = name.includes(query);
     const matchesCategory = allowedIds.has(id);
+
+    // ✅ Match query only if it's a *prefix* of ANY word
+    let matchesSearch = false;
+    if (query === '') {
+      matchesSearch = true;
+    } else {
+      const words = name.split(/\s+/);
+      matchesSearch = words.some(word => word.toLowerCase().startsWith(query));
+    }
 
     const shouldShow = matchesSearch && matchesCategory;
     card.style.display = shouldShow ? 'block' : 'none';
@@ -2030,6 +2036,3 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
-
-
-
