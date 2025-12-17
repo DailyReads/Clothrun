@@ -1460,6 +1460,14 @@ function renderProductCard(product, isFavorite = false) {
   const finalPrice = isDiscount 
     ? Math.round(product.price * (1 - discountRate / 100)) 
     : product.price;
+
+  // ✅ Color count text (e.g., "1 Color", "2 Colors")
+  let colorCountText = '';
+  if (product.colors && product.colors.length > 0) {
+    const n = product.colors.length;
+    colorCountText = `<div style="font-size:12px;color:#777;margin-top:4px;">${n} Color${n > 1 ? 's' : ''}</div>`;
+  }
+
   return `
     <div class="product-card" data-name="${product.name.toLowerCase()}" data-id="${product.id}" 
          onclick="showProductDetails(${product.id})">
@@ -1472,12 +1480,13 @@ function renderProductCard(product, isFavorite = false) {
         </svg>
       </button>
       <div class="product-name">${product.name}</div>
-      <div class="product-price">
+      <div class="product-price" style="margin-top:6px;">
         ${isDiscount 
-          ? `<s>Rp ${product.price.toLocaleString('id-ID')}</s> 
-             <strong>Rp ${finalPrice.toLocaleString('id-ID')}</strong>`
-          : `Rp ${product.price.toLocaleString('id-ID')}`
+          ? `<div><s style="color:#999;font-size:14px;">Rp ${product.price.toLocaleString('id-ID')}</s></div>
+             <div><strong style="color:#d4a373;font-size:16px;">Rp ${finalPrice.toLocaleString('id-ID')}</strong></div>`
+          : `<div>Rp ${product.price.toLocaleString('id-ID')}</div>`
         }
+        ${colorCountText}
       </div>
     </div>
   `;
@@ -2039,6 +2048,3 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
-
-
-
