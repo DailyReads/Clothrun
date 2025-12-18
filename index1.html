@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -116,7 +117,6 @@ header {
     gap: 12px;         /* tetap 12px (konsisten) */
   }
 }
-
 /* ====== CARD ====== */
 .product-card {
   position: relative;
@@ -127,7 +127,6 @@ header {
   text-align: left;
   transition: transform .15s ease, box-shadow .15s ease;
 }
-
 /* ====== IMAGE ====== */
 .product-card img {
   width: 100%;
@@ -136,32 +135,27 @@ header {
   background: #f4f4f4;
   display: block;
 }
-
 /* ====== TEXT CONTENT ====== */
 .product-card-content {
   padding: 10px 8px;
 }
-
 .product-name { 
   font-size: 15px; 
   font-weight: 500; 
   margin: 6px 0 4px;
   color: #111;
 }
-
 /* ====== PRICE ====== */
 .product-price strong {
   color: #d4a373;       /* warna brand */
   font-weight: 700;
   font-size: 16px;
 }
-
 .product-price s {
   opacity: .55;
   font-size: 13px;
   margin-right: 4px;
 }
-
 /* ====== BADGE ====== */
 .product-badge {
   position: absolute;
@@ -1134,7 +1128,38 @@ footer p {
   color: #000;
   font-weight: 600;
 }
-
+.color-thumbnail {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  background: #f8f9fa;
+  transition: all 0.2s;
+}
+.color-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.color-option:hover .color-thumbnail {
+  transform: scale(1.05);
+  border-color: #d4a373;
+}
+.color-option.selected .color-thumbnail {
+  border-color: #333;
+  box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.4);
+}
+.color-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+.color-option.selected .color-label {
+  color: #222;
+}
   </style>
 </head>
 <body>
@@ -1197,7 +1222,6 @@ footer p {
   </div>
   <!-- Products Section -->
   <div class="section" id="productsSection">
-    
     <div class="product-grid" id="productGrid"></div>
   </div>
   <!-- No Results -->
@@ -1228,7 +1252,7 @@ footer p {
         <div class="product-description-details" id="detailsDescription">Product description will appear here.</div>
         <!-- Color Selection -->
         <div class="color-selection">
-          <div class="section-title-details">Color</div>
+          <div class="section-title-details">Select Option</div>
           <div class="color-options" id="colorOptions"></div>
         </div>
         <button class="add-to-cart-details-btn" id="detailsAddToCartBtn">Add to Cart</button>
@@ -1283,18 +1307,17 @@ footer p {
 const products = [
   { 
     id: 1, 
-    name: "Men's Gentle style retro knit sweaters", 
+    name: "Snoopy Keychain", 
     price: 149000, 
-    category: "cloth", 
-    image: "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01fPgR9L1TT0DRP9Hzs_!!1137782382.jpg_q50.jpg_.webp",
+    image: "https://down-id.img.susercontent.com/file/sg-11134201-22110-ztu7s4hswckv22.webp",
     images: [
-      "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01fPgR9L1TT0DRP9Hzs_!!1137782382.jpg_q50.jpg_.webp",
-      "https://img.alicdn.com/imgextra/i2/1137782382/O1CN01dJsklv1TT0DPx6vMk_!!1137782382.jpg_q50.jpg_.webp",
-      "https://img.alicdn.com/imgextra/i1/1137782382/O1CN01tGLL4M1TT0DQyAdAE_!!1137782382.jpg_q50.jpg_.webp"
+      "https://down-id.img.susercontent.com/file/sg-11134201-22110-ztu7s4hswckv22.webp",
+      "https://down-id.img.susercontent.com/file/sg-11134201-22110-n2xt0ziswckvb6@resize_w450_nl.webp",
+      "https://down-id.img.susercontent.com/file/sg-11134201-22110-6otlt6iswckvbc@resize_w450_nl.webp"
     ],
     colors: [
-      { name: "Coffee", code: "#6F4E37", imageIndex: 1 },
-      { name: "Gray", code: "#808080", imageIndex: 2 },
+      {name: "A",imageIndex: 1 },
+      {name:"B", imageIndex: 2 },
     ],
     description: "A timeless retro knit sweater designed to deliver a gentle, refined look for everyday wear. Crafted from soft, high-quality knit fabric, this sweater blends vintage charm with modern comfort." 
   },
@@ -1403,7 +1426,6 @@ const products = [
     description: "Eco-friendly canvas tote with reinforced handles." 
   }
 ];
-
 // ================================
 // CONFIG & STATE
 // ================================
@@ -1421,17 +1443,14 @@ let appliedPromo = null;
 let selectedColor = null;
 let currentProductForColor = null;
 let currentProductForDetails = null;
-
 let currentCategory = 'all'; // default
-
-
 // ✅ Explicit ID-based category mapping (adjust IDs as needed)
 const categoryMap = {
   all: products.map(p => p.id),
   new: [1, 2, 3],
   sale: [4, 5, 6],
   bracelet: [9],          // ✅ tambahkan
-  charm: [10]             // ✅ tambahkan
+  charm: [1]             // ✅ tambahkan
 };
 // ================================
 // RENDER PRODUCTS & FAVORITES
@@ -1440,7 +1459,6 @@ function renderProducts() {
   const grid = document.getElementById('productGrid');
   grid.innerHTML = products.map(p => renderProductCard(p, favorites.includes(p.id))).join('');
 }
-
 function renderFavorites() {
   const favGrid = document.getElementById('favoritesGrid');
   const favItems = products.filter(p => favorites.includes(p.id));
@@ -1448,20 +1466,17 @@ function renderFavorites() {
     ? favItems.map(p => renderProductCard(p, true)).join('')
     : ''; // ✅ benar-benar kosong — tanpa <div class="no-results">
 }
-
 function renderProductCard(product, isFavorite = false) {
   const isDiscount = isDiscountActive && discountProducts.includes(product.id);
   const finalPrice = isDiscount 
     ? Math.round(product.price * (1 - discountRate / 100)) 
     : product.price;
-
-  // ✅ Color count text (e.g., "1 Color", "2 Colors")
-  let colorCountText = '';
+  // ✅ Type count text (e.g., "1 Type", "2 Types")
+  let typeCountText = '';
   if (product.colors && product.colors.length > 0) {
     const n = product.colors.length;
-    colorCountText = `<div style="font-size:12px;color:#777;margin-top:4px;">${n} Color${n > 1 ? 's' : ''}</div>`;
+    typeCountText = `<div style="font-size:12px;color:#777;margin-top:4px;">${n} Type${n > 1 ? 's' : ''}</div>`;
   }
-
   return `
     <div class="product-card" data-name="${product.name.toLowerCase()}" data-id="${product.id}" 
          onclick="showProductDetails(${product.id})">
@@ -1480,12 +1495,11 @@ function renderProductCard(product, isFavorite = false) {
              <div><strong style="color:#d4a373;font-size:16px;">Rp ${finalPrice.toLocaleString('id-ID')}</strong></div>`
           : `<div>Rp ${product.price.toLocaleString('id-ID')}</div>`
         }
-        ${colorCountText}
+        ${typeCountText}
       </div>
     </div>
   `;
 }
-
 // ================================
 // FAVORITE TOGGLE
 // ================================
@@ -1507,12 +1521,10 @@ function toggleFavorite(e, productId) {
     updateFavoriteButtonInDetails();
   }
 }
-
 function toggleFavoriteInDetails() {
   if (!currentProductForDetails) return;
   toggleFavorite({ stopPropagation: () => {} }, currentProductForDetails.id);
 }
-
 function updateFavoriteButtonInDetails() {
   const btn = document.getElementById('detailsFavoriteBtn');
   const isFav = favorites.includes(currentProductForDetails.id);
@@ -1520,7 +1532,6 @@ function updateFavoriteButtonInDetails() {
     btn.classList.toggle('active', isFav);
   }
 }
-
 // ================================
 // COLOR SELECTION
 // ================================
@@ -1535,7 +1546,6 @@ function selectColor(colorName, imageIndex) {
   currentSlideIndex = imageIndex;
   updateSliderDisplay();
 }
-
 // ================================
 // ADD TO CART — no size
 // ================================
@@ -1549,7 +1559,6 @@ function confirmAddToCart(productId) {
   addToCartWithColor(productId, selectedColor);
   closeProductDetails();
 }
-
 function addToCartWithColor(productId, color = null) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
@@ -1573,13 +1582,11 @@ function addToCartWithColor(productId, color = null) {
   updateCartDisplay();
   alert(`${product.name}${color ? ` (${color})` : ''} added to cart!`);
 }
-
 // ================================
 // PRODUCT DETAILS MODAL
 // ================================
 let currentSlideIndex = 0;
 let totalSlides = 0;
-
 function showProductDetails(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
@@ -1594,7 +1601,6 @@ function showProductDetails(productId) {
   const btn = document.getElementById('detailsAddToCartBtn');
   const favBtn = document.getElementById('detailsFavoriteBtn');
   const colorOpts = document.getElementById('colorOptions');
-
   title.textContent = product.name;
   const isDiscount = isDiscountActive && discountProducts.includes(productId);
   const finalPrice = isDiscount ? Math.round(product.price * (1 - discountRate / 100)) : product.price;
@@ -1602,55 +1608,53 @@ function showProductDetails(productId) {
     ? `<s style="color:#999;font-size:20px;">Rp ${product.price.toLocaleString('id-ID')}</s><br>Rp ${finalPrice.toLocaleString('id-ID')}`
     : `Rp ${product.price.toLocaleString('id-ID')}`;
   desc.textContent = product.description || 'No description available.';
-
   const images = product.images || [product.image];
   totalSlides = images.length;
   currentSlideIndex = 0;
   slider.innerHTML = images.map((src, i) => 
     `<img src="${src}" alt="${product.name}" class="${i === 0 ? 'active' : ''}">`
   ).join('');
-
   if (colorOpts && product.colors && product.colors.length > 0) {
-    colorOpts.innerHTML = product.colors.map(color => `
+  const images = product.images || [product.image];
+  colorOpts.innerHTML = product.colors.map((color, idx) => {
+    const imgSrc = images[color.imageIndex] || product.image;
+    const label = String.fromCharCode(65 + idx); // A, B, C...
+    return `
       <div class="color-option" data-color="${color.name}" 
            onclick="selectColor('${color.name}', ${color.imageIndex})">
-        <div class="color-swatch" style="background-color: ${color.code};"></div>
-        <div class="color-label">${color.name}</div>
+        <div class="color-thumbnail">
+          <img src="${imgSrc}" alt="Option ${label}" loading="lazy">
+        </div>
+        <div class="color-label">${label}</div>
       </div>
-    `).join('');
-    colorOpts.closest('.color-selection').style.display = 'block';
-  } else {
-    colorOpts.closest('.color-selection').style.display = 'none';
-  }
-
+    `;
+  }).join('');
+  colorOpts.closest('.color-selection').style.display = 'block';
+} else {
+  colorOpts.closest('.color-selection').style.display = 'none';
+}
   btn.onclick = () => confirmAddToCart(productId);
   btn.disabled = false;
-
   updateFavoriteButtonInDetails();
   updateSliderDisplay();
-
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function closeProductDetails() {
   const modal = document.getElementById('productDetailsModal');
   modal.classList.remove('active');
   document.body.style.overflow = 'auto';
   currentProductForDetails = null;
 }
-
 function changeSlide(dir) {
   currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides;
   updateSliderDisplay();
 }
-
 function updateSliderDisplay() {
   const imgs = document.querySelectorAll('#detailsImageSlider img');
   const counter = document.getElementById('imageCounter');
   const prev = document.getElementById('sliderPrevBtn');
   const next = document.getElementById('sliderNextBtn');
-
   imgs.forEach((img, i) => img.classList.toggle('active', i === currentSlideIndex));
   if (counter) counter.textContent = `${currentSlideIndex + 1} / ${totalSlides}`;
   if (prev && next && totalSlides > 1) {
@@ -1661,7 +1665,6 @@ function updateSliderDisplay() {
     next.style.display = 'none';
   }
 }
-
 // ================================
 // CART & UI
 // ================================
@@ -1669,17 +1672,14 @@ function updateCartDisplay() {
   const cartCount = document.getElementById('cartCount');
   const cartItems = document.getElementById('cartItems');
   const checkoutBtn = document.getElementById('checkoutBtn');
-
   // Hitung subtotal (tanpa diskon)
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const discountValue = subtotal * (currentDiscount / 100);
   const total = subtotal - discountValue;
-
   // Update cart count badge
   cartCount.textContent = totalItems;
   cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-
   // Render items
   if (cart.length === 0) {
     cartItems.innerHTML = `
@@ -1693,8 +1693,8 @@ function updateCartDisplay() {
   } else {
    cartItems.innerHTML = cart.map((item, index) => {
   const itemPrice = item.finalPrice || item.price;
-  const colorText = item.color ? `<div style="font-size:13px;color:#666;">Color: ${item.color}</div>` : '';
-
+  // ✅ Changed: Color → Type
+  const typeText = item.color ? `<div style="font-size:13px;color:#666;">Type: ${item.color}</div>` : '';
   // ✅ Ambil gambar sesuai warna jika ada
   let displayImage = item.image; // fallback ke cover
   if (item.color && item.colors) {
@@ -1703,12 +1703,11 @@ function updateCartDisplay() {
       displayImage = item.images[colorObj.imageIndex];
     }
   }
-
   return `
     <div class="receipt-item">
       <img src="${displayImage}" alt="${item.name}" class="item-image">
       <div class="item-info">
-        <div class="item-name">${item.name}${colorText}</div>
+        <div class="item-name">${item.name}${typeText}</div>
         <div class="item-controls">
           <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
           <span class="quantity">${item.quantity}</span>
@@ -1721,13 +1720,11 @@ function updateCartDisplay() {
 }).join('');
     checkoutBtn.disabled = false;
   }
-
   // ✅ Update 3 baris summary
   document.getElementById('subtotalAmount').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
   document.getElementById('discountAmount').textContent = `Rp ${discountValue.toLocaleString('id-ID')}`;
   document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
-
 function updateQuantity(cartIndex, change) {
   if (cartIndex < 0 || cartIndex >= cart.length) return;
   cart[cartIndex].quantity += change;
@@ -1737,13 +1734,11 @@ function updateQuantity(cartIndex, change) {
   saveCartToLocalStorage();
   updateCartDisplay();
 }
-
 function saveCartToLocalStorage() {
   localStorage.setItem('clothrunCart', JSON.stringify(cart));
   localStorage.setItem('clothrunPromo', JSON.stringify(appliedPromo));
   localStorage.setItem('clothrunDiscount', currentDiscount.toString());
 }
-
 function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('clothrunCart');
   const savedPromo = localStorage.getItem('clothrunPromo');
@@ -1752,7 +1747,6 @@ function loadCartFromLocalStorage() {
   if (savedPromo) appliedPromo = JSON.parse(savedPromo);
   if (savedDiscount) currentDiscount = parseFloat(savedDiscount);
 }
-
 // ================================
 // PROMO
 // ================================
@@ -1760,17 +1754,14 @@ function applyPromo() {
   const input = document.getElementById("promoCode");
   const msg = document.getElementById("promoMessage");
   if (!input || !msg) return;
-
   const code = input.value.trim().toUpperCase();
   input.value = '';
-
   // ❌ Tidak pakai localStorage → selalu mulai dari nol tiap sesi
   if (appliedPromo) {
     msg.style.color = "red";
     msg.textContent = "Promo already applied.";
     return;
   }
-
   if (promoList[code]) {
     const promo = promoList[code];
     appliedPromo = { code, ...promo };
@@ -1784,9 +1775,8 @@ function applyPromo() {
     msg.textContent = "Invalid promo code.";
   }
 }
-
 // ================================
-// WHATSAPP
+// WHATSAPP — ✅ Color → Type
 // ================================
 function sendToWhatsApp() {
   const name = document.getElementById('customerName')?.value.trim();
@@ -1801,22 +1791,33 @@ function sendToWhatsApp() {
   }
   const subtotal = cart.reduce((sum, item) => sum + ((item.finalPrice || item.price) * item.quantity), 0);
   const total = subtotal - (subtotal * currentDiscount / 100);
-  let message = `*Keyloops Store Order*\n`;
-  message += `Customer: ${name}\n`;
-  message += `Email: ${email}\n`;
-  message += `*ORDER DETAILS:*\n`;
+  let message = `*Keyloops Store Order*
+`;
+  message += `Customer: ${name}
+`;
+  message += `Email: ${email}
+`;
+  message += `*ORDER DETAILS:*
+`;
   cart.forEach(item => {
     const price = item.finalPrice || item.price;
-    const colorText = item.color ? ` | Color: ${item.color}` : '';
-    message += `• ${item.name}${colorText}\n`;
-    message += `  Qty: ${item.quantity} × Rp ${price.toLocaleString('id-ID')}\n`;
-    message += `  Subtotal: Rp ${(price * item.quantity).toLocaleString('id-ID')}\n`;
+    // ✅ Changed: Color → Type
+    const typeText = item.color ? ` | Type: ${item.color}` : '';
+    message += `• ${item.name}${typeText}
+`;
+    message += `  Qty: ${item.quantity} × Rp ${price.toLocaleString('id-ID')}
+`;
+    message += `  Subtotal: Rp ${(price * item.quantity).toLocaleString('id-ID')}
+`;
   });
   if (currentDiscount > 0) {
-    message += `Subtotal: Rp ${subtotal.toLocaleString('id-ID')}\n`;
-    message += `Discount (${currentDiscount}%): -Rp ${(subtotal * currentDiscount / 100).toLocaleString('id-ID')}\n`;
+    message += `Subtotal: Rp ${subtotal.toLocaleString('id-ID')}
+`;
+    message += `Discount (${currentDiscount}%): -Rp ${(subtotal * currentDiscount / 100).toLocaleString('id-ID')}
+`;
   }
-  message += `*TOTAL: Rp ${total.toLocaleString('id-ID')}*\n`;
+  message += `*TOTAL: Rp ${total.toLocaleString('id-ID')}*
+`;
   message += `Thank you for your order!`;
   window.open(`https://wa.me/082382052250?text=${encodeURIComponent(message)}`, '_blank');
   setTimeout(() => {
@@ -1833,7 +1834,6 @@ function sendToWhatsApp() {
     document.getElementById('promoMessage').textContent = '';
   }, 1000);
 }
-
 // ================================
 // SEARCH
 // ================================
@@ -1842,15 +1842,12 @@ function filterProducts() {
   const cards = document.querySelectorAll('.product-card');
   const clearBtn = document.getElementById('searchClear');
   const noRes = document.getElementById('noResults');
-
   const allowedIds = new Set(categoryMap[currentCategory] || []);
   let found = false;
-
   cards.forEach(card => {
     const name = card.getAttribute('data-name') || '';
     const id = parseInt(card.getAttribute('data-id'));
     const matchesCategory = allowedIds.has(id);
-
     // ✅ Match query only if it's a *prefix* of ANY word
     let matchesSearch = false;
     if (query === '') {
@@ -1859,30 +1856,25 @@ function filterProducts() {
       const words = name.split(/\s+/);
       matchesSearch = words.some(word => word.toLowerCase().startsWith(query));
     }
-
     const shouldShow = matchesSearch && matchesCategory;
     card.style.display = shouldShow ? 'block' : 'none';
     if (shouldShow) found = true;
   });
-
   // UI feedback
   if (noRes) noRes.style.display = (query || currentCategory !== 'all') && !found ? 'block' : 'none';
   if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
 }
-
 function clearSearch() {
   const inp = document.getElementById('searchInput');
   if (inp) inp.value = '';
   filterProducts();
 }
-
 function toggleCart() {
   const cartSection = document.getElementById('cartSection');
   const isOpen = cartSection.style.display === 'block';
   cartSection.style.display = isOpen ? 'none' : 'block';
   document.body.style.overflow = isOpen ? 'auto' : 'hidden';
 }
-
 // ================================
 // NAVIGATION — updated behavior
 // ================================
@@ -1891,7 +1883,6 @@ function showProducts() {
   document.getElementById('favoritesSection').style.display = 'none';
   document.getElementById('productsSection').style.display = 'block';
   document.getElementById('searchSection').style.display = 'block';
-  
   // ✅ Show category tabs — restore full appearance
 const tabs = document.getElementById('categoryTabs');
 if (tabs) {
@@ -1904,17 +1895,14 @@ if (tabs) {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) searchInput.value = '';
   filterProducts();
-
   // Update title
   document.querySelector('.page-title').textContent = 'Products';
 }
-
 function showFavorites() {
   // Show Favorites, hide Products & Search
   document.getElementById('favoritesSection').style.display = 'block';
   document.getElementById('productsSection').style.display = 'none';
   document.getElementById('searchSection').style.display = 'none';
-  
   // ✅ Hide category tabs visually but keep layout space
 const tabs = document.getElementById('categoryTabs');
 if (tabs) {
@@ -1926,21 +1914,17 @@ if (tabs) {
   // Ensure "No Results" is hidden
   const noResults = document.getElementById('noResults');
   if (noResults) noResults.style.display = 'none';
-
   // Re-render favorites
   renderFavorites();
-
   // Update title
   document.querySelector('.page-title').textContent = 'Favorites';
 }
-
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.toggle('active');
   const overlay = document.querySelector('.sidebar-overlay');
   overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
 }
-
 // ================================
 // INIT
 // ================================
@@ -1950,7 +1934,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFavorites();
   updateCartDisplay();
 });
-
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const pdm = document.getElementById('productDetailsModal');
@@ -1962,13 +1945,11 @@ function toggleFavorite(e, productId) {
   const product = products.find(p => p.id === productId);
   const index = favorites.indexOf(productId);
   let isAdding = index === -1;
-
   if (isAdding) {
     favorites.push(productId);
   } else {
     favorites.splice(index, 1);
   }
-
   localStorage.setItem('clothrunFavorites', JSON.stringify(favorites));
   renderProducts();
   if (document.getElementById('favoritesSection').style.display === 'block') {
@@ -1977,22 +1958,18 @@ function toggleFavorite(e, productId) {
   if (currentProductForDetails && currentProductForDetails.id === productId) {
     updateFavoriteButtonInDetails();
   }
-
   // ✅ Show toast
   showToast(isAdding ? 'Added to Favorites' : 'Removed from Favorites');
 }
-
 // Helper: Toast notification
 function showToast(message) {
   // Remove existing toasts
   const existing = document.querySelector('.toast');
   if (existing) existing.remove();
-
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
   document.body.appendChild(toast);
-
   // Trigger animation
   setTimeout(() => toast.classList.add('show'), 10);
   setTimeout(() => toast.classList.add('hide'), 2000);
@@ -2018,7 +1995,6 @@ function autoActivateTabFromHash() {
       'bracelet': 'bracelet',
       'necklace': 'necklace'
     };
-    
     const targetCategory = hashToCategory[hash];
     if (targetCategory) {
       // Find and click the matching tab
@@ -2026,22 +2002,15 @@ function autoActivateTabFromHash() {
       if (tab) {
         // Simulate click to trigger full logic (class toggle + filter)
         tab.click();
-        
-        
       }
     }
   }
 }
-
 // Call it on load
 document.addEventListener('DOMContentLoaded', () => {
   // ... your existing init code ...
-
   autoActivateTabFromHash();
 });
   </script>
 </body>
-</html>
-
-
-
+  </html>
