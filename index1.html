@@ -1459,7 +1459,7 @@ function renderProductCard(product, isFavorite = false) {
   let colorCountText = '';
   if (product.colors && product.colors.length > 0) {
     const n = product.colors.length;
-    colorCountText = `<div style="font-size:12px;color:#777;margin-top:4px;">${n} Color${n > 1 ? 's' : ''}</div>`;
+    colorCountText = `<div style="font-size:12px;color:#777;margin-top:4px;">${n} Color${n ≥ 1 ? 's' : ''}</div>`;
   }
 
   return `
@@ -2042,4 +2042,5 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
+
 
