@@ -1308,7 +1308,7 @@ const products = [
   { 
     id: 1, 
     name: "Snoopy keychain", 
-    price: 149000, 
+    price: 60000, 
     image: "https://down-id.img.susercontent.com/file/sg-11134201-22110-ztu7s4hswckv22.webp",
     images: [
       "https://down-id.img.susercontent.com/file/sg-11134201-22110-ztu7s4hswckv22.webp",
@@ -1343,7 +1343,6 @@ const products = [
     id: 3, 
     name: "Men's ice silk pants summer style", 
     price: 119000, 
-    category: "pants", 
     image: "https://img.alicdn.com/imgextra/i1/2503593231/O1CN01lTxY0w1ZjqjesFME1_!!2503593231.jpg_q50.jpg_.webp",
     images: [
       "https://img.alicdn.com/imgextra/i1/2503593231/O1CN01lTxY0w1ZjqjesFME1_!!2503593231.jpg_q50.jpg_.webp",
@@ -1361,7 +1360,6 @@ const products = [
     id: 4, 
     name: "High-Waisted Jeans", 
     price: 299000, 
-    category: "pants", 
     image: "https://images.unsplash.com/photo-1612336308010-6f13304cfd67?w=300",
     images: ["https://images.unsplash.com/photo-1612336308010-6f13304cfd67?w=460"],
     colors: [{ name: "Blue", code: "#1E90FF", imageIndex: 0 }],
@@ -1736,7 +1734,6 @@ function updateQuantity(cartIndex, change) {
 }
 function saveCartToLocalStorage() {
   localStorage.setItem('clothrunCart', JSON.stringify(cart));
-  localStorage.setItem('clothrunPromo', JSON.stringify(appliedPromo));
   localStorage.setItem('clothrunDiscount', currentDiscount.toString());
 }
 function loadCartFromLocalStorage() {
@@ -2014,4 +2011,3 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
   </html>
-
