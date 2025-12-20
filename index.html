@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keyloops</title>
+  <title>Keyloops — Small Tokens, Big Memories</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%23d4a373'/><text x='12' y='16' text-anchor='middle' font-size='14' fill='white'>K</text></svg>">
   <style>
     * {
@@ -51,12 +51,6 @@
     header.scrolled h1 {
       color: #fff;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    @media (min-width: 1024px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
     }
 
     /* ————— HERO SLIDER ————— */
@@ -153,12 +147,6 @@
       right: 20px;
     }
 
-    @media (max-width: 768px) {
-      .slide-content h2 { font-size: 2.2rem; }
-      .slide-content p { font-size: 1.1rem; }
-      .hero-arrow { font-size: 1.5rem; }
-    }
-
     /* BUTTONS */
     .btn {
       display: inline-block;
@@ -184,7 +172,7 @@
     }
 
     /* ————— FEATURED HEADING ————— */
-    .featured-heading {
+    .section-heading {
       text-align: left;
       font-size: 1.5rem;
       font-weight: 500;
@@ -194,14 +182,14 @@
     }
 
     @media (min-width: 768px) {
-      .featured-heading {
+      .section-heading {
         font-size: 2.2rem;
         margin: 100px 0 30px 0;
         padding-left: 40px;
       }
     }
 
-    /* ————— NIKE-STYLE GRID (2 COLUMNS) ————— */
+    /* ————— NIKE-STYLE GRID ————— */
     .nike-style-section {
       display: flex;
       gap: 0;
@@ -215,7 +203,6 @@
       width: 100%;
       height: 400px;
       overflow: hidden;
-      border-radius: 0;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
@@ -251,192 +238,213 @@
 
     .nike-overlay .btn {
       background: white;
-      color: #000000;
+      color: #000;
       border: none;
       padding: 0.7rem 1.5rem;
       font-weight: 700;
     }
 
     .nike-overlay .btn:hover {
-      background: #f0f0f08f;
+      background: #f0f0f0;
       transform: translateY(-2px);
     }
 
     @media (min-width: 768px) {
-      .nike-style-section {
-        flex-wrap: nowrap;
-      }
-      .nike-card {
-        width: 50%;
-        height: 500px;
-      }
+      .nike-card { width: 50%; height: 500px; }
+      .nike-style-section { flex-wrap: nowrap; }
+    }
+
+    /* ————— WHY SHOP WITH US ————— */
+    .why-section {
+      max-width: 1000px;
+      margin: 100px auto 80px;
+      padding: 0 20px;
+    }
+
+    .reasons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .reason-card {
+      flex: 1 1 250px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    }
+
+    .reason-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      color: #d4a373;
+    }
+
+    .reason-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: #2d3748;
+    }
+
+    .reason-card p {
+      font-size: 1rem;
+      color: #718096;
+      line-height: 1.6;
     }
 
     /* ————— FOOTER ————— */
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 40px 20px;
       color: #718096;
       font-size: 0.95rem;
       border-top: 1px solid #edf2f7;
     }
-    /* ————— TEXT ENTRANCE ANIMATION ————— */
-.slide-content > * {
-  opacity: 0;
-  transform: translateX(60px);
-  transition: opacity 0.6s ease, transform 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
 
-.slide.active .slide-content > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.slide.active .slide-content h2 {
-  transition-delay: 0.5s;
-}
-.slide.active .slide-content p {
-  transition-delay: 0.6s;
-}
-.slide.active .slide-content .btn {
-  transition-delay: 0.65s;
-}
-    /* ————— Arrivals HEADING ————— */
-    .arrivals-heading {
-      text-align: left;
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin: 70px 0 20px 0;
-      padding-left: 20px;
-      color: #000;
+    /* ————— TEXT ANIMATION ————— */
+    .slide-content > * {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    @media (min-width: 768px) {
-      .arrivals-heading {
-        font-size: 2.2rem;
-        margin: 100px 0 30px 0;
-        padding-left: 40px;
-      }
+    .slide.active .slide-content > * {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide.active .slide-content h2 { transition-delay: 0.3s; }
+    .slide.active .slide-content p { transition-delay: 0.5s; }
+    .slide.active .slide-content .btn { transition-delay: 0.7s; }
+
+    @media (max-width: 768px) {
+      .slide-content h2 { font-size: 2.2rem; }
+      .slide-content p { font-size: 1.1rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header id="header">
-    <h1>Keyloops</h1>
-  </header>
+<header id="header">
+  <h1>Keyloops</h1>
+</header>
 
-  <!-- HERO SLIDER -->
-  <section class="hero">
-    <div class="hero-slides" id="heroSlides">
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80')">
-        <div class="slide-content">
-          <h2>Small Tokens,<br>Big Memories.</h2>
-          <p>Keychains that tell a story — of places, people, or promises.</p>
-          <a href="index1.html" class="btn">Shop Now</a>
-        </div>
-      </div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80')">
-        <div class="slide-content">
-          <h2>Handcrafted with Care</h2>
-          <p>From metal, wood, to resin — every loop is made one by one in Jakarta.</p>
-          <a href="index1.html" class="btn">Shop Now</a>
-        </div>
+<!-- HERO SLIDER -->
+<section class="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/products/IMG_2556_jpg_1200x.jpg?v=1679990742')">
+      <div class="slide-content">
+        <h2>Small Objects,<br>Beautifully Chosen.</h2>
+        <p>A curated selection of aesthetic keychains sourced from trusted creators in Jakarta.</p>
+        <a href="index1.html" class="btn">Explore Collection</a>
       </div>
     </div>
 
-    <button class="hero-arrow left" id="prevBtn"><</button>
-    <button class="hero-arrow right" id="nextBtn">></button>
-  </section>
+    <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/files/IMG_2561_jpg_c17d25ee-0d57-4bfa-be5e-77718eb37bd5_1200x.jpg?v=1684840876')">
+      <div class="slide-content">
+        <h2>Curated with Taste,<br>Made to Be Carried</h2>
+        <p>Minimal designs selected for everyday use — simple, timeless, and expressive.</p>
+        <a href="index1.html" class="btn">Shop Now</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- FEATURED HEADING -->
-  <h2 class="featured-heading">Featured</h2>
+  <button class="hero-arrow left" id="prevBtn"><</button>
+  <button class="hero-arrow right" id="nextBtn">></button>
+</section>
 
-  <!-- NIKE-STYLE SECTION (2 COLUMNS) -->
-  <section class="nike-style-section">
-    <div class="nike-card">
-      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
-      <div class="nike-overlay">
-        <h3>Trail Running</h3>
-        <p>Up the Mountains, Through the Woods</p>
-        <a href="index1.html" class="btn">Explore</a>
-      </div>
-    </div>
-    <div class="nike-card">
-      <img src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" alt="Mountain Muse" />
-      <div class="nike-overlay">
-        <h3>Nike x Jacquemus</h3>
-        <p>Mountain Muse</p>
-        <a href="index1.html" class="btn">Shop</a>
-      </div>
-    </div>
-  </section>
+<!-- FEATURED HEADING -->
+<h2 class="section-heading">Featured Collections</h2>
 
-<h2 class="arrivals-heading">New Arrivals</h2>
-  <section class="nike-style-section">
-    <div class="nike-card">
-      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Trail Running" />
-      <div class="nike-overlay">
-        <h3>Trail Running</h3>
-        <p>Up the Mountains, Through the Woods</p>
-        <a href="index1.html#new-arrivals" class="btn">Explore</a>
-      </div>
+<!-- NIKE-STYLE SECTION -->
+<section class="nike-style-section">
+  <div class="nike-card">
+    <img src="https://confettipaperstudio.in/cdn/shop/products/IMG_2555_1024x1024.jpg?v=1679989741" alt="City Tokens Collection" />
+    <div class="nike-overlay">
+      <h3>City Tokens</h3>
+      <p>City-inspired designs picked for their character, detail, and everyday appeal.</p>
+      <a href="index1.html" class="btn">View Pieces</a>
     </div>
-    <div class="nike-card">
-      <img src="https://images.unsplash.com/photo-1605733513158-0b86d5e7948b?auto=format&fit=crop&w=1200&h=800&q=80" alt="Mountain Muse" />
-      <div class="nike-overlay">
-        <h3>Nike x Jacquemus</h3>
-        <p>Mountain Muse</p>
-        <a href="index1.html#new-arrivals" class="btn">Shop</a>
-      </div>
+  </div>
+
+  <div class="nike-card">
+    <img src="https://confettipaperstudio.in/cdn/shop/files/IMG_2531_jpg_1024x1024.jpg?v=1684840297" alt="Everyday Objects Collection" />
+    <div class="nike-overlay">
+      <h3>Everyday Objects</h3>
+      <p>Simple forms, clean colors — small objects that fit effortlessly into daily life.</p>
+      <a href="index1.html" class="btn">Browse</a>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- WHY SHOP WITH US -->
+<h2 class="section-heading">Why Keyloops?</h2>
+<section class="why-section">
+  <div class="reasons">
+    <div class="reason-card">
+      <div class="reason-icon">🖤</div>
+      <h3>Carefully Curated</h3>
+      <p>Every item is personally selected — no random stock, only pieces we’d use ourselves.</p>
+    </div>
+
+    <div class="reason-card">
+      <div class="reason-icon">📍</div>
+      <h3>Sourced from Jakarta</h3>
+      <p>We work with trusted suppliers and creators based in Jakarta.</p>
+    </div>
+
+    <div class="reason-card">
+      <div class="reason-icon">📦</div>
+      <h3>Ready to Gift</h3>
+      <p>Neatly packed and handled with care — perfect for personal use or gifting.</p>
+    </div>
+  </div>
+</section>
+
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Keyloops. Small tokens, big memories.</p>
+    <p>© 2025 Keyloops — Where small tokens hold big memories.</p>
   </footer>
 
   <script>
-    // ————— Header scroll effect —————
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+      header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ————— HERO SLIDER —————
     const slides = document.querySelectorAll('.slide');
     const heroSlides = document.getElementById('heroSlides');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-
     let currentIndex = 0;
-    const totalSlides = slides.length;
     let autoSlideInterval;
+    let startX = 0;
 
     function updateSlide() {
       heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    function goToSlide(index) {
-      currentIndex = index;
-      updateSlide();
-      resetAutoSlide();
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[currentIndex].classList.add('active');
     }
 
     function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalSlides;
+      currentIndex = (currentIndex + 1) % slides.length;
       updateSlide();
       resetAutoSlide();
     }
 
     function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
       updateSlide();
       resetAutoSlide();
     }
@@ -446,41 +454,22 @@
       autoSlideInterval = setInterval(nextSlide, 5000);
     }
 
-    nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
 
-    // Swipe support
-    let startX = 0;
-    heroSlides.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-    heroSlides.addEventListener('touchend', (e) => {
+    heroSlides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    heroSlides.addEventListener('touchend', e => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
     });
 
-    resetAutoSlide();
-
-    // Keyboard
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') prevSlide();
       if (e.key === 'ArrowRight') nextSlide();
     });
-    function updateSlide() {
-  heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-  // Remove active class from all slides
-  slides.forEach(slide => slide.classList.remove('active'));
-
-  // Add active class to current slide (triggers CSS transition)
-  slides[currentIndex].classList.add('active');
-    }
-    // After defining all functions, add:
-updateSlide(); // initial activation
-resetAutoSlide();
+    updateSlide();
+    resetAutoSlide();
   </script>
 </body>
 </html>
-
-
-
