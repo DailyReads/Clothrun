@@ -171,12 +171,12 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* ————— FEATURED HEADING ————— */
+    /* ————— SECTION HEADING ————— */
     .section-heading {
       text-align: left;
       font-size: 1.5rem;
       font-weight: 500;
-      margin: 70px 0 20px 0;
+      margin: 70px 0 20px;
       padding-left: 20px;
       color: #000;
     }
@@ -184,16 +184,21 @@
     @media (min-width: 768px) {
       .section-heading {
         font-size: 2.2rem;
-        margin: 100px 0 30px 0;
+        margin: 100px 0 30px;
         padding-left: 40px;
       }
     }
 
-    /* ————— NIKE-STYLE GRID ————— */
+    /* ————— FEATURED COLLECTIONS ————— */
+    /* ✅ Tambah jarak atas agar tidak nempel ke Hero */
+    .featured-section-wrapper {
+      margin-top: 80px; /* jarak dari hero */
+    }
+
     .nike-style-section {
       display: flex;
       gap: 0;
-      margin: 0;
+      margin: 0 0 60px;
       max-width: 100%;
       flex-wrap: wrap;
     }
@@ -254,51 +259,112 @@
       .nike-style-section { flex-wrap: nowrap; }
     }
 
-    /* ————— WHY SHOP WITH US ————— */
-    .why-section {
-      max-width: 1000px;
-      margin: 100px auto 80px;
-      padding: 0 20px;
-    }
-
-    .reasons {
+    /* ————— SHOP BY PRODUCTS ————— */
+    #shopByProducts {
       display: flex;
-      flex-wrap: wrap;
+      overflow-x: auto;
+      scroll-behavior: smooth;
       gap: 24px;
-      justify-content: center;
+      padding: 0 20px 40px;
+      margin: 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
 
-    .reason-card {
-      flex: 1 1 250px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 30px 24px;
+    #shopByProducts::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-card {
+      flex: 0 0 auto;
+      width: 240px; /* ukuran persegi + teks */
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      text-decoration: none;
+      outline: none;
     }
 
-    .reason-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    .product-card:hover {
+      transform: translateY(-4px);
     }
 
-    .reason-icon {
-      font-size: 2.4rem;
-      margin-bottom: 18px;
-      color: #d4a373;
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1; /* ✅ MEMBUAT GAMBAR PERSEGI! */
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .reason-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 12px;
+    .product-card h2 {
+      font-size: 1.25rem;
+      margin-top: 14px;
       color: #2d3748;
+      font-weight: 600;
+      text-decoration: none;
     }
 
-    .reason-card p {
-      font-size: 1rem;
-      color: #718096;
-      line-height: 1.6;
+    @media (min-width: 768px) {
+      .product-card {
+        width: 260px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .product-card {
+        width: 280px;
+      }
+    }
+
+    /* ————— HEADING + ARROWS ————— */
+    .section-heading-with-arrows {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 0 0 30px;
+    }
+
+    @media (min-width: 768px) {
+      .section-heading-with-arrows {
+        padding-left: 40px;
+        padding-right: 40px;
+        margin: 0 0 40px;
+      }
+    }
+
+    .section-heading {
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      text-align: left;
+    }
+
+    .arrows-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .product-arrow {
+      background: #f8f9fa;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #4a5568;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+    }
+
+    .product-arrow:hover {
+      background: #e2e8f0;
+      transform: scale(1.1);
     }
 
     /* ————— FOOTER ————— */
@@ -335,82 +401,74 @@
 <body>
 
   <!-- HEADER -->
-<header id="header">
-  <h1>Keyloops</h1>
-</header>
+  <header id="header">
+    <h1>Keyloops</h1>
+  </header>
 
-<!-- HERO SLIDER -->
-<section class="hero">
-  <div class="hero-slides" id="heroSlides">
-    <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/products/IMG_2556_jpg_1200x.jpg?v=1679990742')">
-      <div class="slide-content">
-        <h2>Small Objects,<br>Beautifully Chosen.</h2>
-        <p>A curated selection of aesthetic keychains sourced from trusted creators in Jakarta.</p>
-        <a href="index1.html" class="btn">Explore Collection</a>
+  <!-- HERO SLIDER -->
+  <section class="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/products/IMG_2556_jpg_1200x.jpg?v=1679990742')">
+        <div class="slide-content">
+          <h2>Small Objects,<br>Beautifully Chosen.</h2>
+          <p>A curated selection of aesthetic keychains sourced from trusted creators in Jakarta.</p>
+          <a href="index1.html" class="btn">Explore Collection</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/files/IMG_2561_jpg_c17d25ee-0d57-4bfa-be5e-77718eb37bd5_1200x.jpg?v=1684840876')">
+        <div class="slide-content">
+          <h2>Curated with Taste,<br>Made to Be Carried</h2>
+          <p>Minimal designs selected for everyday use — simple, timeless, and expressive.</p>
+          <a href="index1.html" class="btn">Shop Now</a>
+        </div>
       </div>
     </div>
+    <button class="hero-arrow left" id="prevBtn"><</button>
+    <button class="hero-arrow right" id="nextBtn">></button>
+  </section>
 
-    <div class="slide" style="background-image: url('https://confettipaperstudio.in/cdn/shop/files/IMG_2561_jpg_c17d25ee-0d57-4bfa-be5e-77718eb37bd5_1200x.jpg?v=1684840876')">
-      <div class="slide-content">
-        <h2>Curated with Taste,<br>Made to Be Carried</h2>
-        <p>Minimal designs selected for everyday use — simple, timeless, and expressive.</p>
-        <a href="index1.html" class="btn">Shop Now</a>
+  <!-- FEATURED COLLECTIONS -->
+  <div class="featured-section-wrapper">
+    <h2 class="section-heading">Featured Collections</h2>
+    <section class="nike-style-section">
+      <div class="nike-card">
+        <img src="https://confettipaperstudio.in/cdn/shop/products/IMG_2555_1024x1024.jpg?v=1679989741" alt="City Tokens Collection" />
+        <div class="nike-overlay">
+          <h3>City Tokens</h3>
+          <p>City-inspired designs picked for their character, detail, and everyday appeal.</p>
+          <a href="index1.html" class="btn">View Pieces</a>
+        </div>
       </div>
+      <div class="nike-card">
+        <img src="https://confettipaperstudio.in/cdn/shop/files/IMG_2531_jpg_1024x1024.jpg?v=1684840297" alt="Everyday Objects Collection" />
+        <div class="nike-overlay">
+          <h3>Everyday Objects</h3>
+          <p>Simple forms, clean colors — small objects that fit effortlessly into daily life.</p>
+          <a href="index1.html" class="btn">Browse</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SHOP BY PRODUCTS -->
+  <div class="section-heading-with-arrows">
+    <h2 class="section-heading">Shop by Products</h2>
+    <div class="arrows-right">
+      <button class="product-arrow" id="prevProductBtn"><</button>
+      <button class="product-arrow" id="nextProductBtn">></button>
     </div>
   </div>
 
-  <button class="hero-arrow left" id="prevBtn"><</button>
-  <button class="hero-arrow right" id="nextBtn">></button>
-</section>
-
-<!-- FEATURED HEADING -->
-<h2 class="section-heading">Featured Collections</h2>
-
-<!-- NIKE-STYLE SECTION -->
-<section class="nike-style-section">
-  <div class="nike-card">
-    <img src="https://confettipaperstudio.in/cdn/shop/products/IMG_2555_1024x1024.jpg?v=1679989741" alt="City Tokens Collection" />
-    <div class="nike-overlay">
-      <h3>City Tokens</h3>
-      <p>City-inspired designs picked for their character, detail, and everyday appeal.</p>
-      <a href="index1.html" class="btn">View Pieces</a>
-    </div>
-  </div>
-
-  <div class="nike-card">
-    <img src="https://confettipaperstudio.in/cdn/shop/files/IMG_2531_jpg_1024x1024.jpg?v=1684840297" alt="Everyday Objects Collection" />
-    <div class="nike-overlay">
-      <h3>Everyday Objects</h3>
-      <p>Simple forms, clean colors — small objects that fit effortlessly into daily life.</p>
-      <a href="index1.html" class="btn">Browse</a>
-    </div>
-  </div>
-</section>
-
-<!-- WHY SHOP WITH US -->
-<h2 class="section-heading">Why Keyloops?</h2>
-<section class="why-section">
-  <div class="reasons">
-    <div class="reason-card">
-      <div class="reason-icon">🖤</div>
-      <h3>Carefully Curated</h3>
-      <p>Every item is personally selected — no random stock, only pieces we’d use ourselves.</p>
-    </div>
-
-    <div class="reason-card">
-      <div class="reason-icon">📍</div>
-      <h3>Sourced from Jakarta</h3>
-      <p>We work with trusted suppliers and creators based in Jakarta.</p>
-    </div>
-
-    <div class="reason-card">
-      <div class="reason-icon">📦</div>
-      <h3>Ready to Gift</h3>
-      <p>Neatly packed and handled with care — perfect for personal use or gifting.</p>
-    </div>
-  </div>
-</section>
-
+  <section id="shopByProducts">
+    <a href="index1.html#strap" class="product-card">
+      <img src="https://confettipaperstudio.in/cdn/shop/products/IMG_2556_jpg_1200x.jpg?v=1679990742" alt="Phone Straps" />
+      <h2>Phone Straps</h2>
+    </a>
+    <a href="index1.html#charm" class="product-card">
+      <img src="https://confettipaperstudio.in/cdn/shop/files/IMG_2561_jpg_c17d25ee-0d57-4bfa-be5e-77718eb37bd5_1200x.jpg?v=1684840876" alt="Keychains" />
+      <h2>Charms</h2>
+    </a>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -429,7 +487,6 @@
     const nextBtn = document.getElementById('nextBtn');
     let currentIndex = 0;
     let autoSlideInterval;
-    let startX = 0;
 
     function updateSlide() {
       heroSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -457,6 +514,7 @@
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
 
+    let startX = 0;
     heroSlides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     heroSlides.addEventListener('touchend', e => {
       const diff = startX - e.changedTouches[0].clientX;
@@ -470,7 +528,28 @@
 
     updateSlide();
     resetAutoSlide();
+
+    const shopContainer = document.getElementById('shopByProducts');
+    const prevProductBtn = document.getElementById('prevProductBtn');
+    const nextProductBtn = document.getElementById('nextProductBtn');
+
+    if (shopContainer && prevProductBtn && nextProductBtn) {
+      prevProductBtn.addEventListener('click', () => {
+        shopContainer.scrollBy({ left: -280, behavior: 'smooth' });
+      });
+      nextProductBtn.addEventListener('click', () => {
+        shopContainer.scrollBy({ left: 280, behavior: 'smooth' });
+      });
+    }
+
+    const hashToCategory = {
+  'new-arrivals': 'new',
+  'sale': 'sale',
+  'bracelet': 'bracelet',
+  'necklace': 'necklace',
+  'strap': 'strap',          // ✅ tambahkan ini
+  'charm': 'charm'           // ✅ dan ini, kalau perlu
+};
   </script>
 </body>
 </html>
-
