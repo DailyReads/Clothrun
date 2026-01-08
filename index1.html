@@ -1294,8 +1294,17 @@ footer p {
           <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
         </div>
       </div>
-      <div class="receipt-summary">
+     <div class="receipt-summary">
   <div class="summary-row"><span>Subtotal</span><span id="subtotalAmount">Rp 0</span></div>
+  
+  <!-- Promo Code Result / Cancellation -->
+  <div id="promoAppliedSection" style="display:none; margin:10px 0;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span>Promo "<span id="promoCodeDisplay"></span>" Applied</span>
+      <button class="promo-btn" style="padding:4px 10px; font-size:12px;" onclick="cancelPromo()">Cancel</button>
+    </div>
+  </div>
+
   <div class="summary-row"><span>Discount</span><span id="discountAmount">Rp 0</span></div>
   <div class="summary-row total"><span>Total Amount</span><span id="totalAmount">Rp 0</span></div>
   <button class="checkout-btn" onclick="sendToWhatsApp()" id="checkoutBtn" disabled>Checkout</button>
@@ -1740,9 +1749,27 @@ function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('clothrunCart');
   const savedPromo = localStorage.getItem('clothrunPromo');
   const savedDiscount = localStorage.getItem('clothrunDiscount');
+
   if (savedCart) cart = JSON.parse(savedCart);
-  if (savedPromo) appliedPromo = JSON.parse(savedPromo);
-  if (savedDiscount) currentDiscount = parseFloat(savedDiscount);
+  else cart = [];
+
+  if (savedPromo) {
+    appliedPromo = JSON.parse(savedPromo);
+    currentDiscount = appliedPromo.value;
+    // Tampilkan UI promo
+    document.getElementById('promoCodeDisplay').textContent = appliedPromo.code;
+    document.getElementById('promoAppliedSection').style.display = 'block';
+  } else {
+    appliedPromo = null;
+    currentDiscount = 0;
+    // Sembunyikan UI promo
+    document.getElementById('promoAppliedSection').style.display = 'none';
+  }
+
+  // Opsional: fallback jika ada diskon tapi tidak ada promo (misal diskon lain)
+  if (!savedPromo && savedDiscount) {
+    currentDiscount = parseFloat(savedDiscount);
+  }
 }
 // ================================
 // PROMO
@@ -1751,26 +1778,51 @@ function applyPromo() {
   const input = document.getElementById("promoCode");
   const msg = document.getElementById("promoMessage");
   if (!input || !msg) return;
+
   const code = input.value.trim().toUpperCase();
   input.value = '';
-  // ❌ Tidak pakai localStorage → selalu mulai dari nol tiap sesi
+
+  // Batasi hanya satu promo aktif
   if (appliedPromo) {
     msg.style.color = "red";
-    msg.textContent = "Promo already applied.";
+    msg.textContent = "Promo already applied. Cancel first to use another.";
     return;
   }
+
   if (promoList[code]) {
     const promo = promoList[code];
     appliedPromo = { code, ...promo };
     currentDiscount = promo.value;
+
+    // 🔁 Simpan ke localStorage (autosave)
+    localStorage.setItem('clothrunPromo', JSON.stringify(appliedPromo));
+    localStorage.setItem('clothrunDiscount', currentDiscount.toString());
+
     msg.style.color = "green";
     msg.textContent = `Promo ${code} applied! ${promo.value}% off`;
-    // ✅ Tidak disimpan ke localStorage
+
+    // Tampilkan promo di summary
+    document.getElementById('promoCodeDisplay').textContent = code;
+    document.getElementById('promoAppliedSection').style.display = 'block';
+
     updateCartDisplay();
   } else if (code) {
     msg.style.color = "red";
     msg.textContent = "Invalid promo code.";
   }
+}
+function cancelPromo() {
+  appliedPromo = null;
+  currentDiscount = 0;
+
+  // 🔁 Hapus dari localStorage
+  localStorage.removeItem('clothrunPromo');
+  localStorage.removeItem('clothrunDiscount');
+
+  document.getElementById('promoAppliedSection').style.display = 'none';
+  document.getElementById('promoMessage').textContent = '';
+
+  updateCartDisplay();
 }
 // ================================
 // WHATSAPP — ✅ Color → Type
