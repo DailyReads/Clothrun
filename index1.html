@@ -1230,7 +1230,8 @@ footer p {
     <p>Try a different keyword or category</p>
   </div>
   
-  <div class="section" id="productsSection">
+ <!-- Products Section -->
+<div class="section" id="productsSection">
   <div class="product-grid" id="productGrid"></div>
   <div class="load-more-section" style="text-align: center; margin: 30px 0; display: none;">
     <button class="add-btn" onclick="loadMoreProducts()">Load More</button>
@@ -1438,16 +1439,170 @@ const products = [
       { name: "Black", code: "#000000", imageIndex: 1 }
     ],
     description: "Eco-friendly canvas tote with reinforced handles." 
-  }
+  },
+  {
+id: 9,
+name: "Minimalist Phone Strap",
+price: 45000,
+image: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=300",
+images: [
+"https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=460",
+"https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=460&auto=format&fit=crop&q=60"
+],
+colors: [
+{ name: "Black", code: "#000000", imageIndex: 0 },
+{ name: "White", code: "#FFFFFF", imageIndex: 1 }
+],
+description: "Sleek and durable phone strap made from premium woven nylon. Perfect for everyday carry with a secure loop design."
+},
+{
+id: 10,
+name: "Pearl Charm Keychain",
+price: 35000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Ivory", code: "#FFFFF0", imageIndex: 0 }],
+description: "Elegant faux pearl charm on a gold-tone chain. Adds a touch of sophistication to your keys or bag."
+},
+{
+id: 11,
+name: "Cartoon Animal Phone Strap",
+price: 50000,
+image: "https://images.unsplash.com/photo-1611162617474-5b21e5c4c5a5?w=300",
+images: [
+"https://images.unsplash.com/photo-1611162617474-5b21e5c4c5a5?w=460",
+"https://images.unsplash.com/photo-1611162617474-5b21e5c4c5a5?w=460&auto=format&fit=crop&q=60"
+],
+colors: [
+{ name: "Bear", imageIndex: 0 },
+{ name: "Cat", imageIndex: 1 }
+],
+description: "Adorable plush animal phone straps with soft texture and strong metal ring. Choose your favorite character!"
+},
+{
+id: 12,
+name: "Leather Charm Bracelet",
+price: 120000,
+image: "https://images.unsplash.com/photo-1591047139829-d91aecb00a6f?w=300",
+images: ["https://images.unsplash.com/photo-1591047139829-d91aecb00a6f?w=460"],
+colors: [{ name: "Brown", code: "#8B4513", imageIndex: 0 }],
+description: "Handcrafted leather bracelet with detachable charm. Adjustable fit for all wrist sizes."
+},
+{
+id: 13,
+name: "Crystal Heart Charm",
+price: 65000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Rose Gold", code: "#E0BFB8", imageIndex: 0 }],
+description: "Sparkling crystal heart charm on a delicate chain. Ideal as a gift or personal accessory."
+},
+{
+id: 14,
+name: "Boho Beaded Phone Strap",
+price: 55000,
+image: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=300",
+images: ["https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=460"],
+colors: [{ name: "Multicolor", code: "#FF6B6B", imageIndex: 0 }],
+description: "Handmade beaded phone strap with bohemian flair. Each piece is uniquely crafted with glass beads."
+},
+{
+id: 15,
+name: "Mini Backpack Charm",
+price: 40000,
+image: "https://images.unsplash.com/photo-1591047139829-d91aecb00a6f?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1591047139829-d91aecb00a6f?w=460"],
+colors: [{ name: "Navy", code: "#000080", imageIndex: 0 }],
+description: "Tiny functional backpack charm with zippered pocket. Great for holding earbuds or small trinkets."
+},
+{
+id: 16,
+name: "Silicone Phone Grip Strap",
+price: 30000,
+image: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=300&auto=format&fit=crop&q=60",
+images: [
+"https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=460",
+"https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=460&auto=format&fit=crop&q=60"
+],
+colors: [
+{ name: "Pink", code: "#FFC0CB", imageIndex: 0 },
+{ name: "Mint", code: "#B2F2BB", imageIndex: 1 }
+],
+description: "Flexible silicone phone strap with non-slip grip. Doubles as a stand for hands-free viewing."
+},
+{
+id: 17,
+name: "Vintage Locket Charm",
+price: 75000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Antique Gold", code: "#D4AF37", imageIndex: 0 }],
+description: "Classic locket charm that opens to hold tiny photos or notes. Timeless keepsake design."
+},
+{
+id: 18,
+name: "Floral Charm Set",
+price: 85000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Mixed", code: "#D8BFD8", imageIndex: 0 }],
+description: "Set of 3 floral charms in pastel tones. Can be worn together or separately on different accessories."
+},
+{
+id: 19,
+name: "Metallic Phone Chain Strap",
+price: 60000,
+image: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=460"],
+colors: [{ name: "Silver", code: "#C0C0C0", imageIndex: 0 }],
+description: "Shiny metallic chain phone strap with lobster clasp. Adds instant glam to any device."
+},
+{
+id: 20,
+name: "Star Charm Keyring",
+price: 28000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Gold", code: "#FFD700", imageIndex: 0 }],
+description: "Dainty star-shaped charm on a sturdy keyring. Lightweight and stylish for daily use."
+},
+{
+id: 21,
+name: "Pastel Phone Strap with Tassel",
+price: 48000,
+image: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=460"],
+colors: [{ name: "Lavender", code: "#E6E6FA", imageIndex: 0 }],
+description: "Soft pastel phone strap with playful tassel detail. Made from high-quality polyester thread."
+},
+{
+id: 22,
+name: "Enamel Charm Pack",
+price: 52000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Rainbow", code: "#FF69B4", imageIndex: 0 }],
+description: "Set of 5 colorful enamel charms featuring fruits, stars, and hearts. Mix and match on your bags or keys."
+},
+{
+id: 23,
+name: "Personalized Initial Charm",
+price: 70000,
+image: "https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=300&auto=format&fit=crop&q=60",
+images: ["https://images.unsplash.com/photo-1605733513597-8b8f7c9e4f3a?w=460"],
+colors: [{ name: "Custom", code: "#000000", imageIndex: 0 }],
+description: "Custom initial charm in polished metal. Specify your letter at checkout (A–Z available)."
+}
 ];
 // ================================
 // CONFIG & STATE
 // ================================
+let displayedProducts = 20; // jumlah awal yang ditampilkan
 const discountRate = 10;
 const discountProducts = [1, 3, 5];
 let isDiscountActive = true;
 const promoList = {
-  "cybers": { type: "percent", value: 15 },
+  "cyber": { type: "percent", value: 15 },
   "TREAT": { type: "percent", value: 25 }
 };
 let cart = [];
@@ -1471,7 +1626,27 @@ const categoryMap = {
 // ================================
 function renderProducts() {
   const grid = document.getElementById('productGrid');
-  grid.innerHTML = products.map(p => renderProductCard(p, favorites.includes(p.id))).join('');
+  const allowedIds = new Set(categoryMap[currentCategory] || []);
+  const filteredProducts = products.filter(p => allowedIds.has(p.id));
+
+  // Terapkan pencarian jika ada
+  const query = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
+  const finalProducts = query
+    ? filteredProducts.filter(p =>
+        p.name.toLowerCase().split(/\s+/).some(word => word.startsWith(query))
+      )
+    : filteredProducts;
+
+  // Potong sesuai jumlah yang sudah di-load
+  const productsToShow = finalProducts.slice(0, displayedProducts);
+
+  grid.innerHTML = productsToShow.map(p => renderProductCard(p, favorites.includes(p.id))).join('');
+
+  // Tampilkan atau sembunyikan tombol Load More
+  const loadMoreSection = document.querySelector('.load-more-section');
+  if (loadMoreSection) {
+    loadMoreSection.style.display = finalProducts.length > displayedProducts ? 'block' : 'none';
+  }
 }
 function renderFavorites() {
   const favGrid = document.getElementById('favoritesGrid');
@@ -1895,35 +2070,42 @@ function sendToWhatsApp() {
 // ================================
 function filterProducts() {
   const query = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
-  const cards = document.querySelectorAll('.product-card');
-  const clearBtn = document.getElementById('searchClear');
-  const noRes = document.getElementById('noResults');
   const allowedIds = new Set(categoryMap[currentCategory] || []);
-  let found = false;
-  cards.forEach(card => {
-    const name = card.getAttribute('data-name') || '';
-    const id = parseInt(card.getAttribute('data-id'));
-    const matchesCategory = allowedIds.has(id);
-    // ✅ Match query only if it's a *prefix* of ANY word
-    let matchesSearch = false;
-    if (query === '') {
-      matchesSearch = true;
-    } else {
-      const words = name.split(/\s+/);
-      matchesSearch = words.some(word => word.toLowerCase().startsWith(query));
-    }
-    const shouldShow = matchesSearch && matchesCategory;
-    card.style.display = shouldShow ? 'block' : 'none';
-    if (shouldShow) found = true;
+
+  // Filter produk berdasarkan kategori + pencarian (prefix per kata)
+  const filtered = products.filter(p => {
+    const inCategory = allowedIds.has(p.id);
+    if (!inCategory) return false;
+    if (!query) return true;
+    const words = p.name.toLowerCase().split(/\s+/);
+    return words.some(word => word.startsWith(query));
   });
-  // UI feedback
-  if (noRes) noRes.style.display = (query || currentCategory !== 'all') && !found ? 'block' : 'none';
+
+  // Reset jumlah tampilan saat ganti kategori/search
+  displayedProducts = 20;
+
+  // Ambil hanya sebanyak `displayedProducts`
+  const productsToShow = filtered.slice(0, displayedProducts);
+
+  // Render ulang grid
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = productsToShow.map(p => renderProductCard(p, favorites.includes(p.id))).join('');
+
+  // Tampilkan/sembunyikan "No Results"
+  const noRes = document.getElementById('noResults');
+  if (noRes) {
+    noRes.style.display = filtered.length === 0 ? 'block' : 'none';
+  }
+
+  // Tampilkan/sembunyikan tombol Load More
+  const loadMoreSection = document.querySelector('.load-more-section');
+  if (loadMoreSection) {
+    loadMoreSection.style.display = filtered.length > displayedProducts ? 'block' : 'none';
+  }
+
+  // Update clear button
+  const clearBtn = document.getElementById('searchClear');
   if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
-}
-function clearSearch() {
-  const inp = document.getElementById('searchInput');
-  if (inp) inp.value = '';
-  filterProducts();
 }
 function toggleCart() {
   const cartSection = document.getElementById('cartSection');
@@ -2067,6 +2249,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ... your existing init code ...
   autoActivateTabFromHash();
 });
+
+function loadMoreProducts() {
+  displayedProducts += 20;
+  renderProducts();
+}
   </script>
 </body>
   </html>
